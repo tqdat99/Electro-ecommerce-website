@@ -5,8 +5,8 @@ router.get('/', function(req, res) {
     res.render('store');
 });
 
-// router.get('/product', function(req, res) {
-//     res.render('index');
-// });
+router.get('/product-details', function(req, res) {
+    res.render('product-details');
+});
 
 module.exports = router;
