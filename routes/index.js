@@ -14,6 +14,10 @@ router.get('/store-product-details', function(req, res) {
     res.render('product-details');
 });
 
+router.get('/cart', function(req, res) {
+    res.render('cart');
+});
+
 router.get('/checkout', function(req, res) {
     res.render('checkout');
 });
