@@ -30,4 +30,8 @@ router.get('/register', function(req, res) {
     res.render('register');
 });
 
+router.get('/forget-password', function(req, res) {
+    res.render('forget-password');
+});
+
 module.exports = router;

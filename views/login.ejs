@@ -50,298 +50,74 @@
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header>
-        <!-- TOP HEADER -->
-        <div id="top-header">
-            <div class="container">
-                <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-phone"></i> 0379990216</a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                    <li><a href="#"><i class="fa fa-map-marker"></i> 51T Quận 6</a></li>
-                </ul>
-                <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-user-o"></i> Tài khoản</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- /TOP HEADER -->
 
-        <!-- MAIN HEADER -->
-        <div id="header">
+    <% include header.ejs%>
+
+        <!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
             <!-- container -->
             <div class="container">
                 <!-- row -->
                 <div class="row">
-                    <!-- LOGO -->
-                    <div class="col-md-3">
-                        <div class="header-logo">
-                            <a href="/" class="logo">
-                                <img src="./img/logo.png" alt="">
-                            </a>
-                        </div>
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a href="#">Trang chủ</a></li>
+                            <li class="active">Đăng nhập</li>
+                        </ul>
                     </div>
-                    <!-- /LOGO -->
-
-                    <!-- SEARCH BAR -->
-                    <div class="col-md-6">
-                        <div class="header-search">
-                            <form>
-                                <select class="input-select">
-										<option value="0">Tất cả</option>
-										<option value="1">Laptop</option>
-                    <option value="1">Điện thoại</option>
-                    <option value="1">Tivi</option>
-									</select>
-                                <input class="input" placeholder="Tìm kiếm sản phẩm">
-                                <button class="search-btn">Tìm</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- /SEARCH BAR -->
-
-                    <!-- ACCOUNT -->
-                    <div class="col-md-3 clearfix">
-                        <div class="header-ctn">
-
-                            <!-- Cart -->
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Giỏ hàng</span>
-                                    <div class="qty">3</div>
-                                </a>
-                                <div class="cart-dropdown">
-                                    <div class="cart-list">
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product01.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">laptop asus rog strix g g531gd-al025t</a></h3>
-                                                <h4 class="product-price"><span class="qty">1x</span>$32.000.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
-
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product02.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">Tai nghe On-ear Sony MDRZX310APBCE (Đen)</a></h3>
-                                                <h4 class="product-price"><span class="qty">2x</span>340.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="cart-summary">
-                                        <small>Có 4 sản phẩm</small>
-                                        <h5>Tổng: 75.245.000đ</h5>
-                                    </div>
-                                    <div class="cart-btns">
-                                        <a href="/cart">Giỏ hàng</a>
-                                        <a href="/checkout">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Cart -->
-
-                            <!-- Menu Toogle -->
-                            <div class="menu-toggle">
-                                <a href="#">
-                                    <i class="fa fa-bars"></i>
-                                    <span>Menu</span>
-                                </a>
-                            </div>
-                            <!-- /Menu Toogle -->
-                        </div>
-                    </div>
-                    <!-- /ACCOUNT -->
                 </div>
-                <!-- row -->
+                <!-- /row -->
             </div>
-            <!-- container -->
+            <!-- /container -->
         </div>
-        <!-- /MAIN HEADER -->
-    </header>
-    <!-- /HEADER -->
+        <!-- /BREADCRUMB -->
 
-    <!-- NAVIGATION -->
-    <nav id="navigation">
-        <!-- container -->
-        <div class="container">
-            <!-- responsive-nav -->
-            <div id="responsive-nav">
-                <!-- NAV -->
-                <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="/store">Laptop</a></li>
-                    <li><a href="/store">Tai nghe</a></li>
-                    <li><a href="/store">Điện thoại</a></li>
-                </ul>
-                <!-- /NAV -->
-            </div>
-            <!-- /responsive-nav -->
-        </div>
-        <!-- /container -->
-    </nav>
-    <!-- /NAVIGATION -->
-
-    <!-- BREADCRUMB -->
-    <div id="breadcrumb" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumb-tree">
-                        <li><a href="#">Trang chủ</a></li>
-                        <li class="active">Đăng nhập</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /BREADCRUMB -->
-
-    <!--================Login Box Area =================-->
-    <section class="login_box_area section-margin">
+        <!--================Login Box Area =================-->
         <div class="container">
             <div class="row">
+                <div class="col-lg-4">
+                    <h3>Đăng nhập</h3>
+                    <div class="form-group">
+                        <label>Tên tài khoản</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input type="password" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" value="submit" class="button">Đăng nhập</button>
+                    </div>
+                    <div class="form-group">
+                        <a href="/forget-password">Quên mật khẩu</a>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
                 <div class="col-lg-6">
-                    <div class="login_box_img">
-                        <div class="hover">
-                            <h4>Tạo tài khoản</h4>
-                            <p>Nếu bạn chưa có tài khoản, hãy tạo ngay cho mình một tài khoản ngay để nhận được các ưu đãi to lớn</p>
-                            <a class="button button-account" href="/register">Tạo tài khoản</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="login_form_inner">
-                        <h3>Đăng nhập</h3>
-                        <form class="row login_form" action="#/" id="contactForm">
-                            <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tài khoản'">
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <button type="submit" value="submit" class="button button-login w-100">Log In</button>
-                                <a href="#">Quên mật khẩu</a>
-                            </div>
-                        </form>
-                    </div>
+                    <h3>Tạo tài khoản</h3>
+                    <p>Nếu bạn chưa có tài khoản, hãy tạo ngay cho mình một tài khoản ngay để nhận được các ưu đãi to lớn</p>
+                    <a class="gray_btn" href="/register">Đăng ký</a>
                 </div>
             </div>
         </div>
-    </section>
-    <!--================End Login Box Area =================-->
+        </section>
+        <!--================End Login Box Area =================-->
 
+        <% include footer.ejs%>
 
-
-    <!--================ Start footer Area  =================-->
-    <footer>
-        <div class="footer-area footer-only">
-            <div class="container">
-                <div class="row section_gap">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-footer-widget tp_widgets ">
-                            <h4 class="footer_title large_title">Our Mission</h4>
-                            <p>
-                                So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved us lan Gathering thing us land years living.
-                            </p>
-                            <p>
-                                So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved
-                            </p>
-                        </div>
-                    </div>
-                    <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
-                        <div class="single-footer-widget tp_widgets">
-                            <h4 class="footer_title">Quick Links</h4>
-                            <ul class="list">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Shop</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Product</a></li>
-                                <li><a href="#">Brand</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-sm-6">
-                        <div class="single-footer-widget instafeed">
-                            <h4 class="footer_title">Gallery</h4>
-                            <ul class="list instafeed d-flex flex-wrap">
-                                <li><img src="img/gallery/r1.jpg" alt=""></li>
-                                <li><img src="img/gallery/r2.jpg" alt=""></li>
-                                <li><img src="img/gallery/r3.jpg" alt=""></li>
-                                <li><img src="img/gallery/r5.jpg" alt=""></li>
-                                <li><img src="img/gallery/r7.jpg" alt=""></li>
-                                <li><img src="img/gallery/r8.jpg" alt=""></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-footer-widget tp_widgets">
-                            <h4 class="footer_title">Contact Us</h4>
-                            <div class="ml-40">
-                                <p class="sm-head">
-                                    <span class="fa fa-location-arrow"></span> Head Office
-                                </p>
-                                <p>123, Main Street, Your City</p>
-
-                                <p class="sm-head">
-                                    <span class="fa fa-phone"></span> Phone Number
-                                </p>
-                                <p>
-                                    +123 456 7890 <br> +123 456 7890
-                                </p>
-
-                                <p class="sm-head">
-                                    <span class="fa fa-envelope"></span> Email
-                                </p>
-                                <p>
-                                    free@infoexample.com <br> www.infoexample.com
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row d-flex">
-                    <p class="col-lg-12 footer-text text-center">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!--================ End footer Area  =================-->
-
-
-
-    <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="vendors/skrollr.min.js"></script>
-    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-    <script src="vendors/jquery.ajaxchimp.min.js"></script>
-    <script src="vendors/mail-script.js"></script>
-    <script src="js/main.js"></script>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/slick.min.js"></script>
+            <script src="js/nouislider.min.js"></script>
+            <script src="js/jquery.zoom.min.js"></script>
+            <script src="js/main.js"></script>
+            <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+            <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+            <script src="vendors/skrollr.min.js"></script>
+            <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+            <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
+            <script src="vendors/jquery.ajaxchimp.min.js"></script>
+            <script src="vendors/mail-script.js"></script>
 </body>
 
 </html>

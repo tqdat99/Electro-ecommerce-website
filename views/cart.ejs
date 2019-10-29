@@ -50,385 +50,155 @@
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header>
-        <!-- TOP HEADER -->
-        <div id="top-header">
-            <div class="container">
-                <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-phone"></i> 0379990216</a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                    <li><a href="#"><i class="fa fa-map-marker"></i> 51T Quận 6</a></li>
-                </ul>
-                <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-user-o"></i> Tài khoản</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- /TOP HEADER -->
+    <%include header.ejs%>
 
-        <!-- MAIN HEADER -->
-        <div id="header">
+        <!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
             <!-- container -->
             <div class="container">
                 <!-- row -->
                 <div class="row">
-                    <!-- LOGO -->
-                    <div class="col-md-3">
-                        <div class="header-logo">
-                            <a href="/" class="logo">
-                                <img src="./img/logo.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- /LOGO -->
-
-                    <!-- SEARCH BAR -->
-                    <div class="col-md-6">
-                        <div class="header-search">
-                            <form>
-                                <select class="input-select">
-										<option value="0">Tất cả</option>
-										<option value="1">Laptop</option>
-                    <option value="1">Điện thoại</option>
-                    <option value="1">Tivi</option>
-									</select>
-                                <input class="input" placeholder="Tìm kiếm sản phẩm">
-                                <button class="search-btn">Tìm</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- /SEARCH BAR -->
-
-                    <!-- ACCOUNT -->
-                    <div class="col-md-3 clearfix">
-                        <div class="header-ctn">
-
-                            <!-- Cart -->
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Giỏ hàng</span>
-                                    <div class="qty">3</div>
-                                </a>
-                                <div class="cart-dropdown">
-                                    <div class="cart-list">
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product01.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">laptop asus rog strix g g531gd-al025t</a></h3>
-                                                <h4 class="product-price"><span class="qty">1x</span>$32.000.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
-
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product02.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">Tai nghe On-ear Sony MDRZX310APBCE (Đen)</a></h3>
-                                                <h4 class="product-price"><span class="qty">2x</span>340.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="cart-summary">
-                                        <small>Có 4 sản phẩm</small>
-                                        <h5>Tổng: 75.245.000đ</h5>
-                                    </div>
-                                    <div class="cart-btns">
-                                        <a href="/cart">Giỏ hàng</a>
-                                        <a href="/checkout">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Cart -->
-
-                            <!-- Menu Toogle -->
-                            <div class="menu-toggle">
-                                <a href="#">
-                                    <i class="fa fa-bars"></i>
-                                    <span>Menu</span>
-                                </a>
-                            </div>
-                            <!-- /Menu Toogle -->
-                        </div>
-                    </div>
-                    <!-- /ACCOUNT -->
-                </div>
-                <!-- row -->
-            </div>
-            <!-- container -->
-        </div>
-        <!-- /MAIN HEADER -->
-    </header>
-    <!-- /HEADER -->
-
-    <!-- NAVIGATION -->
-    <nav id="navigation">
-        <!-- container -->
-        <div class="container">
-            <!-- responsive-nav -->
-            <div id="responsive-nav">
-                <!-- NAV -->
-                <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="/store">Laptop</a></li>
-                    <li><a href="/store">Tai nghe</a></li>
-                    <li><a href="/store">Điện thoại</a></li>
-                </ul>
-                <!-- /NAV -->
-            </div>
-            <!-- /responsive-nav -->
-        </div>
-        <!-- /container -->
-    </nav>
-    <!-- /NAVIGATION -->
-
-    <!-- BREADCRUMB -->
-    <div id="breadcrumb" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumb-tree">
-                        <li><a href="#">Trang chủ</a></li>
-                        <li class="active">Giỏ hàng</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /BREADCRUMB -->
-
-
-
-    <!--================Cart Area =================-->
-    <section class="cart_area">
-        <div class="container">
-            <div class="cart_inner">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col"></th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Tổng</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <img src="./img/product01.png" alt="" class="cart-thumbnail">
-                                </td>
-                                <td>
-                                    <div class="media-body">
-                                        <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
-                                    </div>
-                                    </div>
-                                </td>
-                                </td>
-                                <td>
-                                    <h5>32.000.000đ</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>32.000.000đ</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <img src="./img/product02.png" alt="" class="cart-thumbnail">
-                                </td>
-                                <td>
-                                    <div class="media-body">
-                                        <p>Tai nghe On-ear Sony MDRZX310APBCE (Đen)</p>
-                                    </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>340.000đ</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>1.680.000đ</h5>
-                                </td>
-                            </tr>
-
-                            <tr class="shipping_area">
-                                <td class="d-none d-md-block">
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    <div class="shipping_box">
-                                        <a class="gray_btn" href="#">Cập nhật</a>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="shipping_area">
-                                <td class="d-none d-md-block">
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    <div class="shipping_box">
-                                        <a class="button" href="/checkout">Tiến hành thanh toán</a>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--================End Cart Area =================-->
-
-
-    <!-- FOOTER -->
-    <footer id="footer">
-        <!-- top footer -->
-        <div class="section">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">About Us</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
-                            <ul class="footer-links">
-                                <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                                <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">Categories</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">Hot deals</a></li>
-                                <li><a href="#">Laptops</a></li>
-                                <li><a href="#">Smartphones</a></li>
-                                <li><a href="#">Cameras</a></li>
-                                <li><a href="#">Accessories</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="clearfix visible-xs"></div>
-
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">Information</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Orders and Returns</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">Service</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">Tài khoản</a></li>
-                                <li><a href="#">View Cart</a></li>
-                                <li><a href="#">Wishlist</a></li>
-                                <li><a href="#">Track My Order</a></li>
-                                <li><a href="#">Help</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /top footer -->
-
-        <!-- bottom footer -->
-        <div id="bottom-footer" class="section">
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <ul class="footer-payments">
-                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-                            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a href="#">Trang chủ</a></li>
+                            <li class="active">Giỏ hàng</li>
                         </ul>
-                        <span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
                     </div>
                 </div>
                 <!-- /row -->
             </div>
             <!-- /container -->
         </div>
-        <!-- /bottom footer -->
-    </footer>
-    <!-- /FOOTER -->
+        <!-- /BREADCRUMB -->
 
-    <!-- jQuery Plugins -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/nouislider.min.js"></script>
-    <script src="js/jquery.zoom.min.js"></script>
-    <script src="js/main.js"></script>
 
-    <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="vendors/skrollr.min.js"></script>
-    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-    <script src="vendors/jquery.ajaxchimp.min.js"></script>
-    <script src="vendors/mail-script.js"></script>
+
+        <!--================Cart Area =================-->
+        <section class="cart_area">
+            <div class="container">
+                <div class="cart_inner">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <img src="./img/product01.png" alt="" class="cart-thumbnail">
+                                    </td>
+                                    <td>
+                                        <div class="media-body">
+                                            <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
+                                        </div>
+                                        </div>
+                                    </td>
+                                    </td>
+                                    <td>
+                                        <h5>32.000.000đ</h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>32.000.000đ</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <img src="./img/product02.png" alt="" class="cart-thumbnail">
+                                    </td>
+                                    <td>
+                                        <div class="media-body">
+                                            <p>Tai nghe On-ear Sony MDRZX310APBCE (Đen)</p>
+                                        </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>340.000đ</h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>1.680.000đ</h5>
+                                    </td>
+                                </tr>
+
+                                <tr class="shipping_area">
+                                    <td class="d-none d-md-block">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <div class="shipping_box">
+                                            <a class="gray_btn" href="#">Cập nhật</a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="shipping_area">
+                                    <td class="d-none d-md-block">
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <div class="shipping_box">
+                                            <a class="button" href="/checkout">Tiến hành thanh toán</a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================End Cart Area =================-->
+
+
+        <%include footer.ejs%>
+
+            <!-- jQuery Plugins -->
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/slick.min.js"></script>
+            <script src="js/nouislider.min.js"></script>
+            <script src="js/jquery.zoom.min.js"></script>
+            <script src="js/main.js"></script>
+
+            <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+            <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+            <script src="vendors/skrollr.min.js"></script>
+            <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+            <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
+            <script src="vendors/jquery.ajaxchimp.min.js"></script>
+            <script src="vendors/mail-script.js"></script>
 </body>
 
 </html>

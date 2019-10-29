@@ -38,763 +38,534 @@
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header>
-        <!-- TOP HEADER -->
-        <div id="top-header">
-            <div class="container">
-                <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-phone"></i> 0379990216</a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                    <li><a href="#"><i class="fa fa-map-marker"></i> 51T Quận 6</a></li>
-                </ul>
-                <ul class="header-links pull-right">
-                    <li><a href="#"><i class="fa fa-user-o"></i> Tài khoản</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- /TOP HEADER -->
 
-        <!-- MAIN HEADER -->
-        <div id="header">
+    <%include header.ejs%>
+
+        <!-- BREADCRUMB -->
+        <div id="breadcrumb" class="section">
             <!-- container -->
             <div class="container">
                 <!-- row -->
                 <div class="row">
-                    <!-- LOGO -->
-                    <div class="col-md-3">
-                        <div class="header-logo">
-                            <a href="/" class="logo">
-                                <img src="./img/logo.png" alt="">
-                            </a>
-                        </div>
+                    <div class="col-md-12">
+                        <ul class="breadcrumb-tree">
+                            <li><a href="#">Home</a></li>
+                            <li class="active">Sản phẩm</li>
+                        </ul>
                     </div>
-                    <!-- /LOGO -->
-
-                    <!-- SEARCH BAR -->
-                    <div class="col-md-6">
-                        <div class="header-search">
-                            <form>
-                                <select class="input-select">
-										<option value="0">Tất cả</option>
-										<option value="1">Laptop</option>
-                    <option value="1">Điện thoại</option>
-                    <option value="1">Tivi</option>
-									</select>
-                                <input class="input" placeholder="Tìm kiếm sản phẩm">
-                                <button class="search-btn">Tìm</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- /SEARCH BAR -->
-
-                    <!-- ACCOUNT -->
-                    <div class="col-md-3 clearfix">
-                        <div class="header-ctn">
-
-                            <!-- Cart -->
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Giỏ hàng</span>
-                                    <div class="qty">3</div>
-                                </a>
-                                <div class="cart-dropdown">
-                                    <div class="cart-list">
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product01.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">laptop asus rog strix g g531gd-al025t</a></h3>
-                                                <h4 class="product-price"><span class="qty">1x</span>$32.000.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
-
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img src="./img/product02.png" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#">Tai nghe On-ear Sony MDRZX310APBCE (Đen)</a></h3>
-                                                <h4 class="product-price"><span class="qty">2x</span>340.000đ</h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="cart-summary">
-                                        <small>Có 4 sản phẩm</small>
-                                        <h5>Tổng: 75.245.000đ</h5>
-                                    </div>
-                                    <div class="cart-btns">
-                                        <a href="/cart">Giỏ hàng</a>
-                                        <a href="/checkout">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Cart -->
-
-                            <!-- Menu Toogle -->
-                            <div class="menu-toggle">
-                                <a href="#">
-                                    <i class="fa fa-bars"></i>
-                                    <span>Menu</span>
-                                </a>
-                            </div>
-                            <!-- /Menu Toogle -->
-                        </div>
-                    </div>
-                    <!-- /ACCOUNT -->
                 </div>
-                <!-- row -->
+                <!-- /row -->
             </div>
+            <!-- /container -->
+        </div>
+        <!-- /BREADCRUMB -->
+
+        <!-- SECTION -->
+        <div class="section">
             <!-- container -->
-        </div>
-        <!-- /MAIN HEADER -->
-    </header>
-    <!-- /HEADER -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- ASIDE -->
+                    <div id="aside" class="col-md-3">
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Danh mục</h3>
+                            <div class="checkbox-filter">
 
-    <!-- NAVIGATION -->
-    <nav id="navigation">
-        <!-- container -->
-        <div class="container">
-            <!-- responsive-nav -->
-            <div id="responsive-nav">
-                <!-- NAV -->
-                <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="/store">Laptop</a></li>
-                    <li><a href="/store">Tai nghe</a></li>
-                    <li><a href="/store">Điện thoại</a></li>
-                </ul>
-                <!-- /NAV -->
-            </div>
-            <!-- /responsive-nav -->
-        </div>
-        <!-- /container -->
-    </nav>
-    <!-- /NAVIGATION -->
-
-    <!-- BREADCRUMB -->
-    <div id="breadcrumb" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumb-tree">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Sản phẩm</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /BREADCRUMB -->
-
-    <!-- SECTION -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- ASIDE -->
-                <div id="aside" class="col-md-3">
-                    <!-- aside Widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Danh mục</h3>
-                        <div class="checkbox-filter">
-
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-1">
-                                <label for="category-1">
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="category-1">
+                                    <label for="category-1">
 										<span></span>
 										Laptop
 										<small>(120)</small>
 									</label>
-                            </div>
+                                </div>
 
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-2">
-                                <label for="category-2">
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="category-2">
+                                    <label for="category-2">
 										<span></span>
 										Điện thoại
 										<small>(740)</small>
 									</label>
-                            </div>
+                                </div>
 
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="category-3">
-                                <label for="category-3">
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="category-3">
+                                    <label for="category-3">
 										<span></span>
 										Tai nghe
 										<small>(1450)</small>
 									</label>
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                    <!-- /aside Widget -->
+                        <!-- /aside Widget -->
 
-                    <!-- aside Widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Hãng</h3>
-                        <div class="checkbox-filter">
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-1">
-                                <label for="brand-1">
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Hãng</h3>
+                            <div class="checkbox-filter">
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-1">
+                                    <label for="brand-1">
 										<span></span>
 										Samsung
 										<small>(578)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-2">
-                                <label for="brand-2">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-2">
+                                    <label for="brand-2">
 										<span></span>
 										LG
 										<small>(125)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-3">
-                                <label for="brand-3">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-3">
+                                    <label for="brand-3">
 										<span></span>
 										Sony
 										<small>(755)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-4">
-                                <label for="brand-4">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-4">
+                                    <label for="brand-4">
 										<span></span>
 										Asus
 										<small>(578)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-5">
-                                <label for="brand-5">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-5">
+                                    <label for="brand-5">
 										<span></span>
 										Acer
 										<small>(125)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-6">
-                                <label for="brand-6">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-6">
+                                    <label for="brand-6">
 										<span></span>
 										Apple
 										<small>(755)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-6">
-                                <label for="brand-6">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-6">
+                                    <label for="brand-6">
 										<span></span>
 										Nokia
 										<small>(755)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-6">
-                                <label for="brand-6">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-6">
+                                    <label for="brand-6">
 										<span></span>
 										Xiaomi
 										<small>(755)</small>
 									</label>
-                            </div>
-                            <div class="input-checkbox">
-                                <input type="checkbox" id="brand-6">
-                                <label for="brand-6">
+                                </div>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" id="brand-6">
+                                    <label for="brand-6">
 										<span></span>
 										Apple
 										<small>(755)</small>
 									</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /aside Widget -->
+                        <!-- /aside Widget -->
 
-                    <!-- aside Widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Price</h3>
-                        <div class="price-filter">
-                            <div id="price-slider"></div>
-                            <div class="input-number price-min">
-                                <input id="price-min" type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
-                            </div>
-                            <span>-</span>
-                            <div class="input-number price-max">
-                                <input id="price-max" type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Price</h3>
+                            <div class="price-filter">
+                                <div id="price-slider"></div>
+                                <div class="input-number price-min">
+                                    <input id="price-min" type="number">
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
+                                <span>-</span>
+                                <div class="input-number price-max">
+                                    <input id="price-max" type="number">
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
                             </div>
                         </div>
+                        <!-- /aside Widget -->
+
+
                     </div>
-                    <!-- /aside Widget -->
+                    <!-- /ASIDE -->
 
-
-                </div>
-                <!-- /ASIDE -->
-
-                <!-- STORE -->
-                <div id="store" class="col-md-9">
-                    <!-- store top filter -->
-                    <div class="store-filter clearfix">
-                        <div class="store-sort">
-                            <label>
+                    <!-- STORE -->
+                    <div id="store" class="col-md-9">
+                        <!-- store top filter -->
+                        <div class="store-filter clearfix">
+                            <div class="store-sort">
+                                <label>
 									Sắp xếp:
 									<select class="input-select">
 										<option value="0">Giá tăng dần</option>
 										<option value="1">Giá giảm dần</option>
 									</select>
 								</label>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /store top filter -->
+                        <!-- /store top filter -->
 
-                    <!-- store products -->
-                    <div class="row">
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product01.png" alt="">
-                                        <div class="product-label">
-                                            <span class="sale">-30%</span>
-                                            <span class="new">NEW</span>
+                        <!-- store products -->
+                        <div class="row">
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product01.png" alt="">
+                                            <div class="product-label">
+                                                <span class="sale">-30%</span>
+                                                <span class="new">NEW</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Laptop</p>
-                                        <h3 class="product-name">Laptop Apple Macbook Pro 2017 13.3" MPXR2 (13.3"/Core i5/8GB/Iris Plus 640/macOS/1.3 kg)</h3>
-                                        <h4 class="product-price">
-                                            33.300.000đ <del class="product-old-price">
+                                        <div class="product-body">
+                                            <p class="product-category">Laptop</p>
+                                            <h3 class="product-name">Laptop Apple Macbook Pro 2017 13.3" MPXR2 (13.3"/Core i5/8GB/Iris Plus 640/macOS/1.3 kg)</h3>
+                                            <h4 class="product-price">
+                                                33.300.000đ <del class="product-old-price">
 											34.300.000đ</del></h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
                                         </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
+                                </a>
+                            </div>
+                            <!-- /product -->
+
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product02.png" alt="">
+                                            <div class="product-label">
+                                                <span class="new">NEW</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">Tai nghe</p>
+                                            <h3 class="product-name">
+                                                <a href="#"></a>Tai nghe Over-ear Zidli ZH12S (Đen)</a>
+                                </h3>
+                                <h4 class="product-price">429.000đ <del class="product-old-price"> 729.000đ</del>
+                                </h4>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-o"></i>
                                 </div>
-                            </a>
-                        </div>
-                        <!-- /product -->
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                </div>
+                                </div>
+                                </a>
+                            </div>
+                            <!-- /product -->
 
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product02.png" alt="">
-                                        <div class="product-label">
-                                            <span class="new">NEW</span>
+                            <div class="clearfix visible-sm visible-xs"></div>
+
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product03.png" alt="">
                                         </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Tai nghe</p>
-                                        <h3 class="product-name">
-                                            <a href="#"></a>Tai nghe Over-ear Zidli ZH12S (Đen)</a>
-                            </h3>
-                            <h4 class="product-price">429.000đ <del class="product-old-price"> 729.000đ</del>
-                            </h4>
-                            <div class="product-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                            </div>
-                            </div>
-                            <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                            </div>
-                            </div>
-                            </a>
-                        </div>
-                        <!-- /product -->
-
-                        <div class="clearfix visible-sm visible-xs"></div>
-
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product03.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Laptop</p>
-                                        <h3 class="product-name"><a href="#">Laptop Apple MacBook Air 2018 13" MREA2 (13.3"/Core i5/8GB/128GB SSD/UHD 617/macOS/1.2 kg)
+                                        <div class="product-body">
+                                            <p class="product-category">Laptop</p>
+                                            <h3 class="product-name"><a href="#">Laptop Apple MacBook Air 2018 13" MREA2 (13.3"/Core i5/8GB/128GB SSD/UHD 617/macOS/1.2 kg)
 									</a></h3>
-                                        <h4 class="product-price">31.900.000đ
+                                            <h4 class="product-price">31.900.000đ
 
-                                            <del class="product-old-price">32.900.000đ</del></h4>
-                                        <div class="product-rating">
+                                                <del class="product-old-price">32.900.000đ</del></h4>
+                                            <div class="product-rating">
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
                                         </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /product -->
-
-                        <div class="clearfix visible-lg visible-md"></div>
-
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product04.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Laptop</p>
-                                        <h3 class="product-name"><a href="#">Laptop Microsoft Surface Pro 6 LGP-00001 (12"/i5-8250U/8GB/128GB SSD/UHD 620/Win10/0.8 kg)</a></h3>
-                                        <h4 class="product-price">19.900.000đ <del class="product-old-price">19.990.000đ</del></h4>
-                                        <div class="product-rating">
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                </a>
+                            </div>
+                            <!-- /product -->
+
+                            <div class="clearfix visible-lg visible-md"></div>
+
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product04.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">Laptop</p>
+                                            <h3 class="product-name"><a href="#">Laptop Microsoft Surface Pro 6 LGP-00001 (12"/i5-8250U/8GB/128GB SSD/UHD 620/Win10/0.8 kg)</a></h3>
+                                            <h4 class="product-price">19.900.000đ <del class="product-old-price">19.990.000đ</del></h4>
+                                            <div class="product-rating">
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /product -->
+                                </a>
+                            </div>
+                            <!-- /product -->
 
-                        <div class="clearfix visible-sm visible-xs"></div>
+                            <div class="clearfix visible-sm visible-xs"></div>
 
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product05.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Tai nghe</p>
-                                        <h3 class="product-name"><a href="#">Tai nghe Over-ear SoundMAX AH 302 (Đen)</a></h3>
-                                        <h4 class="product-price">260.000đ
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product05.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">Tai nghe</p>
+                                            <h3 class="product-name"><a href="#">Tai nghe Over-ear SoundMAX AH 302 (Đen)</a></h3>
+                                            <h4 class="product-price">260.000đ
 
-                                            <del class="product-old-price">280.000đ
+                                                <del class="product-old-price">280.000đ
 
 										</del></h4>
-                                        <div class="product-rating">
+                                            <div class="product-rating">
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
                                         </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /product -->
+                                </a>
+                            </div>
+                            <!-- /product -->
 
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product06.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">laptop</p>
-                                        <h3 class="product-name"><a href="#">Laptop MSI GL65 9SDK-054VN (15" FHD/i5-9300H/8GB/512GB SSD/GTX 1660Ti/Win10/2.3 kg)
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product06.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">laptop</p>
+                                            <h3 class="product-name"><a href="#">Laptop MSI GL65 9SDK-054VN (15" FHD/i5-9300H/8GB/512GB SSD/GTX 1660Ti/Win10/2.3 kg)
 									</a></h3>
-                                        <h4 class="product-price">29.990.000đ
+                                            <h4 class="product-price">29.990.000đ
 
-                                            <del class="product-old-price">30.990.000đ
+                                                <del class="product-old-price">30.990.000đ
 
 										</del></h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
                                         </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /product -->
+                                </a>
+                            </div>
+                            <!-- /product -->
 
-                        <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
+                            <div class="clearfix visible-lg visible-md visible-sm visible-xs"></div>
 
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product07.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Điện thoại</p>
-                                        <h3 class="product-name"><a href="#">Điện thoại Samsung Galaxy Note 8 (Đen)
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product07.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">Điện thoại</p>
+                                            <h3 class="product-name"><a href="#">Điện thoại Samsung Galaxy Note 8 (Đen)
 									</a></h3>
-                                        <h4 class="product-price">22.490.000đ
+                                            <h4 class="product-price">22.490.000đ
 
-                                            <del class="product-old-price">24.490.000đ
+                                                <del class="product-old-price">24.490.000đ
 
 										</del></h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
                                         </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <!-- /product -->
+                                </a>
+                            </div>
+                            <!-- /product -->
 
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product08.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Laptop</p>
-                                        <h3 class="product-name"><a href="#">Laptop ASUS FX503VM-E4087T (15.6" FHD/i5-7300HQ/8GB/1TB HDD/GTX 1060/Win10/2.6 kg)
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product08.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">Laptop</p>
+                                            <h3 class="product-name"><a href="#">Laptop ASUS FX503VM-E4087T (15.6" FHD/i5-7300HQ/8GB/1TB HDD/GTX 1060/Win10/2.6 kg)
 									</a></h3>
-                                        <h4 class="product-price">26.990.000đ
+                                            <h4 class="product-price">26.990.000đ
 
-                                            <del class="product-old-price">27.990.000đ
+                                                <del class="product-old-price">27.990.000đ
 
 										</del></h4>
-                                        <div class="product-rating">
+                                            <div class="product-rating">
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
                                         </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                </a>
+                            </div>
+                            <!-- /product -->
+
+                            <div class="clearfix visible-sm visible-xs"></div>
+
+                            <!-- product -->
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store-product-details">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="./img/product09.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">Tai nghe</p>
+                                            <h3 class="product-name"><a href="#">Tai nghe Over-ear Zidli ZH12S (Đen)</a></h3>
+                                            <h4 class="product-price">590.000đ <del class="product-old-price">990.000đ</del></h4>
+                                            <div class="product-rating">
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                             </a>
+                            <!-- /product -->
                         </div>
-                        <!-- /product -->
+                        <!-- /store products -->
 
-                        <div class="clearfix visible-sm visible-xs"></div>
-
-                        <!-- product -->
-                        <div class="col-md-4 col-xs-6">
-                            <a href="/store-product-details">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="./img/product09.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">Tai nghe</p>
-                                        <h3 class="product-name"><a href="#">Tai nghe Over-ear Zidli ZH12S (Đen)</a></h3>
-                                        <h4 class="product-price">590.000đ <del class="product-old-price">990.000đ</del></h4>
-                                        <div class="product-rating">
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                    </div>
-                                </div>
-                        </div>
-                        </a>
-                        <!-- /product -->
-                    </div>
-                    <!-- /store products -->
-
-                    <!-- store bottom filter -->
-                    <div class="store-filter clearfix">
-                        <span class="store-qty">Showing 20-100 products</span>
-                        <ul class="store-pagination">
-                            <li class="active">1</li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        </ul>
-                    </div>
-                    <!-- /store bottom filter -->
-                </div>
-                <!-- /STORE -->
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /SECTION -->
-
-
-    <!-- FOOTER -->
-    <footer id="footer">
-        <!-- top footer -->
-        <div class="section">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">About Us</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
-                            <ul class="footer-links">
-                                <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                                <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                        <!-- store bottom filter -->
+                        <div class="store-filter clearfix">
+                            <span class="store-qty">Showing 20-100 products</span>
+                            <ul class="store-pagination">
+                                <li class="active">1</li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                             </ul>
                         </div>
+                        <!-- /store bottom filter -->
                     </div>
-
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">Categories</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">Hot deals</a></li>
-                                <li><a href="#">Laptops</a></li>
-                                <li><a href="#">Smartphones</a></li>
-                                <li><a href="#">Cameras</a></li>
-                                <li><a href="#">Accessories</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="clearfix visible-xs"></div>
-
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">Information</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Orders and Returns</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">Service</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">Tài khoản</a></li>
-                                <li><a href="#">View Cart</a></li>
-                                <li><a href="#">Wishlist</a></li>
-                                <li><a href="#">Track My Order</a></li>
-                                <li><a href="#">Help</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <!-- /STORE -->
                 </div>
                 <!-- /row -->
             </div>
             <!-- /container -->
         </div>
-        <!-- /top footer -->
+        <!-- /SECTION -->
 
-        <!-- bottom footer -->
-        <div id="bottom-footer" class="section">
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <ul class="footer-payments">
-                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-                            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-                        </ul>
-                        <span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
-                    </div>
-                </div>
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /bottom footer -->
-    </footer>
-    <!-- /FOOTER -->
 
-    <!-- jQuery Plugins -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/nouislider.min.js"></script>
-    <script src="js/jquery.zoom.min.js"></script>
-    <script src="js/main.js"></script>
+        <%include footer.ejs%>
+
+            <!-- jQuery Plugins -->
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/slick.min.js"></script>
+            <script src="js/nouislider.min.js"></script>
+            <script src="js/jquery.zoom.min.js"></script>
+            <script src="js/main.js"></script>
 
 </body>
 
