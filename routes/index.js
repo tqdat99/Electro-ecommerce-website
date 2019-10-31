@@ -35,7 +35,7 @@ router.get('/account', function(req, res) {
 });
 
 router.get('/admin', function(req, res) {
-    res.render('admin');
+    res.render('admin/signin');
 });
 
 module.exports = router;
