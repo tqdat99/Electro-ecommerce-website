@@ -10,10 +10,6 @@ router.get('/store', function(req, res) {
     res.render('store');
 });
 
-router.get('/store-product-details', function(req, res) {
-    res.render('product-details');
-});
-
 router.get('/cart', function(req, res) {
     res.render('cart');
 });
@@ -32,6 +28,14 @@ router.get('/register', function(req, res) {
 
 router.get('/forget-password', function(req, res) {
     res.render('forget-password');
+});
+
+router.get('/account', function(req, res) {
+    res.render('account');
+});
+
+router.get('/admin', function(req, res) {
+    res.render('admin');
 });
 
 module.exports = router;

@@ -61,7 +61,8 @@
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
                             <li><a href="#">Trang chủ</a></li>
-                            <li class="active">Giỏ hàng</li>
+                            <li><a href="#">Tài khoản</a></li>
+                            <li class="active">Chi tiết đơn hàng</li>
                         </ul>
                     </div>
                 </div>
@@ -71,7 +72,60 @@
         </div>
         <!-- /BREADCRUMB -->
 
+        <div class="container">
+            <h4>Mã đơn hàng: DH05</h4>
+        </div>
 
+        <section class="cart_area">
+            <div class="container">
+                <div class="cart_inner">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Thời gian</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>Nhận đơn hàng</p>
+                                    </td>
+                                    <td>
+                                        <p>13:25, 29/10/2019</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Shop đã giao cho vận chuyển</p>
+                                    </td>
+                                    <td>
+                                        <p>15:25, 29/10/2019</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Đang vận chuyển</p>
+                                    </td>
+                                    <td>
+                                        <p>16:25, 29/10/2019</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Shipper báo đã giao hàng</p>
+                                    </td>
+                                    <td>
+                                        <p>16:25, 30/10/2019</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!--================Cart Area =================-->
         <section class="cart_area">
@@ -91,25 +145,21 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <a href="store/product-details">
+                                        <a href="/store/product-details">
                                             <img src="./img/product01.png" alt="" class="cart-thumbnail">
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="store/product-details">
+                                        <a href="/store/product-details">
                                             <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
                                         </a>
-
+                                    </td>
                                     </td>
                                     <td>
                                         <p>32.000.000đ</p>
                                     </td>
                                     <td>
-                                        <div class="product_count">
-                                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                        </div>
+                                        <p>1</p>
                                     </td>
                                     <td>
                                         <h5>32.000.000đ</h5>
@@ -117,12 +167,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="store/product-details">
+                                        <a href="/store/product-details">
                                             <img src="./img/product02.png" alt="" class="cart-thumbnail">
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="store/product-details">
+                                        <a href="/store/product-details">
                                             <p>Tai nghe On-ear Sony MDRZX310APBCE (Đen)</p>
                                         </a>
                                     </td>
@@ -130,17 +180,26 @@
                                         <p>340.000đ</p>
                                     </td>
                                     <td>
-                                        <div class="product_count">
-                                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                        </div>
+                                        <p>3</p>
                                     </td>
                                     <td>
                                         <h5>1.680.000đ</h5>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <p>Tổng</p>
+                                    </td>
+                                    <td>
+                                        <h5>33.680.000đ</h5>
+                                    </td>
+                                </tr>
                                 <tr class="shipping_area">
                                     <td class="d-none d-md-block">
                                     </td>
@@ -152,27 +211,10 @@
                                     </td>
                                     <td>
                                         <div class="shipping_box">
-                                            <a class="gray_btn" href="#">Cập nhật</a>
+                                            <a class="button" href="/checkout">Hủy đơn hàng</a>
                                         </div>
                                     </td>
                                 </tr>
-
-                                <tr class="shipping_area">
-                                    <td class="d-none d-md-block">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <div class="shipping_box">
-                                            <a class="button" href="/checkout">Tiến hành thanh toán</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>

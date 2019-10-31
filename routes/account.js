@@ -3,11 +3,11 @@ var router = express.Router();
 router.use(express.static('public'));
 
 router.get('/', function(req, res) {
-    res.render('store');
+    res.render('account');
 });
 
-router.get('/product-details', function(req, res) {
-    res.render('product-details');
+router.get('/order-details', function(req, res) {
+    res.render('order-details');
 });
 
 module.exports = router;
