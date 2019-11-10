@@ -135,7 +135,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <!-- product -->
-                            <% Items.rows.forEach(function(item){ %>
+                            <%Items.rows.forEach(function(item){%>
                                 <div class="col-md-3 col-xs-6">
                                     <a href="/store/product-details">
                                         <div class="product">
@@ -145,10 +145,10 @@
                                             <div class="product-body">
                                                 <p class="product-category">Laptop</p>
                                                 <h3 class="product-name">
-                                                    <%= item.ten%>
+                                                    <%=item.ten%>
                                                 </h3>
                                                 <h4 class="product-price">
-                                                    <%= item.gia%>
+                                                    <%=item.gia%>
                                                 </h4>
                                                 <div class="product-rating">
                                                     <i class="fa fa-star"></i>
