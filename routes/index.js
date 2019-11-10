@@ -14,6 +14,7 @@ const pool = new Pool({
     max: 10,
     idleTimeoutMillis: 300000000,
 });
+
 /* GET home page. */
 router.get('/', function(req, res) {
     query = 'select * from "Laptop" limit 4';

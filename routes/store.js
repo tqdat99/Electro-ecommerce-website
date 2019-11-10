@@ -16,10 +16,6 @@ const pool = new Pool({
     idleTimeoutMillis: 300000000,
 })
 
-router.get('/', function(req, res) {
-    res.render('store');
-});
-
 router.get('/:type', function(req, res) {
     query = 'select * from \"' + req.params["type"] + '\"';
     pool.query(query, function(err, result) {
