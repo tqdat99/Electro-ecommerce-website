@@ -1,13 +1,26 @@
 var express = require('express');
 var router = express.Router();
+var pg = require('pg'),
+    session = require('express-session'),
+    pgSession = require('connect-pg-simple')(session);
 
+const { Pool, Client } = require('pg')
+const pool = new Pool({
+    user: 'postgres',
+    database: 'EcomDB',
+    password: 'dat',
+    host: 'localhost',
+    port: 3001,
+    max: 10,
+    idleTimeoutMillis: 300000000,
+});
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('index');
-});
-
-router.get('/store', function(req, res) {
-    res.render('store');
+    query = 'select * from "Laptop" limit 4';
+    pool.query(query, function(err, result) {
+        console.log(err, result);
+        res.render('index', { Items: result });
+    })
 });
 
 router.get('/cart', function(req, res) {
