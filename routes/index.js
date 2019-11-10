@@ -6,14 +6,24 @@ var pg = require('pg'),
 
 const { Pool, Client } = require('pg')
 const pool = new Pool({
-    user: 'postgres',
-    database: 'EcomDB',
-    password: 'dat',
-    host: 'localhost',
-    port: 3001,
+    user: 'xljfmycrkdjihn',
+    database: 'degkor64j0gfe6',
+    password: '9ace4aff47858df147c4f0f041220c0b2ed2c605e962e531b714f90a1460549f',
+    host: 'ec2-50-17-231-192.compute-1.amazonaws.com',
+    port: 5432,
     max: 10,
     idleTimeoutMillis: 300000000,
 });
+
+// const pool = new Pool({
+//     user: 'postgres',
+//     database: 'EcomDB',
+//     password: 'dat',
+//     host: 'localhost',
+//     port: 3001,
+//     max: 10,
+//     idleTimeoutMillis: 300000000,
+// })
 
 /* GET home page. */
 router.get('/', function(req, res) {
