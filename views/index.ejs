@@ -47,7 +47,7 @@
                 <!-- row -->
                 <!-- shop -->
                 <div class="col-md-4 col-xs-6">
-                    <a href="/store/Laptop">
+                    <a href="/store/product-list-Laptop">
                         <div class="shop">
                             <div class="shop-img">
                                 <img src="./img/shop01.png" alt="">
@@ -79,7 +79,7 @@
 
                 <!-- shop -->
                 <div class="col-md-4 col-xs-6">
-                    <a href="/store/Dienthoai">
+                    <a href="/store/product-list-Dienthoai">
                         <div class="shop">
                             <div class="shop-img">
                                 <img src="./img/shop02.png" alt="">
@@ -95,7 +95,7 @@
 
                 <!-- shop -->
                 <div class="col-md-4 col-xs-6">
-                    <a href="/store/Tivi">
+                    <a href="/store/product-list-Tivi">
                         <div class="shop">
                             <div class="shop-img">
                                 <img src="./img/shop04.png" alt="">
@@ -137,13 +137,13 @@
                             <!-- product -->
                             <%Items.rows.forEach(function(item){%>
                                 <div class="col-md-3 col-xs-6">
-                                    <a href="/store/product-details">
+                                    <a href="/store/details-<%=item.id%>">
                                         <div class="product">
                                             <div class="product-img">
                                                 <img src="<%=item.anh%>" alt="">
                                             </div>
                                             <div class="product-body">
-                                                <p class="product-category">Laptop</p>
+                                                <p class="product-product-list">Laptop</p>
                                                 <h3 class="product-name">
                                                     <%=item.ten%>
                                                 </h3>

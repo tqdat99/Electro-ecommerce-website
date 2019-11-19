@@ -67,8 +67,7 @@
                 <!-- row -->
                 <div class="row">
                     <!-- ASIDE -->
-                    <div id="aside" class="col-md-3">
-                        <!-- aside Widget -->
+                    <!-- <div id="aside" class="col-md-3">
                         <div class="aside">
                             <h3 class="aside-title">Danh mục</h3>
                             <div class="checkbox-filter">
@@ -111,9 +110,7 @@ Tivi
 
                             </div>
                         </div>
-                        <!-- /aside Widget -->
 
-                        <!-- aside Widget -->
                         <div class="aside">
                             <h3 class="aside-title">Hãng</h3>
                             <div class="checkbox-filter">
@@ -191,9 +188,7 @@ Tivi
                                 </div>
                             </div>
                         </div>
-                        <!-- /aside Widget -->
 
-                        <!-- aside Widget -->
                         <div class="aside">
                             <h3 class="aside-title">Price</h3>
                             <div class="price-filter">
@@ -210,90 +205,90 @@ Tivi
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /aside Widget -->
+                        </div> -->
+                    <!-- /aside Widget -->
 
 
-                    </div>
-                    <!-- /ASIDE -->
+                </div>
+                <!-- /ASIDE -->
 
-                    <!-- STORE -->
-                    <div id="store" class="col-md-9">
-                        <!-- store top filter -->
-                        <div class="store-filter clearfix">
-                            <div class="store-sort">
-                                <label>
+                <!-- STORE -->
+                <div id="store" class="col-md-12">
+                    <!-- store top filter -->
+                    <div class="store-filter clearfix">
+                        <div class="store-sort">
+                            <label>
 									Sắp xếp:
 									<select class="input-select">
 										<option value="0">Giá tăng dần</option>
 										<option value="1">Giá giảm dần</option>
 									</select>
 								</label>
-                            </div>
                         </div>
-                        <!-- /store top filter -->
+                    </div>
+                    <!-- /store top filter -->
 
-                        <!-- store products -->
-                        <div class="row">
-                            <!-- product -->
-                            <% Items.rows.forEach(function(item){ %>
-                                <div class="col-md-4 col-xs-6">
-                                    <a href="/store/product-details">
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="<%=item.anh%>" alt="">
+                    <!-- store products -->
+                    <div class="row">
+                        <!-- product -->
+                        <% Items.rows.forEach(function(item){ %>
+                            <div class="col-md-4 col-xs-6">
+                                <a href="/store/details-<%=item.id%>">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="<%=item.anh%>" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">Laptop</p>
+                                            <h3 class="product-name">
+                                                <%= item.ten%>
+                                            </h3>
+                                            <h4 class="product-price">
+                                                <%= item.gia%>
+                                            </h4>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
                                             </div>
-                                            <div class="product-body">
-                                                <p class="product-category">Laptop</p>
-                                                <h3 class="product-name">
-                                                    <%= item.ten%>
-                                                </h3>
-                                                <h4 class="product-price">
-                                                    <%= item.gia%>
-                                                </h4>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <!-- /product -->
-                                <% }); %>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- /product -->
+                            <% }); %>
 
-                        </div>
-                        <!-- /store products -->
-
-                        <!-- store bottom filter -->
-                        <div class="store-filter clearfix">
-                            <span class="store-qty">Showing 20-100 products</span>
-                            <ul class="store-pagination">
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- /store bottom filter -->
                     </div>
-                    <!-- /STORE -->
+                    <!-- /store products -->
+
+                    <!-- store bottom filter -->
+                    <div class="store-filter clearfix">
+                        <span class="store-qty">Showing 20-100 products</span>
+                        <ul class="store-pagination">
+                            <li class="active">1</li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- /store bottom filter -->
                 </div>
-                <!-- /row -->
+                <!-- /STORE -->
             </div>
-            <!-- /container -->
+            <!-- /row -->
+        </div>
+        <!-- /container -->
         </div>
         <!-- /SECTION -->
 
@@ -310,4 +305,4 @@ Tivi
 
 </body>
 
-</html>
+</html>*
