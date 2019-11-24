@@ -15,11 +15,7 @@ const pool = new Pool({
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    query = 'select * from "Laptop" limit 4';
-    pool.query(query, function(err, result) {
-        console.log(err, result);
-        res.render('index', { Items: result });
-    })
+    res.render('index');
 });
 
 router.get('/cart', function(req, res) {

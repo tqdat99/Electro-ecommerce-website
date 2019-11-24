@@ -28,9 +28,9 @@ function productListByTypeAndBrand(type, brand, callback) {
 }
 
 function findProductById(id, callback) {
-    laptopQuery = 'select * from "Laptop" where id = \'' + req.params["id"] + '\'';
-    tiviQuery = 'select * from "Tivi" where id = \'' + req.params["id"] + '\'';
-    dienthoaiQuery = 'select * from "Dienthoai" where id = \'' + req.params["id"] + '\'';
+    laptopQuery = 'select * from "Laptop" where id = \'' + id + '\'';
+    tiviQuery = 'select * from "Tivi" where id = \'' + id + '\'';
+    dienthoaiQuery = 'select * from "Dienthoai" where id = \'' + id + '\'';
 
     pool.query(laptopQuery, function(err, resultLaptop) {
         if (resultLaptop.rowCount > 0) {
@@ -49,14 +49,6 @@ function findProductById(id, callback) {
     });
 }
 
-module.exports = model('Product', {
-    id: String,
-    ten: String,
-    gia: Number,
-    mota: String,
-    anh: String,
-    brand: String,
-});
 module.exports.productListByType = productListByType;
 module.exports.productListByTypeAndBrand = productListByTypeAndBrand;
 module.exports.findProductById = findProductById;
