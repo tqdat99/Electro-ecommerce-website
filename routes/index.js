@@ -5,28 +5,28 @@ var pg = require('pg'),
     pgSession = require('connect-pg-simple')(session);
 
 const { Pool, Client } = require('pg')
-const pool = new Pool({
-    user: 'xljfmycrkdjihn',
-    database: 'degkor64j0gfe6',
-    password: '9ace4aff47858df147c4f0f041220c0b2ed2c605e962e531b714f90a1460549f',
-    host: 'ec2-50-17-231-192.compute-1.amazonaws.com',
-    port: 5432,
-    max: 10,
-    idleTimeoutMillis: 300000000,
-});
+    // const pool = new Pool({
+    //     user: 'xljfmycrkdjihn',
+    //     database: 'degkor64j0gfe6',
+    //     password: '9ace4aff47858df147c4f0f041220c0b2ed2c605e962e531b714f90a1460549f',
+    //     host: 'ec2-50-17-231-192.compute-1.amazonaws.com',
+    //     port: 5432,
+    //     max: 10,
+    //     idleTimeoutMillis: 300000000,
+    // });
 
 // DATABASE_URL = "postgres://xljfmycrkdjihn:9ace4aff47858df147c4f0f041220c0b2ed2c605e962e531b714f90a1460549f@ec2-50-17-231-192.compute-1.amazonaws.com:5432/degkor64j0gfe6"
 // pg.connect(process.env.DATABASE_URL, function(err, client) {});
 
-// const pool = new Pool({
-//     user: 'postgres',
-//     database: 'EcomDB',
-//     password: 'dat',
-//     host: 'localhost',
-//     port: 3001,
-//     max: 10,
-//     idleTimeoutMillis: 300000000,
-// })
+const pool = new Pool({
+    user: 'postgres',
+    database: 'EcomDB',
+    password: 'dat',
+    host: 'localhost',
+    port: 3001,
+    max: 10,
+    idleTimeoutMillis: 300000000,
+})
 
 /* GET home page. */
 router.get('/', function(req, res) {
