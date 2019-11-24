@@ -1,12 +1,10 @@
 const { Pool, Client } = require('pg')
 const pool = new Pool({
-    user: 'postgres',
-    database: 'EcomDB',
-    password: 'dat',
-    host: 'localhost',
-    port: 3001,
-    max: 10,
-    idleTimeoutMillis: 300000000,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
 })
 
 function productListByType(type, callback) {
