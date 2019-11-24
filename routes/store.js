@@ -7,13 +7,11 @@ var pg = require('pg'),
 
 const { Pool, Client } = require('pg')
 const pool = new Pool({
-    user: 'postgres',
-    database: 'EcomDB',
-    password: 'dat',
-    host: 'localhost',
-    port: 3001,
-    max: 10,
-    idleTimeoutMillis: 300000000,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
 })
 
 // const { Pool, Client } = require('pg')
@@ -27,12 +25,16 @@ const pool = new Pool({
 //     idleTimeoutMillis: 300000000,
 // });
 
-router.get('/?type=:type&brand=:brand', function(req, res) {
+router.get('/type=:type&brand=:brand', function(req, res) {
     query = 'select * from \"' + req.params["type"] + '\" where brand = \'' + req.params["brand"] + '\'';
-    console.log(query);
+    // var product = require('../models/product');
 
-    //var product = require('../models/product');
-
+    // product.productListByTypeAndBrand(req.params["type"], req.params["brand"], function(result) {
+    //     console.log(req.params["type"]);
+    //     console.log(req.params["brand"]);
+    //     console.log(err, result);
+    //     res.render('store', { Items: result });
+    // }); 
     pool.query(query, function(err, result) {
         console.log(query);
         console.log(req.params["type"]);
@@ -42,15 +44,9 @@ router.get('/?type=:type&brand=:brand', function(req, res) {
             res.render('store', { Items: result });
         }
     });
-    // product.productListByTypeAndBrand(req.params["type"], req.params["key"], function(result) {
-    //     console.log(req.params["type"]);
-    //     console.log(req.params["brand"]);
-    //     console.log(err, result);
-    //     res.render('store', { Items: result });
-    // });
 });
 
-router.get('/?type=:type', function(req, res) {
+router.get('/type=:type', function(req, res) {
     query = 'select * from \"' + req.params["type"] + '\"';
     console.log(query);
     pool.query(query, function(err, result) {
@@ -60,7 +56,7 @@ router.get('/?type=:type', function(req, res) {
 });
 
 
-router.get('/?id=:id', function(req, res) {
+router.get('/id=:id', function(req, res) {
     laptopQuery = 'select * from "Laptop" where id = \'' + req.params["id"] + '\'';
     tiviQuery = 'select * from "Tivi" where id = \'' + req.params["id"] + '\'';
     dienthoaiQuery = 'select * from "Dienthoai" where id = \'' + req.params["id"] + '\'';
