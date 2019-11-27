@@ -1,49 +1,48 @@
-var express = require('express');
-var router = express.Router();
-var pg = require('pg'),
-    session = require('express-session'),
-    pgSession = require('connect-pg-simple')(session);
+var express = require('express')
+var router = express.Router()
 
-const { Pool, Client } = require('pg')
-const pool = new Pool({
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-})
+var index = require('../app/controllers/index_controller')
 
-/* GET home page. */
-router.get('/', function(req, res) {
-    res.render('index');
-});
+router.get('/', index.home)
 
-router.get('/cart', function(req, res) {
-    res.render('cart');
-});
+module.exports = router
 
-router.get('/checkout', function(req, res) {
-    res.render('checkout');
-});
 
-router.get('/login', function(req, res) {
-    res.render('login');
-});
+// /* GET home page. */
+// router.get('/', function(req, res) {
+//     query = 'select * from "Laptop" limit 4';
+//     pool.query(query, function(err, result) {
+//         console.log(err, result);
+//         res.render('index', { Items: result });
+//     })
+// });
 
-router.get('/register', function(req, res) {
-    res.render('register');
-});
+// router.get('/cart', function(req, res) {
+//     res.render('cart');
+// });
 
-router.get('/forget-password', function(req, res) {
-    res.render('forget-password');
-});
+// router.get('/checkout', function(req, res) {
+//     res.render('checkout');
+// });
 
-router.get('/account', function(req, res) {
-    res.render('account');
-});
+// router.get('/login', function(req, res) {
+//     res.render('login');
+// });
 
-router.get('/admin', function(req, res) {
-    res.render('admin/signin');
-});
+// router.get('/register', function(req, res) {
+//     res.render('register');
+// });
 
-module.exports = router;
+// router.get('/forget-password', function(req, res) {
+//     res.render('forget-password');
+// });
+
+// router.get('/account', function(req, res) {
+//     res.render('account');
+// });
+
+// router.get('/admin', function(req, res) {
+//     res.render('admin/signin');
+// });
+
+// module.exports = router;
