@@ -16,13 +16,7 @@
         "http-errors": "~1.6.3",
         "morgan": "~1.9.1",
         "nodemon": "^1.19.4",
-<<<<<<< HEAD
-<<<<<<< HEAD
         "passport-local": "^1.0.0",
-=======
->>>>>>> parent of 98f3d6e... MVC commit
-=======
->>>>>>> parent of 98f3d6e... MVC commit
         "pg": "^7.12.1"
     }
 }
