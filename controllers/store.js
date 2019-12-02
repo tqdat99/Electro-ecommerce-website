@@ -13,9 +13,7 @@ module.exports.productListByTypeAndBrand = function(req, res) {
 }
 
 module.exports.productDetailById = function(req, res) {
-    productModel.getProductDetailById(req.params['id'], function(items) {
-        if (items.rows.length > 0) {
-            res.render('product-details', { item: items.rows[0] });
-        }
+    productModel.getProductDetailById(req.params['id'], function(item) {
+        res.render('product-details', { item: item });
     })
 }
