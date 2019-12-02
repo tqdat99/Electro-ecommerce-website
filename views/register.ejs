@@ -76,30 +76,48 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h3>Đăng ký</h3>
-                    <div class="form-group">
-                        <label>Tên tài khoản</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Mật khẩu</label>
-                        <input type="password" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Số điện thoại</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" value="submit" class="button">Đăng ký</button>
-                    </div>
+                    <form action="/user/register" method="post">
+                        <div class="form-group">
+                            <label>Tên tài khoản</label>
+                            <input type="text" class="form-control" placeholder="" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" class="form-control" placeholder="" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" placeholder="example@gmail.com" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Họ tên</label>
+                            <input type="text" class="form-control" placeholder="Nguyễn Văn A" name="fullname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input type="date" class="form-control" placeholder="tháng/năm/ngày" name="birthday" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" class="form-control" placeholder="0379990216" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            <input type="text" class="form-control" placeholder="51T Quận 6" name="address" required>
+                        </div>
+                        <p>
+                            <%= msg%>
+                        </p>
+                        <div class="form-group">
+                            <button type="submit" value="submit" class="button">Đăng ký</button>
+                        </div>
+                    </form>
+
                 </div>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-6">
                     <h3>Đăng nhập</h3>
-                    <a class="gray_btn" href="/login">Đăng nhập</a>
+                    <a class="gray_btn" href="/user/login">Đăng nhập</a>
                 </div>
             </div>
         </div>

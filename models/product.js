@@ -1,31 +1,7 @@
-const { Pool, Client } = require('pg')
-const pool = new Pool({
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-})
+var database = require('./database')
+var pool = database.pool;
 
-function productListByType(type, callback) {
-    query = 'select * from \"' + type + '\"';
-    pool.query(query, function(err, result) {
-        if (result.rowCount > 0) {
-            callback(result);
-        }
-    })
-}
-
-function productListByTypeAndBrand(type, brand, callback) {
-    query = 'select * from \"' + type + '\" where brand = \'' + brand + '\'';
-    pool.query(query, function(err, result) {
-        if (result.rowCount > 0) {
-            callback(result);
-        }
-    });
-}
-
-function findProductById(id, callback) {
+module.exports.getProductDetailById = function(id, callback) {
     laptopQuery = 'select * from "Laptop" where id = \'' + id + '\'';
     tiviQuery = 'select * from "Tivi" where id = \'' + id + '\'';
     dienthoaiQuery = 'select * from "Dienthoai" where id = \'' + id + '\'';
@@ -47,6 +23,16 @@ function findProductById(id, callback) {
     });
 }
 
-module.exports.productListByType = productListByType;
-module.exports.productListByTypeAndBrand = productListByTypeAndBrand;
-module.exports.findProductById = findProductById;
+module.exports.getProductListByType = function(type, callback) {
+    query = 'select * from \"' + type + '\"';
+    pool.query(query, function(err, result) {
+        callback(result);
+    })
+}
+
+module.exports.getProductListByTypeAndBrand = function(type, brand, callback) {
+    query = 'select * from \"' + type + '\" where brand = \'' + brand + '\'';
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
