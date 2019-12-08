@@ -8,11 +8,33 @@
                 <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 51T Quận 6</a></li>
             </ul>
-            <ul class="header-links pull-right">
-                <li><a href="/login"><i class="fa fa-user-o"></i> Tài khoản</a></li>
-            </ul>
+            <%= User == null ? '' : User.username %>
+            <% if (User == null) { %>
+                <ul class="header-links pull-left">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"><a href="#"><i class="fa fa-user-o"></i> Tài khoản</i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a href="/users/login">Đăng nhập</a></li>
+                                <li><a href="/users/register">Đăng ký</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+            <% } else { %>
+                <ul class="header-links pull-left">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"><a href="#"><i class="fa fa-user-o"></i>Welcome <%= User.username %>!</i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a href="/users/logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+            <% } %>
         </div>
     </div>
+
+
     <!-- /TOP HEADER -->
 
     <!-- MAIN HEADER -->

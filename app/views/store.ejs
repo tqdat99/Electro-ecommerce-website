@@ -39,7 +39,7 @@
 
 <body>
 
-    <%include header.ejs%>
+   <%- include('header.ejs', {User: User}) %>
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -75,37 +75,37 @@
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="category-1">
                                     <label for="category-1">
-										<span></span>
-										Tất cả
-										<small>(120)</small>
-									</label>
+                                        <span></span>
+                                        Tất cả
+                                        <small>(120)</small>
+                                    </label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="category-2">
                                     <label for="category-2">
-										<span></span>
-										Điện thoại
-										<small>(740)</small>
-									</label>
+                                        <span></span>
+                                        Điện thoại
+                                        <small>(740)</small>
+                                    </label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="category-3">
                                     <label for="category-3">
-										<span></span>
+                                        <span></span>
                                             Laptop
-										<small>(1450)</small>
-									</label>
+                                        <small>(1450)</small>
+                                    </label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="category-3">
                                     <label for="category-3">
-										<span></span>
-Tivi										
+                                        <span></span>
+Tivi                                        
 <small>(1450)</small>
-									</label>
+                                    </label>
                                 </div>
 
                             </div>
@@ -117,74 +117,74 @@ Tivi
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-1">
                                     <label for="brand-1">
-										<span></span>
-										Samsung
-										<small>(578)</small>
-									</label>
+                                        <span></span>
+                                        Samsung
+                                        <small>(578)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-2">
                                     <label for="brand-2">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
+                                        <span></span>
+                                        LG
+                                        <small>(125)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-3">
                                     <label for="brand-3">
-										<span></span>
-										Sony
-										<small>(755)</small>
-									</label>
+                                        <span></span>
+                                        Sony
+                                        <small>(755)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-4">
                                     <label for="brand-4">
-										<span></span>
-										Asus
-										<small>(578)</small>
-									</label>
+                                        <span></span>
+                                        Asus
+                                        <small>(578)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-5">
                                     <label for="brand-5">
-										<span></span>
-										Acer
-										<small>(125)</small>
-									</label>
+                                        <span></span>
+                                        Acer
+                                        <small>(125)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-6">
                                     <label for="brand-6">
-										<span></span>
-										Apple
-										<small>(755)</small>
-									</label>
+                                        <span></span>
+                                        Apple
+                                        <small>(755)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-6">
                                     <label for="brand-6">
-										<span></span>
-										Nokia
-										<small>(755)</small>
-									</label>
+                                        <span></span>
+                                        Nokia
+                                        <small>(755)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-6">
                                     <label for="brand-6">
-										<span></span>
-										Xiaomi
-										<small>(755)</small>
-									</label>
+                                        <span></span>
+                                        Xiaomi
+                                        <small>(755)</small>
+                                    </label>
                                 </div>
                                 <div class="input-checkbox">
                                     <input type="checkbox" id="brand-6">
                                     <label for="brand-6">
-										<span></span>
-										Apple
-										<small>(755)</small>
-									</label>
+                                        <span></span>
+                                        Apple
+                                        <small>(755)</small>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -218,12 +218,12 @@ Tivi
                     <div class="store-filter clearfix">
                         <div class="store-sort">
                             <label>
-									Sắp xếp:
-									<select class="input-select">
-										<option value="0">Giá tăng dần</option>
-										<option value="1">Giá giảm dần</option>
-									</select>
-								</label>
+                                    Sắp xếp:
+                                    <select class="input-select">
+                                        <option value="0">Giá tăng dần</option>
+                                        <option value="1">Giá giảm dần</option>
+                                    </select>
+                                </label>
                         </div>
                     </div>
                     <!-- /store top filter -->

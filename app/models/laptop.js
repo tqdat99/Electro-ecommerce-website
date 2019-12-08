@@ -42,17 +42,3 @@ exports.getProductBrand = function(type, brand, callback){
         callback(result);
     });
 }
-
-/*router.get('/product-list-:type-:key', function(req, res) {
-    query = 'select * from \"' + req.params["type"] + '\" where brand = \'' + req.params["key"] + '\'';
-
-    pool.query(query, function(err, result) {
-        console.log(query);
-        console.log(req.params["type"]);
-        console.log(req.params["brand"]);
-        console.log(err, result);
-        if (result.rowCount > 0) {
-            res.render('store', { Items: result });
-        }
-    });
-});*/

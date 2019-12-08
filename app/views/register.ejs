@@ -26,20 +26,20 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 
     <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="css/slick.css" />
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
+    <link type="text/css" rel="stylesheet" href="/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/css/slick-theme.css" />
 
     <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/nouislider.min.css" />
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,7 +50,7 @@
 </head>
 
 <body>
-    <%include header.ejs%>
+    <%- include('header.ejs', {User: null}) %>
 
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
@@ -76,30 +76,36 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h3>Đăng ký</h3>
-                    <div class="form-group">
-                        <label>Tên tài khoản</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Mật khẩu</label>
-                        <input type="password" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Số điện thoại</label>
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" value="submit" class="button">Đăng ký</button>
-                    </div>
+                    <form action="/users/register" method="post">
+                        <div class="form-group">
+                            <label>Tên tài khoản</label>
+                            <input type="text" name = "username" class="form-control" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" name = "password" class="form-control" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" class="form-control" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value="submit" class="button">Đăng ký</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-lg-2"></div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
+                    <% if (message.length > 0) { %>
+                        <div class="alert alert-danger"><%= message %></div>
+                    <% } %>
+                </div>
+                <div class="col-lg-4">
                     <h3>Đăng nhập</h3>
-                    <a class="gray_btn" href="/login">Đăng nhập</a>
+                    <a class="gray_btn" href="/user/login">Đăng nhập</a>
                 </div>
             </div>
         </div>
@@ -110,12 +116,12 @@
         <%include footer.ejs%>
 
 
-            <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/slick.min.js"></script>
-            <script src="js/nouislider.min.js"></script>
-            <script src="js/jquery.zoom.min.js"></script>
-            <script src="js/main.js"></script>
+            <script src="/js/jquery.min.js"></script>
+            <script src="/js/bootstrap.min.js"></script>
+            <script src="/js/slick.min.js"></script>
+            <script src="/js/nouislider.min.js"></script>
+            <script src="/js/jquery.zoom.min.js"></script>
+            <script src="/js/main.js"></script>
             <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
             <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
             <script src="vendors/skrollr.min.js"></script>

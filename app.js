@@ -2,10 +2,15 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+
+// testttttttt
+var flash    = require('connect-flash');
+var session      = require('express-session');
+var bodyParser = require("body-parser");
+var passport = require('passport')
+// testttttttt
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var storeRouter = require('./routes/store');
 var accountRouter = require('./routes/account');
 var adminRouter = require('./routes/admin');
@@ -15,17 +20,26 @@ var app = express();
 app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' }));
+app.use(flash());
+
+require('./config/passport')(passport)
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+// testttttt
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/store', storeRouter);
 app.use('/account', accountRouter);
 app.use('/admin', adminRouter);
+
+var usersRouter = require('./routes/users')(passport);
+app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
