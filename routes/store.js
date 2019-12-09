@@ -4,10 +4,14 @@ router.use(express.static('public'));
 
 var storeController = require('../controllers/store')
 
+router.get('/type=:type&brand=:brand&order=:order', storeController.productlistOrder)
+
 router.get('/type=:type&brand=:brand', storeController.productListByTypeAndBrand);
 
 router.get('/type=:type', storeController.productListByType);
 
 router.get('/id=:id', storeController.productDetailById);
+
+
 
 module.exports = router;
