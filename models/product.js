@@ -4,7 +4,6 @@ var pool = database.pool;
 module.exports.getProductDetailById = function(id, callback) {
     query = "select * from \"products\" where id = '" + id + "'";
     pool.query(query, function(err, result) {
-        console.log(res)
         callback(result);
     });
 }
@@ -29,6 +28,21 @@ module.exports.getProductOrder  = function(type, brand, order, callback){
         query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + "";
     else
         query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + "";
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getItems = function(callback) {
+    query = 'select * from "products" limit 4';
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getRelatedItems = function(type, callback) {
+    query = "select * from \"products\" where loai = '" + type + "' limit 4";
+    console.log(query)
     pool.query(query, function(err, result) {
         callback(result);
     });
