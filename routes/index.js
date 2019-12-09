@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res) {
-    res.render('index')
-});
+var index = require('../controllers/index')
 
-router.get('/cart', function(req, res) {
+/* GET home page. */
+router.get('/', index.home)
+
+/*router.get('/cart', function(req, res) {
     res.render('cart');
 });
 
@@ -24,6 +24,7 @@ router.get('/account', function(req, res) {
 
 router.get('/admin', function(req, res) {
     res.render('admin/signin');
-});
+});*/
 
 module.exports = router;
+
