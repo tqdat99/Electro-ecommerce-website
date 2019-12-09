@@ -31,9 +31,9 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 </head>
 
@@ -219,11 +219,9 @@ Tivi
                         <div class="store-sort">
                             <label>
                                     Sắp xếp:
-                                    <select class="input-select">
-                                        <option value="0">Giá tăng dần</option>
-                                        <option value="1">Giá giảm dần</option>
-                                    </select>
-                                </label>
+                                %> <a href="/store/product-list-<%=Type%>-<%=Brand%>-asc" class="btn btn-info" role="button">Giá tăng dần</a>
+                                    <a href="/store/product-list-<%=Type%>-<%=Brand%>-desc" class="btn btn-info" role="button">Giá giảm dần</a> %>
+                            </label>
                         </div>
                     </div>
                     <!-- /store top filter -->
