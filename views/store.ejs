@@ -218,11 +218,9 @@ Tivi
                     <div class="store-filter clearfix">
                         <div class="store-sort">
                             <label>
-									Sắp xếp:
-									<select class="input-select">
-										<option value="0">Giá tăng dần</option>
-										<option value="1">Giá giảm dần</option>
-									</select>
+                                    Sắp xếp:
+                                    %> <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=asc" class="btn btn-info" role="button">Giá tăng dần</a>
+                                    <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=desc" class="btn btn-info" role="button">Giá giảm dần</a> %>
 								</label>
                         </div>
                     </div>
