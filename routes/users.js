@@ -15,7 +15,7 @@ module.exports = function(passport) {
 
 	router.post('/login', col.loginform(passport))
 
-	router.post('/register', col.registerform(passport)
+	router.post('/register', col.registerform(passport))
 
 	return router;
 }
