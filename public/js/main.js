@@ -409,3 +409,32 @@ $("#nav li a").click(function() {
     $(this).parent().addClass('active').siblings().removeClass('active');
 
 });
+
+function getSearchParameters() {
+    var prmstr = window.location.search.substr(1);
+    return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+}
+
+function transformToAssocArray(prmstr) {
+    var params = {};
+    var prmarr = prmstr.split("&");
+    for (var i = 0; i < prmarr.length; i++) {
+        var tmparr = prmarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    }
+    return params;
+}
+
+var params = getSearchParameters();
+
+var paging = document.getElementById("paging")
+for (i = 0; i < paging.length; i++) {
+    var page = paging.getElementsByTagName("li")[i];
+    var currentPage = params.page
+    console.log("js" + currentPage)
+    if (i == currentPage) {
+        page.setAttribute("class", "active");
+    } else {
+        page.setAttribute("class", "");
+    }
+}

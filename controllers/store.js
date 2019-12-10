@@ -1,22 +1,25 @@
 var productModel = require('../models/product')
 
 module.exports.productListByType = function(req, res) {
-    productModel.getProductListByType(req.params['type'], function(items) {
+    productModel.getProductListByType(req.params['type'], req.params['page'], function(items) {
+        console.log(req.page)
         res.render('store', {
             Items: items,
             Type: req.params['type'],
             Brand: 'undefined',
+            Page: req.params['page'],
             user: req.user
         });
     })
 }
 
 module.exports.productListByTypeAndBrand = function(req, res) {
-    productModel.getProductListByTypeAndBrand(req.params['type'], req.params['brand'], function(items) {
+    productModel.getProductListByTypeAndBrand(req.params['type'], req.params['brand'], req.params['page'], function(items) {
         res.render('store', {
             Items: items,
             Type: req.params['type'],
             Brand: req.params['brand'],
+            Page: req.params['page'],
             user: req.user
         });
     })
@@ -37,11 +40,12 @@ module.exports.productDetailById = function(req, res) {
 }
 
 module.exports.productlistOrder = function(req, res) {
-    productModel.getProductOrder(req.params['type'], req.params['brand'], req.params['order'], function(items) {
+    productModel.getProductOrder(req.params['type'], req.params['brand'], req.params['order'], req.params['page'], function(items) {
         res.render('store', {
             Items: items,
             Type: req.params['type'],
             Brand: req.params['brand'],
+            Page: req.params['page'],
             user: req.user,
         }); // ????????
     })
