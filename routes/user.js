@@ -12,6 +12,6 @@ router.get('/login', userController.checkNotAuthenticated, userController.logInF
 
 router.post('/login', userController.checkNotAuthenticated, userController.logInFormPost);
 
-router.delete('/logout', userController.logOut)
+router.get('/logout', userController.logOut)
 
 module.exports = router;

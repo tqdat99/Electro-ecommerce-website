@@ -88,8 +88,8 @@ module.exports.logInFormPost = passport.authenticate('local', {
 
 
 module.exports.logOut = function(req, res) {
-    req.logOut();
-    res.redirect('/');
+    req.logout()
+    res.redirect('/')
 }
 
 module.exports.checkAuthenticated = function(req, res, next) {

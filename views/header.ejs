@@ -8,7 +8,7 @@
                 <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 51T Quận 6</a></li>
             </ul>
-            <%if (typeof user === 'undefined'){%>
+            <%if (typeof user === 'undefined' || user == null){%>
                 <ul class="header-links pull-right">
                     <li><a href="/user/register"><i class="fa fa-plus"></i>Đăng ký</a></li>
                     <li><a href="/user/login"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>
@@ -17,7 +17,7 @@
                     <ul class="header-links pull-right">
                         <p style="display:inline; color:#ffffff; padding-right: 8px;"> Xin chào </p>
                         <li><a href="/user/profile"><i class="fa fa-user-o"></i><%=user.fullname%></a></li>
-                        <form action="/user/logout?_method=DELETE" method="POST">
+                        <form action="/user/logout" method="get">
                             <button type="submit">Đăng xuất</button>
                         </form>
                     </ul>
