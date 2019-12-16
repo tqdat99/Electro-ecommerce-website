@@ -28,6 +28,8 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="css/style.css" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,6 +40,127 @@
 </head>
 
 <body>
+
+<!--<script type="text/javascript">
+    $(document).ready(function() {
+        var selections = document.location.pathname.replace("/store/", "").split("&")
+        var typeSelection, brandSelection
+        for (var i = 0; i < selections.length; i++) {
+            if(selections[i].match(/type/)) {
+                typeSelection = selections[i]
+            }
+            if(selections[i].match(/brand/)) {
+                brandSelection = selections[i]
+            }
+        }        
+
+        if(typeSelection) {
+            var types = typeSelection.replace("type=", "").split(",")
+            for (var i = 0; i < types.length; i++) {
+                $("input[value=" + types[i] + "]").prop("checked", true)
+            }
+        }
+
+        $("input[name=catcheckbox]").change(function(){
+            var newTypeSelection = "type=" + Array.prototype.map.call($("input[name=catcheckbox]:checked"), function(e) { return $(e).val(); }).join()
+
+            if(typeSelection) {
+                document.location.href = document.location.href.replace(typeSelection, newTypeSelection)
+            } else {
+                document.location.href = document.location.href + "&" + newTypeSelection
+            }
+        })
+
+        if (brandSelection) {
+            var brands = brandSelection.replace("brand=", "").split(",")
+            for (var i = 0; i < brands.length; i++) {
+                $("input[value=" + brands[i] + "]").prop("checked", true)
+            }
+        }
+
+        $("input[name=brandcheckbox]").change(function(){
+            var newBrandSelection = "brand=" + Array.prototype.map.call($("input[name=brandcheckbox]:checked"), function(e) { return $(e).val(); }).join()
+
+            if(brandSelection) {
+                document.location.href = document.location.href.replace(brandSelection, newBrandSelection)
+            } else {
+                document.location.href = document.location.href + "&" + newBrandSelection
+            }
+        })
+    });
+</script>-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var selections = document.location.pathname.replace("/store/", "").split("&")
+        var typeSelection, brandSelection, orderSelection
+        for (var i = 0; i < selections.length; i++) {
+            if(selections[i].match(/type/)) {
+                typeSelection = selections[i]
+            }
+            if(selections[i].match(/brand/)) {
+                brandSelection = selections[i]
+            }
+            if(selections[i].match(/order/)) {
+                orderSelection = selections[i]
+            }
+        }        
+
+        if(typeSelection) {
+            var types = typeSelection.replace("type=", "").split(",")
+            for (var i = 0; i < types.length; i++) {
+                $("input[value=" + types[i] + "]").prop("checked", true)
+            }
+        }
+
+        $("input[name=catcheckbox]").change(function(){
+            var newTypeSelection = "type=" + Array.prototype.map.call($("input[name=catcheckbox]:checked"), function(e) { return $(e).val(); }).join()
+
+            if(typeSelection) {
+                document.location.href = document.location.href.replace(typeSelection, newTypeSelection)
+            } else {
+                document.location.href = document.location.href + "&" + newTypeSelection
+            }
+        })
+
+        if (brandSelection) {
+            var brands = brandSelection.replace("brand=", "").split(",")
+            for (var i = 0; i < brands.length; i++) {
+                $("input[value=" + brands[i] + "]").prop("checked", true)
+            }
+        }
+
+        $("input[name=brandcheckbox]").change(function(){
+            var newBrandSelection = "brand=" + Array.prototype.map.call($("input[name=brandcheckbox]:checked"), function(e) { return $(e).val(); }).join()
+
+            if(brandSelection) {
+                document.location.href = document.location.href.replace(brandSelection, newBrandSelection)
+            } else {
+                document.location.href = document.location.href + "&" + newBrandSelection
+            }
+        })
+
+
+        if(orderSelection){
+            var order = orderSelection.replace("order=","")
+            //for (var i = 0; i < order.length; i++) {
+            //    $("input[value=" + order[i] + "]").prop("checked", true)
+            //}
+            $("input[value=" + order + "]").prop("checked", true)
+        }
+
+                $("input[name=optradio]").change(function(){
+            var newOrderSelection = "order=" + Array.prototype.map.call($("input[name=optradio]:checked"), function(e) { return $(e).val(); }).join()
+
+            if(orderSelection) {
+                document.location.href = document.location.href.replace(orderSelection, newOrderSelection)
+            } else {
+                document.location.href = document.location.href + "&" + newOrderSelection
+            }
+        })
+
+    });
+</script>
 
     <%include header.ejs%>
 
@@ -67,22 +190,27 @@
                 <!-- row -->
                 <div class="row">
                     <!-- ASIDE -->
-                    <!-- <div id="aside" class="col-md-3">
+                    <div id="aside" class="col-md-3">
+
+                        <div class="aside">
+                            <h3 class="aside-title">Sắp xếp</h3>
+
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio" value="asc">Giá từ thấp đến cao</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio" value="desc">Giá từ cao đến thấp</label>
+                                </div>
+
+                        </div>
+
                         <div class="aside">
                             <h3 class="aside-title">Danh mục</h3>
+
                             <div class="checkbox-filter">
 
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="category-1">
-                                    <label for="category-1">
-										<span></span>
-										Tất cả
-										<small>(120)</small>
-									</label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-2">
+                                    <input type="checkbox" name = "catcheckbox" id="category-2" value="Dienthoai">
                                     <label for="category-2">
 										<span></span>
 										Điện thoại
@@ -91,7 +219,7 @@
                                 </div>
 
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="category-3">
+                                    <input type="checkbox" name = "catcheckbox" id="category-3" value="Laptop">
                                     <label for="category-3">
 										<span></span>
                                             Laptop
@@ -100,11 +228,11 @@
                                 </div>
 
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="category-3">
-                                    <label for="category-3">
+                                    <input type="checkbox" name = "catcheckbox" id="category-4" value="Tivi">
+                                    <label for="category-4">
 										<span></span>
-Tivi										
-<small>(1450)</small>
+                                        Tivi										
+                                        <small>(1450)</small>
 									</label>
                                 </div>
 
@@ -113,84 +241,147 @@ Tivi
 
                         <div class="aside">
                             <h3 class="aside-title">Hãng</h3>
+
                             <div class="checkbox-filter">
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-1" value="Samsung">
                                     <label for="brand-1">
 										<span></span>
 										Samsung
 										<small>(578)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-2">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-2" value="LG">
                                     <label for="brand-2">
 										<span></span>
 										LG
 										<small>(125)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-3">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-3" value="Sony">
                                     <label for="brand-3">
 										<span></span>
 										Sony
 										<small>(755)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-4">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-4" value="Asus">
                                     <label for="brand-4">
 										<span></span>
 										Asus
 										<small>(578)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-5">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-5" value="Vivo">
                                     <label for="brand-5">
 										<span></span>
-										Acer
+										Vivo
 										<small>(125)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-6" value="Apple">
                                     <label for="brand-6">
 										<span></span>
 										Apple
 										<small>(755)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-7" value="Huawei">
                                     <label for="brand-6">
 										<span></span>
-										Nokia
+										Huawei
 										<small>(755)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-8" value="Xiaomi">
                                     <label for="brand-6">
 										<span></span>
 										Xiaomi
 										<small>(755)</small>
 									</label>
                                 </div>
+
                                 <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-8" value="Xiaomi">
                                     <label for="brand-6">
-										<span></span>
-										Apple
-										<small>(755)</small>
-									</label>
+                                        <span></span>
+                                        Xiaomi
+                                        <small>(755)</small>
+                                    </label>
                                 </div>
+
+                                <div class="input-checkbox">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-9" value="Dell">
+                                    <label for="brand-9">
+                                        <span></span>
+                                        Dell
+                                        <small>(755)</small>
+                                    </label>
+                                </div>
+
+                                <div class="input-checkbox">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-10" value="Asanzo">
+                                    <label for="brand-10">
+                                        <span></span>
+                                        Asanzo
+                                        <small>(755)</small>
+                                    </label>
+                                </div>
+
+                                <div class="input-checkbox">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-11" value="HP">
+                                    <label for="brand-11">
+                                        <span></span>
+                                        HP
+                                        <small>(755)</small>
+                                    </label>
+                                </div>
+
+                                <div class="input-checkbox">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-12" value="Panasonic">
+                                    <label for="brand-12">
+                                        <span></span>
+                                        Panasonic
+                                        <small>(755)</small>
+                                    </label>
+                                </div>
+
+                                <div class="input-checkbox">
+                                    <input type="checkbox" name = "brandcheckbox" id="brand-13" value="Xiaomi">
+                                    <label for="brand-13">
+                                        <span></span>
+                                        Toshiba
+                                        <small>(755)</small>
+                                    </label>
+                                </div>
+
                             </div>
                         </div>
 
                         <div class="aside">
-                            <h3 class="aside-title">Price</h3>
+                            <div class="row">
+                                <div class = "col-sm-8">
+                                    <h3 class="aside-title">Price</h3>
+                                </div>
+                                <div class = "col-sm-4">
+                                    <button type="button" class="btn btn-danger">Submit</button>
+                                </div>
+                            </div>
                             <div class="price-filter">
                                 <div id="price-slider"></div>
                                 <div class="input-number price-min">
@@ -205,7 +396,7 @@ Tivi
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
-                        </div> -->
+                        </div> 
                     <!-- /aside Widget -->
 
 
@@ -213,17 +404,9 @@ Tivi
                 <!-- /ASIDE -->
 
                 <!-- STORE -->
-                <div id="store" class="col-md-12">
+                <div id="store" class="col-md-9">
                     <!-- store top filter -->
-                    <div class="store-filter clearfix">
-                        <div class="store-sort">
-                            <label>
-                                    Sắp xếp:
-                                    %> <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=asc" class="btn btn-info" role="button">Giá tăng dần</a>
-                                    <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=desc" class="btn btn-info" role="button">Giá giảm dần</a> %>
-								</label>
-                        </div>
-                    </div>
+
                     <!-- /store top filter -->
 
                     <!-- store products -->
