@@ -198,59 +198,63 @@
                             <h3 class="title">Sản phẩm tương tự</h3>
                         </div>
                     </div>
-                        <% Items.rows.forEach(function(item){ %>
-                                <div class="col-md-3 col-xs-6">
-                                    <a href="/store/id=<%=item.id%>">
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="/<%=item.anh%>" alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <p class="product-product-list"></p>
-                                                <h3 class="product-name">
-                                                    <%= item.ten %>
-                                                </h3>
-                                                <h4 class="product-price">
-                                                    <%= item.gia %>
-                                                </h4>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                    <div class="row">
+                        <!-- product -->
+                        <% Items.forEach(function(item){ %>
+                            <div class="col-md-3 col-xs-6">
+                                <a href="/store/id=<%=item.id%>">
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="<%=item.anh%>" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">
+                                                <%= item.loai%>
+                                            </p>
+                                            <h3 class="product-name">
+                                                <div>
+                                                    <div class="line-clamp-3">
+                                                        <%= item.ten%>
+                                                    </div>
                                                 </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div>
+
+                                            </h3>
+                                            <h4 class="product-price">
+                                                <%= new Intl.NumberFormat().format(item.gia)%>
+                                            </h4>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
                                             </div>
                                             <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <!-- /product -->
-                        <% }); %>
+                                    </div>
+                                </a>
 
+                            </div>
+
+                            <% }); %>
+                    </div>
+                    <!-- /row -->
                 </div>
-                <!-- /row -->
+                <!-- /container -->
             </div>
-            <!-- /container -->
-        </div>
-        <!-- /Section -->
+            <!-- /Section -->
 
-        <% include footer.ejs%>
+            <% include footer.ejs%>
 
-            <!-- jQuery Plugins -->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/slick.min.js"></script>
-            <script src="js/nouislider.min.js"></script>
-            <script src="js/jquery.zoom.min.js"></script>
-            <script src="js/main.js"></script>
+                <!-- jQuery Plugins -->
+                <script src="js/jquery.min.js"></script>
+                <script src="js/bootstrap.min.js"></script>
+                <script src="js/slick.min.js"></script>
+                <script src="js/nouislider.min.js"></script>
+                <script src="js/jquery.zoom.min.js"></script>
+                <script src="js/main.js"></script>
 
 </body>
 

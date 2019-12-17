@@ -1,9 +1,12 @@
 var productModel = require('../models/product')
-
 module.exports.productDetailById = function(req, res) {
-    productModel.getProductDetailById(req.params['id'], function(result) {
-        res.render('product-details', {
-            item: result
+    productModel.getProductDetailById(req.params['id'], function(item) {
+        productModel.getProductList([item.loai], [item.brand], undefined, 'asc', function(items) {
+            onPageItems = items.slice(0, 4)
+            res.render('product-details', {
+                item: item,
+                Items: onPageItems
+            })
         })
     })
 }
@@ -15,7 +18,6 @@ module.exports.productList = function(req, res) {
     type = []
     brand = []
     var order = 'asc'
-    var page = 1
     price = undefined
 
     console.log(req)

@@ -4,15 +4,14 @@ var pool = database.pool;
 module.exports.getItems = function(callback) {
     query = "select * from \"products\" limit 4";
     pool.query(query, function(err, result) {
-        console.log(result)
-        callback(result);
+        callback(result.rows);
     });
 }
 
 module.exports.getProductDetailById = function(id, callback) {
-    query = "select * from \"products\" where id = '";
+    query = "select * from \"products\" where id = '" + id + "'";
     pool.query(query, function(err, result) {
-        callback(result.rows[0]);
+        callback(result.rows[0])
     });
 }
 

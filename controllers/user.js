@@ -58,6 +58,17 @@ module.exports.profile = function(req, res) {
     });
 }
 
+module.exports.profileEdit = function(req, res) {
+    console.log("profileEdit:")
+    console.log(req.body)
+    userModel.editUserByUsername(req.body)
+    res.render('profile', {
+        msg: '',
+        user: req.user
+    });
+}
+
+
 module.exports.logInFormGet = function(req, res) {
     res.render('login', {
         user: req.user

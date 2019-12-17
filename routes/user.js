@@ -12,6 +12,8 @@ router.get('/login', userController.checkNotAuthenticated, userController.logInF
 
 router.get('/profile', userController.checkAuthenticated, userController.profile)
 
+router.post('/profile', userController.checkAuthenticated, userController.profileEdit)
+
 router.post('/login', userController.checkNotAuthenticated, userController.logInFormPost);
 
 router.get('/logout', userController.logOut)

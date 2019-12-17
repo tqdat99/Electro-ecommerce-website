@@ -44,29 +44,39 @@
             <div class="row ">
                 <div class="col-lg-6">
                     <h3>Chỉnh sửa tài khoản</h3>
-                    <div class="form-group">
-                        <label>Tên tài khoản</label>
-                        <input type="text" class="form-control" placeholder="" value="Trương Quốc Đạt">
-                    </div>
-                    <div class="form-group">
-                        <label>Mật khẩu</label>
-                        <input type="password" class="form-control" placeholder="" value="truongquocat">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" placeholder="" value="tqdat99@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Số điện thoại</label>
-                        <input type="text" class="form-control" placeholder="" value="0379990216">
-                    </div>
-                    <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <input type="text" class="form-control" placeholder="" value="Quận 6">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" value="submit" class="button">Lưu</button>
-                    </div>
+                    <form action="/user/profile" method="post">
+                        <div class="form-group">
+                            <label>Tên tài khoản</label>
+                            <input type="text" class="form-control" placeholder="" name="username" value="<%=user.username%>">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" class="form-control" placeholder="" name="password" value="<%=user.password%>">
+                        </div>
+                        <div class="form-group">
+                            <label>Họ tên</label>
+                            <input type="text" class="form-control" placeholder="" name="fullname" value="<%=user.fullname%>">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input type="date" class="form-control" placeholder="" name="birthday" value="<%=user.birthday%>">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" placeholder="" name="email" value="<%=user.email%>">
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" class="form-control" placeholder="" name="phone" value="<%=user.phone%>">
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            <input type="text" class="form-control" placeholder="" name="address" value="<%=user.address%>">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value="submit" class="button">Lưu</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
