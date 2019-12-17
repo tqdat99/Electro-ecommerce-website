@@ -4,32 +4,46 @@ var pool = database.pool;
 module.exports.getProductDetailById = function(id, callback) {
     query = "select * from \"products\" where id = '";
     pool.query(query, function(err, result) {
-        callback(result);
+        callback(result.rows[0]);
     });
 }
 
-module.exports.getProductListByType = function(type, page, callback) {
-    query = "select * from \"products\" where loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
+module.exports.getProductList = function(type, brand, order, callback) {
+    var query
 
-module.exports.getProductListByTypeAndBrand = function(type, brand, page, callback) {
-    query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
+    console.log("models:")
+    console.log(type)
+    console.log(brand)
 
-module.exports.getProductOrder = function(type, brand, order, page, callback) {
-    var query;
-    if (brand != 'undefined')
-        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    else
-        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
+    query = "select * from \"products\" where "
+    if (type != undefined)
+        if (type.length > 0) {
+            query += "(";
+            for (i = 0; i < type.length; i++) {
+                query += "loai = '" + type[i] + "'";
+                if (i != type.length - 1)
+                    query += " or ";
+            }
+            query += ")";
+        }
+    if (brand != undefined && type != undefined && brand.length > 0 && type.length > 0) {
+        query += " and ";
+    }
+    if (brand != undefined)
+        if (brand.length > 0) {
+            for (i = 0; i < brand.length; i++) {
+                query += "brand = '" + brand[i] + "'";
+                if (i != brand.length - 1)
+                    query += " or ";
+            }
+        }
+    query += " ORDER BY gia " + order;
+
+    console.log(query)
+
     pool.query(query, function(err, result) {
-        callback(result);
+        console.log(result)
+        callback(result.rows);
     });
 }
 

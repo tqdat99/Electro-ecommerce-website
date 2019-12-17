@@ -28,50 +28,27 @@ module.exports.registerFormPost = async function(req, res, next) {
 
     console.log(valid)
     userModel.findUserByUsername(username, function(foundUser) {
-            userModel.validatePassword(password, function(ifValid) {
-                if (foundUser != null) {
-                    console.log(foundUser)
-                    res.render('register', {
-                        msg: 'Tên tài khoản đã tồn tại',
-                        user: req.user
-                    })
-                } else if (!ifValid) {
-                    console.log(ifValid)
-                    console.log('Mật khẩu phải có ít nhất 6 ký tự')
-                    return res.render('register', {
-                        msg: 'Mật khẩu phải có ít nhất 6 ký tự',
-                        user: req.user
-                    })
-                } else {
-                    userModel.addUser(user)
-                    console.log('added')
-                    res.redirect('/user/login')
-                }
-            })
+        userModel.validatePassword(password, function(ifValid) {
+            if (foundUser != null) {
+                console.log(foundUser)
+                res.render('register', {
+                    msg: 'Tên tài khoản đã tồn tại',
+                    user: req.user
+                })
+            } else if (!ifValid) {
+                console.log(ifValid)
+                console.log('Mật khẩu phải có ít nhất 6 ký tự')
+                return res.render('register', {
+                    msg: 'Mật khẩu phải có ít nhất 6 ký tự',
+                    user: req.user
+                })
+            } else {
+                userModel.addUser(user)
+                console.log('added')
+                res.redirect('/user/login')
+            }
         })
-        // console.log(valid)
-        // if (!valid) {
-        //     console.log('Tên tài khoản đã tồn tại')
-        //     res.render('register', {
-        //         msg: 'Tên tài khoản đã tồn tại',
-        //         user: req.user
-        //     })
-        // }
-
-    // userModel.validatePassword(password, function(ifValid) {
-    //     if (!ifValid) {
-    //         return false
-    //     }
-    // })
-    // console.log(valid)
-    // if (!valid) {
-    //     console.log('Mật khẩu phải có ít nhất 6 ký tự')
-    //     return res.render('register', {
-    //         msg: 'Mật khẩu phải có ít nhất 6 ký tự',
-    //         user: req.user
-    //     })
-    // }
-
+    })
 }
 
 module.exports.logInFormGet = function(req, res) {
@@ -86,6 +63,12 @@ module.exports.logInFormPost = passport.authenticate('local', {
     failureFlash: true
 })
 
+module.exports.profile = function(req, res) {
+    res.render('profile', {
+        msg: '',
+        user: req.user
+    });
+}
 
 module.exports.logOut = function(req, res) {
     req.logout()

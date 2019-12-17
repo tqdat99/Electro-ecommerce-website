@@ -67,149 +67,51 @@
                 <!-- row -->
                 <div class="row">
                     <!-- ASIDE -->
-                    <div id="aside" class="col-md-3">
+                    <form id="aside" class="col-md-3" action="/store/filter" method="get">
                         <div class="aside">
                             <h3 class="aside-title">Danh mục</h3>
-                            <div class="checkbox-filter">
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-all">
-                                    <label for="category-all">
-										<span></span>
-										Tất cả
-										<small>(120)</small>
-									</label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-dienthoai">
-                                    <label for="category-dienthoai">
-										<span></span>
-										Điện thoại
-										<small>(740)</small>
-									</label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-laptop">
-                                    <label for="category-laptop">
-										<span></span>
-                                            Laptop
-										<small>(1450)</small>
-									</label>
-                                </div>
-
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="category-tivi">
-                                    <label for="category-tivi">
-										<span></span>
-                                            Tivi										
-                                        <small>(1450)</small>
-									</label>
-                                </div>
-
-                            </div>
+                            <input type="radio" name="type" value="All">Tất cả<br>
+                            <input type="radio" name="type" value="Laptop">Laptop<br>
+                            <input type="radio" name="type" value="Tivi">Tivi<br>
+                            <input type="radio" name="type" value="Dienthoai">Điện thoại<br>
                         </div>
 
                         <div class="aside">
                             <h3 class="aside-title">Hãng</h3>
-                            <div class="checkbox-filter">
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-1">
-                                    <label for="brand-1">
-										<span></span>
-										Samsung
-										<small>(578)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-2">
-                                    <label for="brand-2">
-										<span></span>
-										LG
-										<small>(125)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-3">
-                                    <label for="brand-3">
-										<span></span>
-										Sony
-										<small>(755)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-4">
-                                    <label for="brand-4">
-										<span></span>
-										Asus
-										<small>(578)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-5">
-                                    <label for="brand-5">
-										<span></span>
-										Acer
-										<small>(125)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
-                                    <label for="brand-6">
-										<span></span>
-										Apple
-										<small>(755)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
-                                    <label for="brand-6">
-										<span></span>
-										Nokia
-										<small>(755)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
-                                    <label for="brand-6">
-										<span></span>
-										Xiaomi
-										<small>(755)</small>
-									</label>
-                                </div>
-                                <div class="input-checkbox">
-                                    <input type="checkbox" id="brand-6">
-                                    <label for="brand-6">
-										<span></span>
-										Apple
-										<small>(755)</small>
-									</label>
-                                </div>
-                            </div>
+                            <input type="checkbox" name="brand" value="Samsung">Samsung<br>
+                            <input type="checkbox" name="brand" value="LG">LG<br>
+                            <input type="checkbox" name="brand" value="Sony">Sony<br>
+                            <input type="checkbox" name="brand" value="Asus">Asus<br>
+                            <input type="checkbox" name="brand" value="Acer">Acer<br>
+                            <input type="checkbox" name="brand" value="Apple">Apple<br>
+                            <input type="checkbox" name="brand" value="Nokia">Nokia<br>
+                            <input type="checkbox" name="brand" value="Xiaomi">Xiaomi<br>
+                            <input type="checkbox" name="brand" value="Apple">Apple<br>
+                            <input type="checkbox" name="brand" value="Huawei">Huawei<br>
+                            <input type="checkbox" name="brand" value="Dell">Dell<br>
+                            <input type="checkbox" name="brand" value="HP">HP<br>
+                            <input type="checkbox" name="brand" value="Panasonic">Panasonic<br>
+                            <input type="checkbox" name="brand" value="Toshiba">Toshiba<br>
+                            <input type="checkbox" name="brand" value="Asanzo">Asanzo<br>
+                            <input type="checkbox" name="brand" value="Vivo">Vivo<br>
                         </div>
 
-                        <div class="aside">
-                            <h3 class="aside-title">Price</h3>
-                            <div class="price-filter">
-                                <div id="price-slider"></div>
-                                <div class="input-number price-min">
-                                    <input id="price-min" type="number">
-                                    <span class="qty-up">+</span>
-                                    <span class="qty-down">-</span>
-                                </div>
-                                <span>-</span>
-                                <div class="input-number price-max">
-                                    <input id="price-max" type="number">
-                                    <span class="qty-up">+</span>
-                                    <span class="qty-down">-</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /aside Widget -->
+                        <!-- <div class="aside">
+                            <h3 class="aside-title">Giá</h3>
+                            <input type="checkbox" name="Type" value="All">Dưới 3,000,000<br>
+                            <input type="checkbox" name="Type" value="All">3,000,000 - 6,000,000<br>
+                            <input type="checkbox" name="Type" value="All">6,000,000 - 10,000,000<br>
+                            <input type="checkbox" name="Type" value="All">10,000,000 - 15,000,000<br>
+                            <input type="checkbox" name="Type" value="All">15,000,000 - 20,000,000<br>
+                            <input type="checkbox" name="Type" value="All">20,000,000 - 25,000,000<br>
+                            <input type="checkbox" name="Type" value="All">25,000,000 - 30,000,000<br>
+                            <input type="checkbox" name="Type" value="All">30,000,000 trở lên<br>
+                        </div> -->
 
+                        <input type="submit" value="Áp dụng">
 
-                    </div>
+                        <!-- <button>Áp dụng</button> -->
+                    </form>
                     <!-- /ASIDE -->
 
                     <!-- STORE -->
@@ -219,8 +121,8 @@
                             <div class="store-sort">
                                 <label>
                                     Sắp xếp:
-                                    %> <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=asc&page=<%=Page%>" class="btn btn-info" role="button">Giá tăng dần</a>
-                                    <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=desc&page=<%=Page%>" class="btn btn-info" role="button">Giá giảm dần</a> %>
+                                    %> <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=asc&page=<%=Page%>" class="btn btn-info" role="button" id="ascBtn">Giá tăng dần</a>
+                                    <a href="/store/type=<%=Type%>&brand=<%=Brand%>&order=desc&page=<%=Page%>" class="btn btn-info" role="button" id="descBtn">Giá giảm dần</a> %>
 								</label>
                             </div>
                         </div>
@@ -229,7 +131,7 @@
                         <!-- store products -->
                         <div class="row">
                             <!-- product -->
-                            <% Items.rows.forEach(function(item){ %>
+                            <% Items.forEach(function(item){ %>
                                 <div class="col-md-4 col-xs-6">
                                     <a href="/store/id=<%=item.id%>">
                                         <div class="product">
@@ -237,9 +139,16 @@
                                                 <img src="<%=item.anh%>" alt="">
                                             </div>
                                             <div class="product-body">
-                                                <p class="product-category">Laptop</p>
+                                                <p class="product-category">
+                                                    <%= item.loai%>
+                                                </p>
                                                 <h3 class="product-name">
-                                                    <%= item.ten%>
+                                                    <div>
+                                                        <div class="line-clamp-3">
+                                                            <%= item.ten%>
+                                                        </div>
+                                                    </div>
+
                                                 </h3>
                                                 <h4 class="product-price">
                                                     <%= item.gia%>
@@ -251,16 +160,18 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
-                                                <div class="product-btns">
+                                                <!-- <div class="product-btns">
                                                     <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                                                     <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                     <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                                </div> -->
+
+                                                <div class="add-to-cart">
+                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                                 </div>
                                             </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                            </div>
                                         </div>
+
                                     </a>
                                 </div>
                                 <!-- /product -->
@@ -270,14 +181,48 @@
 
                         <!-- store bottom filter -->
                         <div class="store-filter clearfix">
-                            <ul class="store-pagination" id="paging">
-                                <li><a href="/store/type=<%=Type%>&brand=<%=Brand%>&page=1">1</a></li>
-                                <li><a href="/store/type=<%=Type%>&brand=<%=Brand%>&page=2">2</a></li>
-                                <!-- <li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
-                            </ul>
+
+                            <% if (pages > 0) { %>
+                                <ul class="store-pagination">
+                                    <% if (current == 1) { %>
+                                        <li class="disabled" id="pageFirst"><a>Đầu</a></li>
+                                        <% } else { %>
+                                            <li><a id="pageFirst">Đầu</a></li>
+                                            <% } %>
+                                                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                                    <% if (i !== 1) { %>
+                                                        <li class="disabled"><a>...</a></li>
+                                                        <% } %>
+                                                            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                                                <% if (i == current) { %>
+                                                                    <li class="active">
+                                                                        <a style="color:#ffffff">
+                                                                            <%= i %>
+                                                                        </a>
+                                                                    </li>
+                                                                    <% } else { %>
+                                                                        <li>
+                                                                            <a id="page<%=i%>">
+                                                                                <%= i %>
+                                                                            </a>
+                                                                        </li>
+                                                                        <% } %>
+                                                                            <% if (i == Number(current) + 4 && i < pages) { %>
+                                                                                <li class="disabled "><a>...</a></li>
+                                                                                <% } %>
+                                                                                    <% } %>
+                                                                                        <% if (current == pages) { %>
+                                                                                            <li class="disabled" id="pageLast"><a>Last</a></li>
+                                                                                            <% } else { %>
+                                                                                                <li><a id="pageLast">Cuối</a>
+                                                                                                </li>
+                                                                                                <% } %>
+                                </ul>
+                                <% } %>
+                                    <!-- /store bottom filter -->
                         </div>
-                        <!-- /store bottom filter -->
                     </div>
+
                     <!-- /STORE -->
                 </div>
                 <!-- /row -->
@@ -290,6 +235,40 @@
         <%include footer.ejs%>
 
             <!-- jQuery Plugins -->
+            <script>
+                var currentHref = window.location.href;
+                var ascBtn = document.getElementById('ascBtn');
+                var descBtn = document.getElementById('descBtn');
+
+                ascBtnHref = currentHref.replace("&order=asc", "&order=asc");
+                ascBtnHref = currentHref.replace("&order=desc", "&order=asc");
+                ascBtn.href = ascBtnHref;
+
+                descBtnHref = currentHref.replace("&order=desc", "&order=desc");
+                descBtnHref = currentHref.replace("&order=asc", "&order=desc");
+                descBtn.href = descBtnHref;
+
+
+                page = document.getElementById("pageFirst");
+                n = currentHref.indexOf("&page=");
+                page.href = currentHref.substr(0, n) + "&page=" + 1;
+
+                page = document.getElementById("pageLast");
+                n = currentHref.indexOf("&page=");
+                page.href = currentHref.substr(0, n) + "&page=" + <%=pages%>;
+
+                for (i = 0; i < <%=pages%>; i++) {
+                    page = document.getElementById("pageLast");
+                    page.innerHTML = "yes";
+
+                    id = "page" + i;
+                    page = document.getElementById(id);
+                    page.innerHTML = id;
+
+                    n = currentHref.indexOf("&page=");
+                    page.href = currentHref.substr(0, n) + "&page=" + i;
+                }
+            </script>
             <script src="js/jquery.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/slick.min.js"></script>
@@ -299,4 +278,4 @@
 
 </body>
 
-</html>*
+</html>
