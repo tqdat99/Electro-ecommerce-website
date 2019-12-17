@@ -10,6 +10,7 @@ module.exports.getProductDetailById = function(id, callback) {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 module.exports.getProductListByType = function(type, callback) {
 
     var typelist = type.split(',');
@@ -61,6 +62,30 @@ module.exports.getProductListByTypeAndBrand = function(type, brand, page, callba
     query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
     pool.query(query, function(err, result) {
         callback(result);
+=======
+module.exports.getProductListByType = function(type, page, callback) {
+    query = "select * from \"products\" where loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
+    pool.query(query, function(err, result) {
+        callback(result);
+    })
+}
+
+module.exports.getProductListByTypeAndBrand = function(type, brand, page, callback) {
+    query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getProductOrder = function(type, brand, order, page, callback) {
+    var query;
+    if (brand != 'undefined')
+        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
+    else
+        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
+    pool.query(query, function(err, result) {
+        callback(result);
+>>>>>>> parent of 5e58dde... Filter & Pagination (Dat)
     });
 }
 
