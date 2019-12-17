@@ -8,42 +8,211 @@ module.exports.getProductDetailById = function(id, callback) {
     });
 }
 
-module.exports.getProductList = function(type, brand, order, callback) {
-    var query
+module.exports.getProductListByType = function(type, callback) {
 
-    console.log("models:")
-    console.log(type)
-    console.log(brand)
+    var typelist = type.split(',');
+    var qType = "";
 
-    query = "select * from \"products\" where "
-    if (type != undefined)
-        if (type.length > 0) {
-            query += "(";
-            for (i = 0; i < type.length; i++) {
-                query += "loai = '" + type[i] + "'";
-                if (i != type.length - 1)
-                    query += " or ";
-            }
-            query += ")";
-        }
-    if (brand != undefined && type != undefined && brand.length > 0 && type.length > 0) {
-        query += " and ";
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
     }
-    if (brand != undefined)
-        if (brand.length > 0) {
-            for (i = 0; i < brand.length; i++) {
-                query += "brand = '" + brand[i] + "'";
-                if (i != brand.length - 1)
-                    query += " or ";
-            }
-        }
-    query += " ORDER BY gia " + order;
+    qType = qType.substring(0, qType.length - 1);
+
+    query = "select * from \"products\" where loai in ( " + qType + " )";
+    pool.query(query, function(err, result) {
+        callback(result);
+    })
+}
+
+module.exports.getProductListByBrand = function(brand, callback) {
+    var brandlist = brand.split(',');
+    var qBrand = "";
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+    query = "select * from \"products\" where brand in (" + qBrand + ")";
+    pool.query(query, function(err, result) {
+        callback(result);
+    })
+}
+
+module.exports.getProductListByTypeAndBrand = function(type, brand, callback) {
+    var typelist = type.split(',');
+    var brandlist = brand.split(',');
+    var qType = "";
+    var qBrand = "";
+
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
+    }
+    qType = qType.substring(0, qType.length - 1);
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+    var query = "select * from \"products\" where loai in ( " + qType + " ) and brand in (" + qBrand + ")";
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getProductTypeAndPrice = function(type, price, callback) {
+
+    var typelist = type.split(',');
+    var qType = "";
+    var pricelist = price.split(',');
+
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
+    }
+    qType = qType.substring(0, qType.length - 1);
+
+    var query;
+    query = "select * from \"products\" where loai in ( " + qType + " ) and gia between " + pricelist[0] + " and " + pricelist[1];
+    pool.query(query, function(err, result) {
+        console.log(result)
+        callback(result.rows);
+    });
+}
+
+module.exports.getProductBrandAndPrice = function(brand, price, callback) {
+
+    var brandlist = brand.split(',');
+    var qBrand = "";
+    var pricelist = price.split(',');
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+    var query;
+    query = "select * from \"products\" where brand in ( " + qBrand + " ) and gia between " + pricelist[0] + " and " + pricelist[1];
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getProductTypeAndOrder = function(type, order, callback) {
+
+    var typelist = type.split(',');
+    var qType = "";
+
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
+    }
+    qType = qType.substring(0, qType.length - 1);
+
+    var query;
+    query = "select * from \"products\" where loai in ( " + qType + " ) ORDER BY gia " + order + "";
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getProductBrandAndOrder = function(brand, order, callback) {
+
+    var brandlist = brand.split(',');
+    var qBrand = "";
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+
+    var query;
+    query = "select * from \"products\" where brand in ( " + qBrand + " ) ORDER BY gia " + order + "";
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getProductTypeBrandOrder = function(type, brand, order, callback) {
+    var typelist = type.split(',');
+    var brandlist = brand.split(',');
+    var qType = "";
+    var qBrand = "";
+
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
+    }
+    qType = qType.substring(0, qType.length - 1);
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+    var query = "select * from \"products\" where loai in ( " + qType + " ) and brand in (" + qBrand + ") ORDER BY gia " + order + "";
+
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getProductTypeBrandPrice = function(type, brand, price, callback) {
+    var typelist = type.split(',');
+    var brandlist = brand.split(',');
+    var pricelist = price.split(',');
+    var qType = "";
+    var qBrand = "";
+
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
+    }
+    qType = qType.substring(0, qType.length - 1);
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+    var query = "select * from \"products\" where loai in ( " + qType + " ) and brand in (" + qBrand + ")  and gia between " + pricelist[0] + " and " + pricelist[1] + "";
+
+    pool.query(query, function(err, result) {
+        callback(result);
+    });
+}
+
+module.exports.getProductTypeOrderPrice = function(type, order, price, callback) {
+    var typelist = type.split(',');
+    var pricelist = price.split(',');
+    var qType = "";
+
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
+    }
+    qType = qType.substring(0, qType.length - 1);
+
+    var query = "select * from \"products\" where loai in ( " + qType + " )  and gia between " + pricelist[0] + " and " + pricelist[1] + " ORDER BY gia " + order + "";
 
     console.log(query)
 
     pool.query(query, function(err, result) {
-        console.log(result)
-        callback(result.rows);
+        callback(result);
+    });
+}
+
+module.exports.getProductBrandOrderPrice = function(brand, order, price, callback) {
+    var brandlist = brand.split(',');
+    var pricelist = price.split(',');
+    var qBrand = "";
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+    var query = "select * from \"products\" where brand in (" + qBrand + ")  and gia between " + pricelist[0] + " and " + pricelist[1] + " ORDER BY gia " + order + "";
+
+    pool.query(query, function(err, result) {
+        callback(result);
     });
 }
 
@@ -62,31 +231,26 @@ module.exports.getRelatedItems = function(type, callback) {
     });
 }
 
-/*exports.getItems = function(callback) {
-    query = 'select * from "products" limit 4';
+module.exports.getProductFilter = function(type, brand, price, order, callback) {
+    var typelist = type.split(',');
+    var brandlist = brand.split(',');
+    var pricelist = price.split(',');
+    var qType = "";
+    var qBrand = "";
+
+    for (const element of typelist) {
+        qType = qType + "'" + element + "'" + ',';
+    }
+    qType = qType.substring(0, qType.length - 1);
+
+    for (const element of brandlist) {
+        qBrand = qBrand + "'" + element + "'" + ',';
+    }
+    qBrand = qBrand.substring(0, qBrand.length - 1);
+
+    var query = "select * from \"products\" where loai in ( " + qType + " ) and brand in (" + qBrand + ") and gia between " + pricelist[0] + " and " + pricelist[1] + " ORDER BY gia " + order + "";
+
     pool.query(query, function(err, result) {
         callback(result);
     });
 }
-
-exports.getProductList = function(type, callback) {
-    query = "select * from \"products\" where loai = '" + type + "'";
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-
-exports.getProductDetail = function(id, callback){
-    query = "select * from \"products\" where id = '" + id + "'";
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-
-exports.getProductBrand = function(type, brand, callback){
-    query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "'";
-    console.log(query)
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}*/

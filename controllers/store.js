@@ -1,70 +1,19 @@
 var productModel = require('../models/product')
-
-module.exports.productList = function(req, res) {
-    var perPage = 9
-    var page = req.params.page || 1
-
-    type = []
-    brand = []
-    var order = 'asc'
-    var page = 1
-
-    console.log(req)
-    console.log(req.query.type)
-    console.log(req.query.brand)
-
-
-    if (req.params['type'] != undefined) {
-        type.push(req.params['type'])
-    }
-    if (req.query.type != undefined) {
-        console.log("type: " + req.query.type.length)
-        if (!Array.isArray(req.query.type))
-            type.push(req.query.type)
-        else
-            type = req.query.type
-    }
-
-    if (req.params['brand'] != undefined) {
-        brand.push(req.params['brand'])
-    }
-    if (req.query.brand != undefined) {
-        console.log("brand: " + req.query.brand.length)
-        if (!Array.isArray(req.query.brand))
-            brand.push(req.query.brand)
-        else
-            brand = req.query.brand
-    }
-
-    if (req.params['order'] != undefined)
-        order = req.params['order']
-    if (req.query.order != undefined)
-        order = req.query.order
-
-    if (req.params['page'] != undefined)
-        page = req.params['page']
-    if (req.query.page != undefined)
-        order = req.query.page
-
-    console.log("controller:")
-    console.log(type)
-    console.log(brand)
-
-
-    productModel.getProductList(type, brand, order, function(items) {
-        // console.log(page + "," + items.length + "," + perPage + "," + Math.ceil(items.length / perPage))
-        // console.log(items)
-        onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + 9)
-            // console.log(onPageItems)
+    //controller neu co thi kiem tra du lieu ma thoi!
+module.exports.productListByType = function(req, res) {
+    productModel.getProductListByType(req.params['type'], function(items) {
         res.render('store', {
-            Items: onPageItems,
-            Type: type,
-            Brand: brand,
-            Order: order,
-            Page: page,
-            user: req.user,
-            current: page,
-            pages: Math.ceil(items.length / perPage)
+            Items: items,
+            user: req.user
+        });
+    })
+}
+
+module.exports.productListByBrand = function(req, res) {
+    productModel.getProductListByBrand(req.params['brand'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user
         });
     })
 }
@@ -80,5 +29,95 @@ module.exports.productDetailById = function(req, res) {
                 });
             })
         }
+    })
+}
+
+module.exports.productListByTypeAndPrice = function(req, res) {
+    productModel.getProductTypeAndPrice(req.params['type'], req.params['price'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListByBrandAndPrice = function(req, res) {
+    productModel.getProductBrandAndPrice(req.params['brand'], req.params['price'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListByTypeAndOrder = function(req, res) {
+    productModel.getProductTypeAndOrder(req.params['type'], req.params['order'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListByBrandAndOrder = function(req, res) {
+    productModel.getProductBrandAndOrder(req.params['brand'], req.params['order'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListByTypeAndBrand = function(req, res) {
+    productModel.getProductListByTypeAndBrand(req.params['type'], req.params['brand'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user
+        });
+    })
+}
+
+module.exports.productListByTypeBrandOrder = function(req, res) {
+    productModel.getProductTypeBrandOrder(req.params['type'], req.params['brand'], req.params['order'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListByTypeBrandPrice = function(req, res) {
+    productModel.getProductTypeBrandPrice(req.params['type'], req.params['brand'], req.params['price'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListByTypeOrderPrice = function(req, res) {
+    productModel.getProductTypeOrderPrice(req.params['type'], req.params['order'], req.params['price'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListByBrandOrderPrice = function(req, res) {
+    productModel.getProductBrandOrderPrice(req.params['brand'], req.params['order'], req.params['price'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
+    })
+}
+
+module.exports.productListFilter = function(req, res) {
+    productModel.getProductFilter(req.params['type'], req.params['brand'], req.params['price'], req.params['order'], function(items) {
+        res.render('store', {
+            Items: items,
+            user: req.user,
+        });
     })
 }
