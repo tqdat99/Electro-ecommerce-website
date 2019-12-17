@@ -33,111 +33,14 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
 
 </head>
 
 <body>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var selections = document.location.pathname.replace("/store/", "").split("&")
-            var typeSelection, brandSelection, orderSelection, priceSelection
-            for (var i = 0; i < selections.length; i++) {
-                if (selections[i].match(/type/)) {
-                    typeSelection = selections[i]
-                }
-                if (selections[i].match(/brand/)) {
-                    brandSelection = selections[i]
-                }
-                if (selections[i].match(/order/)) {
-                    orderSelection = selections[i]
-                }
-                if (selections[i].match(/price/)) {
-                    priceSelection = selections[i]
-                }
-            }
 
-            if (typeSelection) {
-                var types = typeSelection.replace("type=", "").split(",")
-
-                //if(types.length == 0)
-
-                for (var i = 0; i < types.length; i++) {
-                    $("input[value=" + types[i] + "]").prop("checked", true)
-                }
-            }
-
-            $("input[name=catcheckbox]").change(function() {
-                var newTypeSelection = "type=" + Array.prototype.map.call($("input[name=catcheckbox]:checked"), function(e) {
-                    return $(e).val();
-                }).join()
-
-                if (typeSelection) {
-                    document.location.href = document.location.href.replace(typeSelection, newTypeSelection)
-                } else {
-                    document.location.href = document.location.href + "&" + newTypeSelection
-                }
-            })
-
-            if (brandSelection) {
-                var brands = brandSelection.replace("brand=", "").split(",")
-                for (var i = 0; i < brands.length; i++) {
-                    $("input[value=" + brands[i] + "]").prop("checked", true)
-                }
-            }
-
-            $("input[name=brandcheckbox]").change(function() {
-                var newBrandSelection = "brand=" + Array.prototype.map.call($("input[name=brandcheckbox]:checked"), function(e) {
-                    return $(e).val();
-                }).join()
-
-                if (brandSelection) {
-                    document.location.href = document.location.href.replace(brandSelection, newBrandSelection)
-                } else {
-                    document.location.href = document.location.href + "&" + newBrandSelection
-                }
-            })
-
-            if (orderSelection) {
-                var order = orderSelection.replace("order=", "")
-                $("input[value=" + order + "]").prop("checked", true)
-            }
-
-            $("input[name=optradio]").change(function() {
-                var newOrderSelection = "order=" + Array.prototype.map.call($("input[name=optradio]:checked"), function(e) {
-                    return $(e).val();
-                }).join()
-
-                if (orderSelection) {
-                    document.location.href = document.location.href.replace(orderSelection, newOrderSelection)
-                } else {
-                    document.location.href = document.location.href + "&" + newOrderSelection
-                }
-            })
-
-
-            if (priceSelection) {
-                var price = priceSelection.replace("price=", "").split(",")
-                for (var i = 0; i < price.length; i++) {
-                    $('#price-min').val(price[0]);
-                    $('#price-max').val(price[1]);
-                }
-            }
-
-            $("#submitprice").click(function() {
-                var newPriceSelection = "price=" + $('#price-min').val() + ',' + $('#price-max').val();
-
-                if (priceSelection) {
-                    document.location.href = document.location.href.replace(priceSelection, newPriceSelection)
-                } else {
-                    document.location.href = document.location.href + "&" + newPriceSelection
-                }
-            })
-
-        });
-    </script>
 
     <%include header.ejs%>
 
@@ -189,28 +92,28 @@
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="catcheckbox" id="category-2" value="Dienthoai">
                                     <label for="category-2">
-                                        <span></span>
-                                        Điện thoại
-                                        <small>(740)</small>
-                                    </label>
+										<span></span>
+										Điện thoại
+										<small>(740)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="catcheckbox" id="category-3" value="Laptop">
                                     <label for="category-3">
-                                        <span></span>
+										<span></span>
                                             Laptop
-                                        <small>(1450)</small>
-                                    </label>
+										<small>(1450)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="catcheckbox" id="category-4" value="Tivi">
                                     <label for="category-4">
-                                        <span></span>
-                                        Tivi                                        
+										<span></span>
+                                        Tivi										
                                         <small>(1450)</small>
-                                    </label>
+									</label>
                                 </div>
 
                             </div>
@@ -224,69 +127,78 @@
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-1" value="Samsung">
                                     <label for="brand-1">
-                                        <span></span>
-                                        Samsung
-                                        <small>(578)</small>
-                                    </label>
+										<span></span>
+										Samsung
+										<small>(578)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-2" value="LG">
                                     <label for="brand-2">
-                                        <span></span>
-                                        LG
-                                        <small>(125)</small>
-                                    </label>
+										<span></span>
+										LG
+										<small>(125)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-3" value="Sony">
                                     <label for="brand-3">
-                                        <span></span>
-                                        Sony
-                                        <small>(755)</small>
-                                    </label>
+										<span></span>
+										Sony
+										<small>(755)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-4" value="Asus">
                                     <label for="brand-4">
-                                        <span></span>
-                                        Asus
-                                        <small>(578)</small>
-                                    </label>
+										<span></span>
+										Asus
+										<small>(578)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-5" value="Vivo">
                                     <label for="brand-5">
-                                        <span></span>
-                                        Vivo
-                                        <small>(125)</small>
-                                    </label>
+										<span></span>
+										Vivo
+										<small>(125)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-6" value="Apple">
                                     <label for="brand-6">
-                                        <span></span>
-                                        Apple
-                                        <small>(755)</small>
-                                    </label>
+										<span></span>
+										Apple
+										<small>(755)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-7" value="Huawei">
-                                    <label for="brand-7">
-                                        <span></span>
-                                        Huawei
-                                        <small>(755)</small>
-                                    </label>
+                                    <label for="brand-6">
+										<span></span>
+										Huawei
+										<small>(755)</small>
+									</label>
                                 </div>
 
                                 <div class="input-checkbox">
                                     <input type="checkbox" name="brandcheckbox" id="brand-8" value="Xiaomi">
-                                    <label for="brand-8">
+                                    <label for="brand-6">
+										<span></span>
+										Xiaomi
+										<small>(755)</small>
+									</label>
+                                </div>
+
+                                <div class="input-checkbox">
+                                    <input type="checkbox" name="brandcheckbox" id="brand-8" value="Xiaomi">
+                                    <label for="brand-6">
                                         <span></span>
                                         Xiaomi
                                         <small>(755)</small>
@@ -330,7 +242,7 @@
                                 </div>
 
                                 <div class="input-checkbox">
-                                    <input type="checkbox" name="brandcheckbox" id="brand-13" value="">
+                                    <input type="checkbox" name="brandcheckbox" id="brand-13" value="Xiaomi">
                                     <label for="brand-13">
                                         <span></span>
                                         Toshiba
@@ -340,48 +252,34 @@
 
                             </div>
                         </div>
+
                         <div class="aside">
                             <div class="row">
                                 <div class="col-sm-8">
                                     <h3 class="aside-title">Price</h3>
                                 </div>
                                 <div class="col-sm-4">
-                                    <button type="button" id="submitprice" class="btn btn-danger">Submit</button>
+                                    <button type="button" class="btn btn-danger">Submit</button>
                                 </div>
                             </div>
-
                             <div class="price-filter">
-
                                 <div id="price-slider"></div>
                                 <div class="input-number price-min">
                                     <input id="price-min" type="number">
                                     <span class="qty-up">+</span>
                                     <span class="qty-down">-</span>
                                 </div>
-
                                 <span>-</span>
                                 <div class="input-number price-max">
                                     <input id="price-max" type="number">
                                     <span class="qty-up">+</span>
                                     <span class="qty-down">-</span>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- /aside Widget -->
-
-                        <input type="submit" value="Áp dụng">
 
                     </div>
-                    <!-- /ASIDE -->
-
-                    <!-- STORE -->
                     <div id="store" class="col-md-9">
-                        <!-- store top filter -->
-
-                        <!-- /store top filter -->
-
-                        <!-- store products -->
                         <div class="row">
                             <!-- product -->
                             <% Items.rows.forEach(function(item){ %>
@@ -429,10 +327,10 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                     <!-- <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                </div> -->
+                                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                                        </div> -->
 
                                                     <div class="add-to-cart">
                                                         <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
@@ -446,31 +344,129 @@
                                     <% }); %>
                                 </div>
                                 <!-- /store products -->
-
-                                <!-- store bottom filter -->
-
+                                <!-- /STORE -->
                         </div>
-
-                        <!-- /STORE -->
+                        <!-- /row -->
                     </div>
-                    <!-- /row -->
                 </div>
-                <!-- /container -->
+                <!-- /aside Widget -->
+
+                <input type="submit" value="Áp dụng">
+
             </div>
-            <!-- /SECTION -->
+
 
 
             <%include footer.ejs%>
 
                 <!-- jQuery Plugins -->
+                <script>
+                    $(document).ready(function() {
+                                var selections = document.location.pathname.replace("/store/", "").split("&")
+                                var typeSelection, brandSelection, orderSelection
+                                for (var i = 0; i < selections.length; i++) {
+                                    if (selections[i].match(/type/)) {
+                                        typeSelection = selections[i]
+                                    }
+                                    if (selections[i].match(/brand/)) {
+                                        brandSelection = selections[i]
+                                    }
+                                    if (selections[i].match(/order/)) {
+                                        orderSelection = selections[i]
+                                    }
+                                }
 
+                                if (typeSelection) {
+                                    var types = typeSelection.replace("type=", "").split(",")
+                                    for (var i = 0; i < types.length; i++) {
+                                        $("input[value=" + types[i] + "]").prop("checked", true)
+                                    }
+
+                                    $("input[name=catcheckbox]").change(function() {
+                                        var newTypeSelection = "type=" + Array.prototype.map.call($("input[name=catcheckbox]:checked"), function(e) {
+                                            return $(e).val();
+                                        }).join()
+
+                                        if (typeSelection) {
+                                            document.location.href = document.location.href.replace(typeSelection, newTypeSelection)
+                                        } else {
+                                            document.location.href = document.location.href + "&" + newTypeSelection
+                                        }
+                                    })
+
+                                    if (brandSelection) {
+                                        var brands = brandSelection.replace("brand=", "").split(",")
+                                        for (var i = 0; i < brands.length; i++) {
+                                            $("input[value=" + brands[i] + "]").prop("checked", true)
+                                        }
+                                    }
+
+                                    $("input[name=brandcheckbox]").change(function() {
+                                        var newBrandSelection = "brand=" + Array.prototype.map.call($("input[name=brandcheckbox]:checked"), function(e) {
+                                            return $(e).val();
+                                        }).join()
+
+                                        if (brandSelection) {
+                                            document.location.href = document.location.href.replace(brandSelection, newBrandSelection)
+                                        } else {
+                                            document.location.href = document.location.href + "&" + newBrandSelection
+                                        }
+                                    })
+
+                                    if (orderSelection) {
+                                        var order = orderSelection.replace("order=", "")
+                                        $("input[value=" + order + "]").prop("checked", true)
+                                    }
+
+                                    $("input[name=optradio]").change(function() {
+                                        var newOrderSelection = "order=" + Array.prototype.map.call($("input[name=optradio]:checked"), function(e) {
+                                            return $(e).val();
+                                        }).join()
+
+                                        if (orderSelection) {
+                                            document.location.href = document.location.href.replace(orderSelection, newOrderSelection)
+                                        } else {
+                                            document.location.href = document.location.href + "&" + newOrderSelection
+                                        }
+                                    })
+
+
+                                    if (priceSelection) {
+                                        var price = priceSelection.replace("price=", "").split(",")
+                                        for (var i = 0; i < price.length; i++) {
+                                            $('#price-min').val(price[0]);
+                                            $('#price-max').val(price[1]);
+                                        }
+                                    }
+
+
+                                    if (orderSelection) {
+                                        var order = orderSelection.replace("order=", "")
+                                            //for (var i = 0; i < order.length; i++) {
+                                            //    $("input[value=" + order[i] + "]").prop("checked", true)
+                                            //}
+                                        $("input[value=" + order + "]").prop("checked", true)
+                                    }
+
+                                    $("input[name=optradio]").change(function() {
+                                        var newOrderSelection = "order=" + Array.prototype.map.call($("input[name=optradio]:checked"), function(e) {
+                                            return $(e).val();
+                                        }).join()
+
+                                        if (orderSelection) {
+                                            document.location.href = document.location.href.replace(orderSelection, newOrderSelection)
+                                        } else {
+                                            document.location.href = document.location.href + "&" + newOrderSelection
+                                        }
+                                    })
+                                });
+                </script>
                 <script src="js/jquery.min.js"></script>
                 <script src="js/bootstrap.min.js"></script>
                 <script src="js/slick.min.js"></script>
                 <script src="js/nouislider.min.js"></script>
                 <script src="js/jquery.zoom.min.js"></script>
                 <script src="js/main.js"></script>
-
 </body>
 
 </html>
