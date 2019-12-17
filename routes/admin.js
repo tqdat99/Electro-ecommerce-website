@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 router.use(express.static('public'));
-var adminController = require('../controllers/admin')
 
 router.get('/', function(req, res) {
     res.render('admin/signin');
 });
 
-router.get('/manage-users', adminController.userList);
+router.get('/manage-users', function(req, res) {
+    res.render('admin/manage-users');
+});
 
 router.get('/manage-users-edit', function(req, res) {
     res.render('admin/manage-users-edit');

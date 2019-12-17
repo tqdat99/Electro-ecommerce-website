@@ -910,7 +910,6 @@ textarea.input {
     box-shadow: 0px 0px 0px 0px #E4E7ED, 0px 0px 0px 1px #E4E7ED;
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
-    height: 430px;
 }
 
 .product:hover {
@@ -1072,24 +1071,27 @@ textarea.input {
 }
 
 .product .add-to-cart {
-    /* background: #1e1f29; */
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    padding-top: 40px;
+    padding-bottom: 16px;
+    background: #1e1f29;
     text-align: center;
-    /* -webkit-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
     -ms-transform: translateY(0%);
     transform: translateY(0%);
     -webkit-transition: 0.2s all;
-    transition: 0.2s all; */
+    transition: 0.2s all;
     z-index: 2;
-    opacity: 1;
 }
 
-
-/* .product:hover .add-to-cart {
+.product:hover .add-to-cart {
     -webkit-transform: translateY(100%);
     -ms-transform: translateY(100%);
     transform: translateY(100%);
-    opacity: 1;
-} */
+}
 
 .product .add-to-cart .add-to-cart-btn {
     position: relative;
@@ -1099,7 +1101,7 @@ textarea.input {
     background-color: #ef233c;
     color: #FFF;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 700;
     border-radius: 40px;
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
@@ -7995,6 +7997,7 @@ h2.title {
     color: #696763;
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
+    margin-bottom: 25px;
 }
 
 .add-to {
@@ -9488,23 +9491,4 @@ textarea {
 .cart-holder {
     width: 150px;
     height: 150px;
-}
-
-div.b {
-    -webkit-line-clamp: 2;
-    max-lines: 2;
-    white-space: nowrap;
-    width: 100%;
-    height: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.line-clamp-3 {
-    /* Required declarations: */
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    /* Limit the text block to three lines */
-    -webkit-line-clamp: 3;
 }

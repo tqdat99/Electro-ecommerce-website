@@ -8,8 +8,6 @@ router.get('/register', userController.checkNotAuthenticated, userController.reg
 
 router.post('/register', userController.checkNotAuthenticated, userController.registerFormPost)
 
-router.get('/profile', userController.checkAuthenticated, userController.profile)
-
 router.get('/login', userController.checkNotAuthenticated, userController.logInFormGet)
 
 router.post('/login', userController.checkNotAuthenticated, userController.logInFormPost);
