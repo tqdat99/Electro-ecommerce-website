@@ -10,6 +10,8 @@ router.post('/register', userController.checkNotAuthenticated, userController.re
 
 router.get('/login', userController.checkNotAuthenticated, userController.logInFormGet)
 
+router.get('/profile', userController.checkAuthenticated, userController.profile)
+
 router.post('/login', userController.checkNotAuthenticated, userController.logInFormPost);
 
 router.get('/logout', userController.logOut)

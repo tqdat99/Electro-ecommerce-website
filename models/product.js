@@ -1,270 +1,69 @@
 var database = require('./database')
 var pool = database.pool;
 
+module.exports.getItems = function(callback) {
+    query = "select * from \"products\" limit 4";
+    pool.query(query, function(err, result) {
+        console.log(result)
+        callback(result);
+    });
+}
+
 module.exports.getProductDetailById = function(id, callback) {
     query = "select * from \"products\" where id = '";
     pool.query(query, function(err, result) {
-        callback(result);
+        callback(result.rows[0]);
     });
 }
 
-module.exports.getProductListByType = function(type, callback) {
+module.exports.getProductList = function(type, brand, price, order, callback) {
+    var query
+    console.log("models:")
+    console.log(type)
+    console.log(brand)
 
-    var typelist = type.split(',');
-    var qType = "";
+    query = "select * from \"products\" where "
+    if (type != undefined)
+        if (type.length > 0) {
+            query += "(";
+            for (i = 0; i < type.length; i++) {
+                query += "loai = '" + type[i] + "'";
+                if (i != type.length - 1)
+                    query += " or ";
+            }
+            query += ")";
+        }
 
-    for (const element of typelist) {
-        qType = qType + "'" + element + "'" + ',';
+    if (brand != undefined && type != undefined && brand.length > 0 && type.length > 0) {
+        query += " and ";
     }
-    qType = qType.substring(0, qType.length - 1);
 
-    query = "select * from \"products\" where loai in ( " + qType + " )";
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
+    if (brand != undefined)
+        if (brand.length > 0) {
+            query += "(";
+            for (i = 0; i < brand.length; i++) {
+                query += "brand = '" + brand[i] + "'";
+                if (i != brand.length - 1)
+                    query += " or ";
+            }
+            query += ")";
+        }
 
-module.exports.getProductListByBrand = function(brand, callback) {
-    var brandlist = brand.split(',');
-    var qBrand = "";
-
-    for (const element of brandlist) {
-        qBrand = qBrand + "'" + element + "'" + ',';
+    if (((type != undefined && type.length > 0) || (brand.length > 0 && brand != undefined)) && price != null) {
+        query += " and ";
     }
-    qBrand = qBrand.substring(0, qBrand.length - 1);
-
-    query = "select * from \"products\" where brand in (" + qBrand + ")";
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-module.exports.getProductListByType = function(type, page, callback) {
-    query = "select * from \"products\" where loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-
-module.exports.getProductListByTypeAndBrand = function(type, brand, page, callback) {
-    query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-}
-
-module.exports.getProductListByType = function(type, page, callback) {
-    query = "select * from \"products\" where loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-
-module.exports.getProductListByTypeAndBrand = function(type, brand, page, callback) {
-    query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-
-module.exports.getProductListByType = function(type, page, callback) {
-    query = "select * from \"products\" where loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-
-
-module.exports.getProductListByTypeAndBrand = function(type, brand, page, callback) {
-    query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-module.exports.getProductListByType = function(type, page, callback) {
-    query = "select * from \"products\" where loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    })
-}
-
-module.exports.getProductListByTypeAndBrand = function(type, brand, page, callback) {
-    query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductOrder = function(type, brand, order, page, callback) {
-    var query;
-    if (brand != 'undefined')
-        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    else
-        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductOrder = function(type, brand, order, page, callback) {
-    var query;
-    if (brand != 'undefined')
-        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    else
-        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductOrder = function(type, brand, order, page, callback) {
-    var query;
-    if (brand != 'undefined')
-        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    else
-        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductOrder = function(type, brand, order, page, callback) {
-    var query;
-    if (brand != 'undefined')
-        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    else
-        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + " limit 9 offset " + (page - 1) * 9;
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductListByTypeAndBrand = function(type, brand, callback) {
-    var typelist = type.split(',');
-    var brandlist = brand.split(',');
-    var qType = "";
-    var qBrand = "";
-
-    for (const element of typelist) {
-        qType = qType + "'" + element + "'" + ',';
+    if (price != null) {
+        var range = price.split("-");
+        if (range.length == 2) {
+            query += "gia between " + range[0] + " and " + range[1];
+        } else
+            query += "gia > 30000000 ";
     }
-    qType = qType.substring(0, qType.length - 1);
 
-    for (const element of brandlist) {
-        qBrand = qBrand + "'" + element + "'" + ',';
-    }
-    qBrand = qBrand.substring(0, qBrand.length - 1);
+    query += " ORDER BY gia " + order;
 
-    var query = "select * from \"products\" where loai in ( " + qType + " ) and brand in (" + qBrand + ")";
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductTypeAndOrder = function(type, order, callback) {
-
-    var typelist = type.split(',');
-    var qType = "";
-
-    for (const element of typelist) {
-        qType = qType + "'" + element + "'" + ',';
-    }
-    qType = qType.substring(0, qType.length - 1);
-
-    var query;
-    query = "select * from \"products\" where loai in ( " + qType + " ) ORDER BY gia " + order + "";
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductBrandAndOrder = function(brand, order, callback) {
-
-    var brandlist = brand.split(',');
-    var qBrand = "";
-
-    for (const element of brandlist) {
-        qBrand = qBrand + "'" + element + "'" + ',';
-    }
-    qBrand = qBrand.substring(0, qBrand.length - 1);
-
-
-    var query;
-    query = "select * from \"products\" where brand in ( " + qBrand + " ) ORDER BY gia " + order + "";
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getProductTypeBrandOrder = function(type, brand, order, callback) {
-    var typelist = type.split(',');
-    var brandlist = brand.split(',');
-    var qType = "";
-    var qBrand = "";
-
-    for (const element of typelist) {
-        qType = qType + "'" + element + "'" + ',';
-    }
-    qType = qType.substring(0, qType.length - 1);
-
-    for (const element of brandlist) {
-        qBrand = qBrand + "'" + element + "'" + ',';
-    }
-    qBrand = qBrand.substring(0, qBrand.length - 1);
-
-    var query = "select * from \"products\" where loai in ( " + qType + " ) and brand in (" + qBrand + ") ORDER BY gia " + order + "";
-
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getItems = function(callback) {
-    query = 'select * from "products" limit 4';
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-
-module.exports.getRelatedItems = function(type, callback) {
-    query = "select * from \"products\" where loai = '" + type + "' limit 4";
     console.log(query)
     pool.query(query, function(err, result) {
-        callback(result);
+        callback(result.rows);
     });
 }
-
-/*module.exports.getProductFilter  = function(type, brand, price, order, callback){
-    var typelist = type.split(',');
-    var brandlist = brand.split(',');
-    var pricelist = price.split(',');
-    var qType = "";
-    var qBrand = "";
-
-    for (const element of typelist) {
-        qType = qType + "'" + element + "'" + ',';
-    }
-    qType = qType.substring(0, qType.length - 1);
-
-    for (const element of brandlist) {
-        qBrand = qBrand + "'" + element + "'" + ',';
-    }
-    qBrand = qBrand.substring(0, qBrand.length - 1);
-
-    var query = "select * from \"products\" where loai in ( " + qType + " ) and brand in (" + qBrand + ") and gia between " + pricelist[0] + " and " + pricelist[1] + " ORDER BY gia " + order + "";
-
-    /*if (brand != 'undefined')
-        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + "";
-    else
-        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + "";
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-module.exports.getProductOrder  = function(type, brand, order, callback){
-    var query;
-    if (brand != 'undefined')
-        query = "select * from \"products\" where brand = '" + brand + "' and loai = '" + type + "' ORDER BY gia " + order + "";
-    else
-        query = "select * from \"products\" where loai = '" + type + "' ORDER BY gia " + order + "";
-    pool.query(query, function(err, result) {
-        callback(result);
-    });
-}
-*/

@@ -26,6 +26,20 @@ module.exports.addUser = async function(user) {
     })
 }
 
+module.exports.editUserByUsername = function(form, callback) {
+    const query = {
+        text: 'update "Users" set password = $1, fullname = $2, birthday = $3, address = $4, phone = $5 where username = $6',
+        values: [user.password, user.fullname, user.birthday, user.address, user.phone, user.username],
+    }
+
+    pool.query(query, async(err, res) => {
+        if (res.rows.length > 0)
+            callback(res.rows[0])
+        else
+            callback(null)
+    })
+}
+
 module.exports.findUserByUsername = function(username, callback) {
     query = 'select * from "Users" where username = \'' + username + '\''
     pool.query(query, async(err, res) => {
