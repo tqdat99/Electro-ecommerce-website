@@ -448,7 +448,47 @@
                                 <!-- /store products -->
 
                                 <!-- store bottom filter -->
+                                <div class="store-filter clearfix">
 
+                                    <% if (pages > 0) { %>
+                                        <ul class="store-pagination">
+                                            <% if (current == 1) { %>
+                                                <li class="disabled" id="pageFirst"><a>Đầu</a></li>
+                                                <% } else { %>
+                                                    <li><a id="pageFirst">Đầu</a></li>
+                                                    <% } %>
+                                                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                                            <% if (i !== 1) { %>
+                                                                <li class="disabled"><a>...</a></li>
+                                                                <% } %>
+                                                                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                                                        <% if (i == current) { %>
+                                                                            <li class="active">
+                                                                                <a style="color:#ffffff">
+                                                                                    <%= i %>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% } else { %>
+                                                                                <li>
+                                                                                    <a id="page<%=i%>">
+                                                                                        <%= i %>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <% } %>
+                                                                                    <% if (i == Number(current) + 4 && i < pages) { %>
+                                                                                        <li class="disabled "><a>...</a></li>
+                                                                                        <% } %>
+                                                                                            <% } %>
+                                                                                                <% if (current == pages) { %>
+                                                                                                    <li class="disabled" id="pageLast"><a>Last</a></li>
+                                                                                                    <% } else { %>
+                                                                                                        <li><a id="pageLast">Cuối</a>
+                                                                                                        </li>
+                                                                                                        <% } %>
+                                        </ul>
+                                        <% } %>
+                                            <!-- /store bottom filter -->
+                                </div>
                         </div>
 
                         <!-- /STORE -->
@@ -463,7 +503,40 @@
             <%include footer.ejs%>
 
                 <!-- jQuery Plugins -->
+                <script>
+                    var currentHref = window.location.href;
+                    var ascBtn = document.getElementById('ascBtn');
+                    var descBtn = document.getElementById('descBtn');
 
+                    ascBtnHref = currentHref.replace("&order=asc", "&order=asc");
+                    ascBtnHref = currentHref.replace("&order=desc", "&order=asc");
+                    ascBtn.href = ascBtnHref;
+
+                    descBtnHref = currentHref.replace("&order=desc", "&order=desc");
+                    descBtnHref = currentHref.replace("&order=asc", "&order=desc");
+                    descBtn.href = descBtnHref;
+
+
+                    page = document.getElementById("pageFirst");
+                    n = currentHref.indexOf("&page=");
+                    page.href = currentHref.substr(0, n) + "&page=" + 1;
+
+                    page = document.getElementById("pageLast");
+                    n = currentHref.indexOf("&page=");
+                    page.href = currentHref.substr(0, n) + "&page=" + <%=pages%>;
+
+                    for (i = 0; i < <%=pages%>; i++) {
+                        page = document.getElementById("pageLast");
+                        page.innerHTML = "yes";
+
+                        id = "page" + i;
+                        page = document.getElementById(id);
+                        page.innerHTML = id;
+
+                        n = currentHref.indexOf("&page=");
+                        page.href = currentHref.substr(0, n) + "&page=" + i;
+                    }
+                </script>
                 <script src="js/jquery.min.js"></script>
                 <script src="js/bootstrap.min.js"></script>
                 <script src="js/slick.min.js"></script>

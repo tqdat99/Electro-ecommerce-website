@@ -115,6 +115,7 @@ module.exports.productListByBrandOrderPrice = function(req, res) {
 
 module.exports.productListFilter = function(req, res) {
     productModel.getProductFilter(req.params['type'], req.params['brand'], req.params['price'], req.params['order'], function(items) {
+        console.log(items)
         res.render('store', {
             Items: items,
             user: req.user,

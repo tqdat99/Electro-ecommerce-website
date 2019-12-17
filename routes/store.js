@@ -20,8 +20,6 @@ router.get('/brand=:brand&order=:order&price=:price&type=:type', storeController
 router.get('/type=:type&price=:price&order=:order&brand=:brand', storeController.productListFilter)
 router.get('/brand=:brand&price=:price&order=:order&type=:type', storeController.productListFilter)
 
-
-
 router.get('/type=:type&brand=:brand&order=:order', storeController.productListByTypeBrandOrder);
 router.get('/brand=:brand&type=:type&order=:order', storeController.productListByTypeBrandOrder);
 router.get('/type=:type&order=:order&brand=:brand', storeController.productListByTypeBrandOrder);
@@ -37,15 +35,12 @@ router.get('/brand=:brand&order=:order&price=:price', storeController.productLis
 router.get('/type=:type&price=:price&order=:order', storeController.productListByTypeOrderPrice);
 router.get('/brand=:brand&price=:price&order=:order', storeController.productListByBrandOrderPrice);
 
-
-
 router.get('/type=:type&brand=:brand', storeController.productListByTypeAndBrand);
 router.get('/brand=:brand&type=:type', storeController.productListByTypeAndBrand);
 router.get('/type=:type&order=:order', storeController.productListByTypeAndOrder);
 router.get('/brand=:brand&order=:order', storeController.productListByBrandAndOrder);
 router.get('/type=:type&price=:price', storeController.productListByTypeAndPrice);
 router.get('/brand=:brand&price=:price', storeController.productListByBrandAndPrice);
-
 
 router.get('/type=:type', storeController.productListByType);
 
