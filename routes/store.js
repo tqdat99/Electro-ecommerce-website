@@ -8,4 +8,6 @@ router.get('/filter', storeController.productList);
 
 router.get('/id=:id', storeController.productDetailById);
 
+router.post('/id=:id', storeController.postComment);
+
 module.exports = router;
