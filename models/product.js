@@ -66,3 +66,18 @@ module.exports.getProductList = function(type, brand, price, order, callback) {
         callback(result.rows);
     });
 }
+
+module.exports.insertComment = function(name, message, productid, callback){
+    query = 'insert into "comments" (productid, content, name) values (\'' + productid + '\', \'' + message + '\' , \'' + name + '\')';
+    pool.query(query, function(err, result) {
+        console.log(result);
+        callback(result);
+    });
+}
+
+module.exports.getCommentsByProductId = function(id, callback) {
+    query = "select * from \"comments\" where productid = '" + id + "'";
+    pool.query(query, function(err, result) {
+        callback(result.rows)
+    });
+}
