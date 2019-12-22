@@ -1,11 +1,14 @@
 var productModel = require('../models/product')
 module.exports.productDetailById = function(req, res) {
     productModel.getProductDetailById(req.params['id'], function(item) {
-        productModel.getProductList([item.loai], [item.brand], undefined, 'asc', function(items) {
-            onPageItems = items.slice(0, 4)
-            res.render('product-details', {
-                item: item,
-                Items: onPageItems
+        productModel.getCommentsByProductId(req.params['id'], function(comments) {
+            productModel.getProductList([item.loai], [item.brand], undefined, 'asc', function(items) {
+                onPageItems = items.slice(0, 4)
+                res.render('product-details', {
+                    item: item,
+                    comments: comments,
+                    Items: onPageItems
+                })
             })
         })
     })
@@ -83,5 +86,11 @@ module.exports.productList = function(req, res) {
             current: page,
             pages: Math.ceil(items.length / perPage)
         });
+    })
+}
+
+module.exports.postComment = function(req,res){
+    productModel.insertComment(req.body['name'], req.body['message'], req.params['id'], function(){ 
+        res.redirect('back');
     })
 }
