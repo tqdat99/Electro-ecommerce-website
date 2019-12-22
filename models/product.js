@@ -81,3 +81,10 @@ module.exports.getCommentsByProductId = function(id, callback) {
         callback(result.rows)
     });
 }
+
+module.exports.getProductSearch = function(search, callback){
+    query = 'select * from "products" where document_vectors @@ plainto_tsquery(\'' + search + '\')';
+    pool.query(query, function(err, result) {
+        callback(result.rows)
+    });
+}

@@ -94,3 +94,26 @@ module.exports.postComment = function(req,res){
         res.redirect('back');
     })
 }
+
+module.exports.getSearch = function(req, res){
+    var perPage = 9
+    var page = req.query.page || 1
+
+    productModel.getProductSearch(req.query['q'], function(items){
+        var onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + 9)
+        res.render('store', {
+            Items: onPageItems,
+            Type: null,
+            Brand: null,
+            Order: null,
+            Page: page,
+            user: req.user,
+            current: page,
+            pages: Math.ceil(items.length / perPage)
+        })
+    })
+}
+
+module.exports.postSearch = function(req, res){
+    res.redirect('search?q='+req.body['searchbar'])
+}

@@ -10,4 +10,8 @@ router.get('/id=:id', storeController.productDetailById);
 
 router.post('/id=:id', storeController.postComment);
 
+router.post('/search', storeController.postSearch)
+
+router.get('/search', storeController.getSearch)
+
 module.exports = router;
