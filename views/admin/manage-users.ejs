@@ -61,7 +61,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Tên tài khoản</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Trạng thái</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -74,13 +74,13 @@
                                             </p>
                                         </td>
                                         <td>
-                                            <a href="/admin/manage-users-edit">
-                                                <p class="btn-link">Chỉnh sửa thông tin</p>
-                                            </a>
+                                            <p>
+                                                <%= user.status%>
+                                            </p>
                                         </td>
                                         <td>
-                                            <a href="/admin/manage-users-delete">
-                                                <p class="btn-link">Xóa</p>
+                                            <a href="/admin/manage-users-details?username=<%=user.username%>">
+                                                <p class="btn-link">Thông tin chi tiết</p>
                                             </a>
                                         </td>
                                     </tr>
@@ -88,116 +88,104 @@
                             </tbody>
                         </table>
                     </div>
+
+
+                    <% if (pages > 0) { %>
+                        <ul class="store-pagination">
+                            <% if (current == 1) { %>
+                                <li class="disabled" id="pageFirst"><a>Đầu</a></li>
+                                <% } else { %>
+                                    <li><a id="pageFirst">Đầu</a></li>
+                                    <% } %>
+                                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                            <% if (i !== 1) { %>
+                                                <li class="disabled"><a>...</a></li>
+                                                <% } %>
+                                                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+
+                                                        <% if (i == current) { %>
+                                                            <li class="active">
+                                                                <a style="color:#ffffff">
+                                                                    <%= i %>
+                                                                </a>
+                                                            </li>
+                                                            <% } else { %>
+                                                                <li>
+                                                                    <a id="page<%=i%>">
+                                                                        <%= i %>
+                                                                    </a>
+                                                                </li>
+                                                                <% } %>
+
+                                                                    <% if (i == Number(current) + 4 && i < pages) { %>
+                                                                        <li class="disabled "><a>...</a></li>
+                                                                        <% } %>
+                                                                            <% } %>
+                                                                                <% if (current == pages) { %>
+                                                                                    <li class="disabled" id="pageLast"><a>Cuối</a></li>
+                                                                                    <% } else { %>
+                                                                                        <li><a id="pageLast">Cuối</a>
+                                                                                        </li>
+                                                                                        <% } %>
+                        </ul>
+                        <% } %>
                 </div>
             </div>
         </section>
+        <script>
+            var currentHref = window.location.href;
 
-        <% if (pages > 0) { %>
-            <ul class="store-pagination">
-                <% if (current == 1) { %>
-                    <li class="disabled" id="pageFirst"><a>Đầu</a></li>
-                    <% } else { %>
-                        <li><a id="pageFirst">Đầu</a></li>
-                        <% } %>
-                            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-                                <% if (i !== 1) { %>
-                                    <li class="disabled"><a>...</a></li>
-                                    <% } %>
-                                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+            if (Number(<%=current%>) != 1) {
+                page = document.getElementById("pageFirst");
+                if (currentHref.includes("?page=")) {
+                    n = currentHref.indexOf("?page=");
+                    page.href = currentHref.substr(0, n) + "?page=" + 1;
+                } else {
+                    page.href = currentHref + "?page=" + 1;
+                }
+            }
 
-                                            <% if (i == current) { %>
-                                                <li class="active">
-                                                    <a style="color:#ffffff">
-                                                        <%= i %>
-                                                    </a>
-                                                </li>
-                                                <% } else { %>
-                                                    <li>
-                                                        <a id="page<%=i%>">
-                                                            <%= i %>
-                                                        </a>
-                                                    </li>
-                                                    <% } %>
+            if (Number(<%=current%>) != Number(<%=pages%>)) {
+                page = document.getElementById("pageLast");
+                if (currentHref.includes("?page=")) {
+                    n = currentHref.indexOf("?page=");
+                    page.href = currentHref.substr(0, n) + "?page=" + <%=pages%>;
+                } else {
+                    page.href = currentHref + "?page=" + <%=pages%>;
+                }
+            }
 
-                                                        <% if (i == Number(current) + 4 && i < pages) { %>
-                                                            <li class="disabled "><a>...</a></li>
-                                                            <% } %>
-                                                                <% } %>
-                                                                    <% if (current == pages) { %>
-                                                                        <li class="disabled" id="pageLast"><a>Cuối</a></li>
-                                                                        <% } else { %>
-                                                                            <li><a id="pageLast">Cuối</a>
-                                                                            </li>
-                                                                            <% } %>
-            </ul>
-            <% } %>
-                <!-- /store bottom filter -->
-                </div>
-                </div>
-
-                <!-- /STORE -->
-                </div>
-                <!-- /row -->
-                </div>
-                <!-- /container -->
-                </div>
-                <!-- /SECTION -->
-
-                <!-- jQuery Plugins -->
-                <script>
-                    var currentHref = window.location.href;
-
-                    if (Number(<%=current%>) != 1) {
-                        page = document.getElementById("pageFirst");
-                        if (currentHref.includes("&page=")) {
-                            n = currentHref.indexOf("&page=");
-                            page.href = currentHref.substr(0, n) + "&page=" + 1;
-                        } else {
-                            page.href = currentHref + "&page=" + 1;
-                        }
+            var i = (Number(<%=current%>) > 5 ? Number(<%=current%>) - 4 : 1);
+            for (; i <= (Number(<%=current%>) + 4) && i <= Number(<%=pages%>); i++) {
+                if (i == Number(<%=current%>)) {
+                    continue
+                } else {
+                    id = "page" + i;
+                    page = document.getElementById(id);
+                    if (currentHref.includes("?page=")) {
+                        n = currentHref.indexOf("?page=");
+                        page.href = currentHref.substr(0, n) + "?page=" + i;
+                    } else {
+                        page.href = currentHref + "?page=" + i;
                     }
-
-                    if (Number(<%=current%>) != Number(<%=pages%>)) {
-                        page = document.getElementById("pageLast");
-                        if (currentHref.includes("&page=")) {
-                            n = currentHref.indexOf("&page=");
-                            page.href = currentHref.substr(0, n) + "&page=" + <%=pages%>;
-                        } else {
-                            page.href = currentHref + "&page=" + <%=pages%>;
-                        }
-                    }
-
-                    var i = (Number(<%=current%>) > 5 ? Number(<%=current%>) - 4 : 1);
-                    for (; i <= (Number(<%=current%>) + 4) && i <= Number(<%=pages%>); i++) {
-                        if (i == Number(<%=current%>)) {
-                            continue
-                        } else {
-                            id = "page" + i;
-                            page = document.getElementById(id);
-                            if (currentHref.includes("&page=")) {
-                                n = currentHref.indexOf("&page=");
-                                page.href = currentHref.substr(0, n) + "&page=" + i;
-                            } else {
-                                page.href = currentHref + "&page=" + i;
-                            }
-                        }
-                    }
-                    // for (var i = <%=pages%> - 4; i <= <%=pages%>; i++) {
-                    //     // if (i == <%=current%>)
-                    //     //     continue
-                    //     id = "page" + i;
-                    //     page = document.getElementById(id);
-                    //     page.innerHTML = id;
-                    //     n = currentHref.indexOf("&page=");
-                    //     page.href = currentHref.substr(0, n) + "&page=" + i;
-                    // }
-                </script>
-                <script src="js/jquery.min.js"></script>
-                <script src="js/bootstrap.min.js"></script>
-                <script src="js/slick.min.js"></script>
-                <script src="js/nouislider.min.js"></script>
-                <script src="js/jquery.zoom.min.js"></script>
-                <script src="js/main.js"></script>
+                }
+            }
+            // for (var i = <%=pages%> - 4; i <= <%=pages%>; i++) {
+            //     // if (i == <%=current%>)
+            //     //     continue
+            //     id = "page" + i;
+            //     page = document.getElementById(id);
+            //     page.innerHTML = id;
+            //     n = currentHref.indexOf("&?page=");
+            //     page.href = currentHref.substr(0, n) + "&?page=" + i;
+            // }
+        </script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/nouislider.min.js"></script>
+        <script src="js/jquery.zoom.min.js"></script>
+        <script src="js/main.js"></script>
 
 </body>
 

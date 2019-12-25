@@ -16,8 +16,8 @@ module.exports.addUser = async function(user) {
     user.password = hasedPw
 
     const query = {
-        text: 'insert into "Users" values($1, $2, $3, $4, $5, $6, $7)',
-        values: [user.username, user.password, user.fullname, user.birthday, user.address, user.phone, user.email],
+        text: 'insert into "Users" values($1, $2, $3, $4, $5, $6, $7, $8)',
+        values: [user.username, user.password, user.fullname, user.birthday, user.address, user.phone, user.email, 'available'],
     }
 
     pool.query(query, (err, res) => {
@@ -37,6 +37,16 @@ module.exports.editUserByUsername = function(form) {
     pool.query(query, function(err, result) {
         console.log(result)
     })
+}
+
+module.exports.lockUser = function(username) {
+    query = "update \"Users\" set status = \'locked\' where username = \'" + username + "\'"
+    pool.query(query, function(err, result) {})
+}
+
+module.exports.unlockUser = function(username) {
+    query = "update \"Users\" set status = \'available\' where username = \'" + username + "\'"
+    pool.query(query, function(err, result) {})
 }
 
 module.exports.findUserByUsername = function(username, callback) {

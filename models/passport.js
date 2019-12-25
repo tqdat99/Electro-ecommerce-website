@@ -15,6 +15,10 @@ function initialize(passport) {
                 return done(null, false, { message: 'Tên tài khoản không tồn tại' });
             } else {
                 try {
+                    if (user.status == 'locked') {
+                        console.log('Account locked')
+                        return done(null, false, { message: 'Tài khoản đã bị khóa' });
+                    }
                     if (await bcrypt.compare(password, user.password)) {
                         console.log('OK')
                         return done(null, user);

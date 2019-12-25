@@ -68,7 +68,6 @@ module.exports.profileEdit = function(req, res) {
     });
 }
 
-
 module.exports.logInFormGet = function(req, res) {
     res.render('login', {
         user: req.user
@@ -80,7 +79,6 @@ module.exports.logInFormPost = passport.authenticate('local', {
     failureRedirect: '/user/login',
     failureFlash: true
 })
-
 
 module.exports.logOut = function(req, res) {
     req.logout()

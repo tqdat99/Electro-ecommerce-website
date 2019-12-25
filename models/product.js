@@ -15,13 +15,21 @@ module.exports.getProductDetailById = function(id, callback) {
     });
 }
 
-module.exports.getProductList = function(type, brand, price, order, callback) {
+module.exports.getProductList = function(key, type, brand, price, order, callback) {
     var query
     console.log("models:")
     console.log(type)
     console.log(brand)
 
     query = "select * from \"products\" where "
+
+    if (key != undefined) {
+        query += "(document_vectors @@ to_tsquery('" + key + "'))"
+    }
+    if ((type != undefined && type.length > 0) || (brand.length > 0 && brand != undefined) || (price != null)) {
+        query += " and ";
+    }
+
     if (type != undefined)
         if (type.length > 0) {
             query += "(";
@@ -32,8 +40,7 @@ module.exports.getProductList = function(type, brand, price, order, callback) {
             }
             query += ")";
         }
-
-    if (brand != undefined && type != undefined && brand.length > 0 && type.length > 0) {
+    if ((brand.length > 0 && brand != undefined) || price != null) {
         query += " and ";
     }
 

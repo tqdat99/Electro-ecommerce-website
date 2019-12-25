@@ -11,10 +11,11 @@ router.get('/', function(req, res) {
 
 router.get('/manage-users', adminController.userList);
 
+router.get('/manage-users-details', adminController.userInfo);
 
-router.get('/manage-users-edit', function(req, res) {
-    res.render('admin/manage-users-edit');
-});
+router.post('/lock-user', adminController.userLock);
+
+router.post('/unlock-user', adminController.userUnlock);
 
 router.get('/manage-products', function(req, res) {
     res.render('admin/manage-products');

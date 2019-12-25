@@ -1,7 +1,7 @@
 var userModel = require('../models/user')
 
 module.exports.userList = function(req, res) {
-    var perPage = 1
+    var perPage = 5
     var page = 1
 
     console.log(req.params)
@@ -22,6 +22,35 @@ module.exports.userList = function(req, res) {
             pages: Math.ceil(items.length / perPage)
         });
     })
+}
+
+module.exports.userInfo = function(req, res) {
+    username = req.query.username
+    userModel.findUserByUsername(username, function(user) {
+        res.render('admin/manage-users-details', {
+            user: user,
+        });
+    })
+}
+
+module.exports.userLock = function(req, res) {
+    username = req.query.username
+    redirect = "manage-users-details?username=" + username
+    userModel.lockUser(username,
+        userModel.findUserByUsername(username, function(user) {
+            res.redirect(redirect)
+        })
+    )
+}
+
+module.exports.userUnlock = function(req, res) {
+    username = req.query.username
+    redirect = "manage-users-details?username=" + username
+    userModel.unlockUser(username,
+        userModel.findUserByUsername(username, function(user) {
+            res.redirect(redirect)
+        })
+    )
 }
 
 module.exports.profileEdit = function(req, res) {
