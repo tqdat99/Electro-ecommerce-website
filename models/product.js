@@ -18,19 +18,27 @@ module.exports.getProductDetailById = function(id, callback) {
 module.exports.getProductList = function(key, type, brand, price, order, callback) {
     var query
     console.log("models:")
+    console.log(key)
     console.log(type)
     console.log(brand)
+    console.log(price)
+    console.log(order)
 
     query = "select * from \"products\" where "
 
     if (key != undefined) {
         query += "(document_vectors @@ to_tsquery('" + key + "'))"
-    }
-    if ((type != undefined && type.length > 0) || (brand.length > 0 && brand != undefined) || (price != null)) {
-        query += " and ";
+        if (type != undefined) {
+            if (type.length > 0)
+                query += " and ";
+        } else if (brand != undefined) {
+            if (brand.length > 0)
+                query += " and ";
+        } else if (price != null)
+            query += " and ";
     }
 
-    if (type != undefined)
+    if (type != undefined) {
         if (type.length > 0) {
             query += "(";
             for (i = 0; i < type.length; i++) {
@@ -40,11 +48,15 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
             }
             query += ")";
         }
-    if ((brand.length > 0 && brand != undefined) || price != null) {
-        query += " and ";
+        if (brand != undefined) {
+            if (brand.length > 0)
+                query += " and ";
+        } else if (price != null)
+            query += " and ";
     }
 
-    if (brand != undefined)
+
+    if (brand != undefined) {
         if (brand.length > 0) {
             query += "(";
             for (i = 0; i < brand.length; i++) {
@@ -54,10 +66,11 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
             }
             query += ")";
         }
-
-    if (((type != undefined && type.length > 0) || (brand.length > 0 && brand != undefined)) && price != null) {
-        query += " and ";
+        if (price != null) {
+            query += " and ";
+        }
     }
+
     if (price != null) {
         var range = price.split("-");
         if (range.length == 2) {

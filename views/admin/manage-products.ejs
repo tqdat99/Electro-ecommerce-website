@@ -49,37 +49,6 @@
 <body>
     <% include nav-bar.ejs%>
 
-
-        <!-- NAVIGATION -->
-        <nav id="navigation">
-            <!-- container -->
-            <div class="container">
-                <!-- responsive-nav -->
-                <div id="responsive-nav">
-                    <!-- NAV -->
-                    <ul class="main-nav nav navbar-nav">
-                        <li class="active"><a href="/admin/manage-products-laptop">Laptop</a></li>
-                        <li><a href="/admin/manage-products-laptop">Điện thoại</a></li>
-                        <li><a href="/admin/manage-products-laptop">Tai nghe</a></li>
-                        <!-- <li><a href="/admin/manage-products-laptop">+ Thêm danh mục</a></li> -->
-                    </ul>
-                    <!-- /NAV -->
-                </div>
-                <!-- /responsive-nav -->
-            </div>
-            <!-- /container -->
-        </nav>
-
-        <!-- /NAVIGATION -->
-        <div class="container">
-            <div class="header-search">
-                <form>
-                    <input class="input" placeholder="Tìm kiếm sản phẩm">
-                    <button class="search-btn">Tìm</button>
-                </form>
-            </div>
-        </div>
-
         <section class="cart_area">
             <div class="container">
                 <div class="cart_inner">
@@ -90,97 +59,129 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Tên sản phẩm</th>
                                     <th scope="col">Giá</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <p>LT01</p>
-                                    </td>
-                                    <td>
-                                        <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
-                                    </td>
-                                    </td>
-                                    <td>
-                                        <p>32.000.000đ</p>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/manage-products-edit">
-                                            <p class="btn-link">Chỉnh sửa</p>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/manage-products-delete">
-                                            <p class="btn-link">Xóa</p>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>LT01</p>
-                                    </td>
-                                    <td>
-                                        <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
-                                    </td>
-                                    </td>
-                                    <td>
-                                        <p>32.000.000đ</p>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/manage-products-edit">
-                                            <p class="btn-link">Chỉnh sửa</p>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/manage-products-delete">
-                                            <p class="btn-link">Xóa</p>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>LT01</p>
-                                    </td>
-                                    <td>
-                                        <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
-                                    </td>
-                                    </td>
-                                    <td>
-                                        <p>32.000.000đ</p>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/manage-products-edit">
-                                            <p class="btn-link">Chỉnh sửa</p>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="/admin/manage-products-delete">
-                                            <p class="btn-link">Xóa</p>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <% Users.forEach(function(user){ %>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                <%= user.username%>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <%= user.status%>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/manage-users-details?username=<%=user.username%>">
+                                                <p class="btn-link">Thông tin chi tiết</p>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <%});%>
                             </tbody>
                         </table>
                     </div>
+
+
+                    <% if (pages > 0) { %>
+                        <ul class="store-pagination">
+                            <% if (current == 1) { %>
+                                <li class="disabled" id="pageFirst"><a>Đầu</a></li>
+                                <% } else { %>
+                                    <li><a id="pageFirst">Đầu</a></li>
+                                    <% } %>
+                                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                            <% if (i !== 1) { %>
+                                                <li class="disabled"><a>...</a></li>
+                                                <% } %>
+                                                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+
+                                                        <% if (i == current) { %>
+                                                            <li class="active">
+                                                                <a style="color:#ffffff">
+                                                                    <%= i %>
+                                                                </a>
+                                                            </li>
+                                                            <% } else { %>
+                                                                <li>
+                                                                    <a id="page<%=i%>">
+                                                                        <%= i %>
+                                                                    </a>
+                                                                </li>
+                                                                <% } %>
+
+                                                                    <% if (i == Number(current) + 4 && i < pages) { %>
+                                                                        <li class="disabled "><a>...</a></li>
+                                                                        <% } %>
+                                                                            <% } %>
+                                                                                <% if (current == pages) { %>
+                                                                                    <li class="disabled" id="pageLast"><a>Cuối</a></li>
+                                                                                    <% } else { %>
+                                                                                        <li><a id="pageLast">Cuối</a>
+                                                                                        </li>
+                                                                                        <% } %>
+                        </ul>
+                        <% } %>
                 </div>
             </div>
         </section>
+        <script>
+            var currentHref = window.location.href;
 
+            if (Number(<%=current%>) != 1) {
+                page = document.getElementById("pageFirst");
+                if (currentHref.includes("?page=")) {
+                    n = currentHref.indexOf("?page=");
+                    page.href = currentHref.substr(0, n) + "?page=" + 1;
+                } else {
+                    page.href = currentHref + "?page=" + 1;
+                }
+            }
+
+            if (Number(<%=current%>) != Number(<%=pages%>)) {
+                page = document.getElementById("pageLast");
+                if (currentHref.includes("?page=")) {
+                    n = currentHref.indexOf("?page=");
+                    page.href = currentHref.substr(0, n) + "?page=" + <%=pages%>;
+                } else {
+                    page.href = currentHref + "?page=" + <%=pages%>;
+                }
+            }
+
+            var i = (Number(<%=current%>) > 5 ? Number(<%=current%>) - 4 : 1);
+            for (; i <= (Number(<%=current%>) + 4) && i <= Number(<%=pages%>); i++) {
+                if (i == Number(<%=current%>)) {
+                    continue
+                } else {
+                    id = "page" + i;
+                    page = document.getElementById(id);
+                    if (currentHref.includes("?page=")) {
+                        n = currentHref.indexOf("?page=");
+                        page.href = currentHref.substr(0, n) + "?page=" + i;
+                    } else {
+                        page.href = currentHref + "?page=" + i;
+                    }
+                }
+            }
+            // for (var i = <%=pages%> - 4; i <= <%=pages%>; i++) {
+            //     // if (i == <%=current%>)
+            //     //     continue
+            //     id = "page" + i;
+            //     page = document.getElementById(id);
+            //     page.innerHTML = id;
+            //     n = currentHref.indexOf("&?page=");
+            //     page.href = currentHref.substr(0, n) + "&?page=" + i;
+            // }
+        </script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/slick.min.js"></script>
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
-        <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-        <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-        <script src="vendors/skrollr.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-        <script src="vendors/jquery.ajaxchimp.min.js"></script>
-        <script src="vendors/mail-script.js"></script>
 
 </body>
 
