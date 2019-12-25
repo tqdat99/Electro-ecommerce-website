@@ -27,7 +27,7 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
     query = "select * from \"products\" where "
 
     if (key != undefined) {
-        query += "(document_vectors @@ to_tsquery('" + key + "'))"
+        query += "(to_tsvector(ten) @@ to_tsquery('" + key + "'))"
         if (type != undefined) {
             if (type.length > 0)
                 query += " and ";
