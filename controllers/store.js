@@ -21,9 +21,9 @@ module.exports.productList = function(req, res) {
     price = undefined
     key = undefined
 
-    console.log(req)
-    console.log(req.query.type)
-    console.log(req.query.brand)
+    // console.log(req)
+    // console.log(req.query.type)
+    // console.log(req.query.brand)
 
     if (req.params['key'] != undefined) {
         key = req.params['key']
@@ -36,7 +36,7 @@ module.exports.productList = function(req, res) {
         type.push(req.params['type'])
     }
     if (req.query.type != undefined) {
-        console.log("type: " + req.query.type.length)
+        // console.log("type: " + req.query.type.length)
         if (!Array.isArray(req.query.type))
             type.push(req.query.type)
         else
@@ -50,7 +50,7 @@ module.exports.productList = function(req, res) {
         brand.push(req.params['brand'])
     }
     if (req.query.brand != undefined) {
-        console.log("brand: " + req.query.brand.length)
+        // console.log("brand: " + req.query.brand.length)
         if (!Array.isArray(req.query.brand))
             brand.push(req.query.brand)
         else
@@ -70,10 +70,10 @@ module.exports.productList = function(req, res) {
     if (req.query.price != undefined)
         price = req.query.price
 
-    console.log("controller:")
-    console.log(type)
-    console.log(brand)
-    console.log(price)
+    // console.log("controller:")
+    // console.log(type)
+    // console.log(brand)
+    // console.log(price)
 
 
     productModel.getProductList(key, type, brand, price, order, function(items) {

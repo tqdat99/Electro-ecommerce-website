@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+// var Passport = require('passport').Passport,
+//     passport = new Passport()
 const initialize = require('../models/passport');
 initialize(passport);
 

@@ -105,9 +105,13 @@
                             </div>
                             <div>
                                 <h3 class="product-price">
-                                    <%= item.gia%>
+                                    <%= new Intl.NumberFormat().format(item.gia)%>
                                 </h3>
-                                <span class="product-available">Còn hàng</span>
+                                <%if (item.kho > 0){%>
+                                    <span class="product-available">Còn hàng (<%=item.kho%>)</span>
+                                    <%} else {%>
+                                        <span class="product-available">Hết hàng</span>
+                                        <%}%>
                             </div>
                             <p>
                                 <%= item.mota%>
