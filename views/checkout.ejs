@@ -73,27 +73,30 @@
                             <div class="section-title">
                                 <h3 class="title">Thông tin</h3>
                             </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="full-name" placeholder="Họ tên">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="email" name="email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="city" placeholder="Tỉnh/Thành phố">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="district" placeholder="Quận">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="address" placeholder="Địa chỉ chi tiết">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="tel" name="tel" placeholder="Điện thoại">
-                            </div>
-                            <div class="form-group order-notes">
-                                <textarea class="input" placeholder="Ghi chú"></textarea>
-                            </div>
+                            <form method="post" action="/checkout">
+                                <div class="form-group">
+                                    <input class="input" type="text" name="full-name" placeholder="Họ tên">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="email" name="email" placeholder="Email">
+                                </div>
+                                <!--<div class="form-group">
+                                    <input class="input" type="text" name="city" placeholder="Tỉnh/Thành phố">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="district" placeholder="Quận">
+                                </div>-->
+                                <div class="form-group">
+                                    <input class="input" type="text" name="address" placeholder="Địa chỉ chi tiết">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="tel" name="tel" placeholder="Điện thoại">
+                                </div>
+                                <div class="form-group order-notes">
+                                    <textarea class="input" name="note" placeholder="Ghi chú"></textarea>
+                                </div>
+                                                        <button type="submit" class="primary-btn order-submit">Xác nhận đơn hàng</button>
+                            </form>
                         </div>
                         <!-- /Billing Details -->
                     </div>
@@ -108,16 +111,16 @@
                                 <div><strong>Sản phẩm</strong></div>
                                 <div><strong>Giá</strong></div>
                             </div>
-                            <div class="order-products">
-                                <div class="order-col">
-                                    <div>1x LAPTOP ASUS ROG STRIX G G531GD-AL025T</div>
-                                    <div>32.000.000đ</div>
+
+                            <% items.forEach(function(item){ %>
+                                <div class="order-products">
+                                    <div class="order-col">
+                                        <div><%=item.quantity%>x <%=item.ten%></div>
+                                        <div><%=item.quantity * item.gia%></div>
+                                    </div>
                                 </div>
-                                <div class="order-col">
-                                    <div>2x Tai nghe On-ear Sony MDRZX310APBCE (Đen)</div>
-                                    <div>1.680.000đ</div>
-                                </div>
-                            </div>
+                            <% }); %>
+
                             <div class="order-col">
                                 <div>Vận chuyển</div>
                                 <div><strong>Miễn phí</strong></div>
@@ -127,7 +130,7 @@
                                 <div><strong class="order-total">33.680.000đ</strong></div>
                             </div>
                         </div>
-                        <div class="payment-method">
+                        <!--<div class="payment-method">
                             <div><strong>Hình thức thanh toán</strong></div>
                             <p></p>
                             <div class="input-radio">
@@ -151,8 +154,7 @@
 									Thẻ tín dụng / Thẻ ghi nợ quốc tế
 								</label>
                             </div>
-                        </div>
-                        <a href="#" class="primary-btn order-submit">Xác nhận đơn hàng</a>
+                        </div>-->
                     </div>
                     <!-- /Order Details -->
                 </div>
