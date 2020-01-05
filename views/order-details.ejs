@@ -26,20 +26,20 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 
     <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="css/slick.css" />
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
+    <link type="text/css" rel="stylesheet" href="/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/css/slick-theme.css" />
 
     <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+    <link type="text/css" rel="stylesheet" href="/css/nouislider.min.css" />
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,7 +51,6 @@
 
 <body>
     <%include header.ejs%>
-
         <!-- BREADCRUMB -->
         <div id="breadcrumb" class="section">
             <!-- container -->
@@ -73,7 +72,7 @@
         <!-- /BREADCRUMB -->
 
         <div class="container">
-            <h4>Mã đơn hàng: DH05</h4>
+            <h4>Mã đơn hàng: <%=statuses[0].orderid%></h4>
         </div>
 
         <section class="cart_area">
@@ -88,38 +87,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                            <% statuses.forEach(function(status){ %>
                                 <tr>
                                     <td>
-                                        <p>Nhận đơn hàng</p>
+                                        <p><%=status.status%></p>
                                     </td>
                                     <td>
-                                        <p>13:25, 29/10/2019</p>
+                                        <p><%=status.time%></p>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <p>Shop đã giao cho vận chuyển</p>
-                                    </td>
-                                    <td>
-                                        <p>15:25, 29/10/2019</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>Đang vận chuyển</p>
-                                    </td>
-                                    <td>
-                                        <p>16:25, 29/10/2019</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>Shipper báo đã giao hàng</p>
-                                    </td>
-                                    <td>
-                                        <p>16:25, 30/10/2019</p>
-                                    </td>
-                                </tr>
+                            <% }); %>
+
                             </tbody>
                         </table>
                     </div>
@@ -143,49 +122,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="/store/product-details">
-                                            <img src="./img/product01.png" alt="" class="cart-thumbnail">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="/store/product-details">
-                                            <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
-                                        </a>
-                                    </td>
-                                    </td>
-                                    <td>
-                                        <p>32.000.000đ</p>
-                                    </td>
-                                    <td>
-                                        <p>1</p>
-                                    </td>
-                                    <td>
-                                        <h5>32.000.000đ</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="/store/product-details">
-                                            <img src="./img/product02.png" alt="" class="cart-thumbnail">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="/store/product-details">
-                                            <p>Tai nghe On-ear Sony MDRZX310APBCE (Đen)</p>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p>340.000đ</p>
-                                    </td>
-                                    <td>
-                                        <p>3</p>
-                                    </td>
-                                    <td>
-                                        <h5>1.680.000đ</h5>
-                                    </td>
-                                </tr>
+
+                                <% items.forEach(function(item){ %>
+
+                                    <tr>
+                                        <td>
+                                            <a href="/store/product-details">
+                                                <img src="/<%= item.anh %>" alt="" class="cart-thumbnail">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/store/product-details">
+                                                <p><%= item.ten %></p>
+                                            </a>
+                                        </td>
+                                        </td>
+                                        <td>
+                                            <p><%= item.gia %></p>
+                                        </td>
+                                        <td>
+                                            <p><%= item.quantity %></p>
+                                        </td>
+                                        <td>
+                                            <h5><%= item.quantity *item.gia %></h5>
+                                        </td>
+                                    </tr>
+
+                                <% }); %>
+
                                 <tr>
                                     <td>
                                     </td>
@@ -209,11 +173,13 @@
                                     </td>
                                     <td>
                                     </td>
+                                    <!--
                                     <td>
                                         <div class="shipping_box">
                                             <a class="button" href="/checkout">Hủy đơn hàng</a>
                                         </div>
                                     </td>
+                                    -->
                                 </tr>
                             </tbody>
                         </table>
@@ -227,12 +193,12 @@
         <%include footer.ejs%>
 
             <!-- jQuery Plugins -->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/slick.min.js"></script>
-            <script src="js/nouislider.min.js"></script>
-            <script src="js/jquery.zoom.min.js"></script>
-            <script src="js/main.js"></script>
+            <script src="/js/jquery.min.js"></script>
+            <script src="/js/bootstrap.min.js"></script>
+            <script src="/js/slick.min.js"></script>
+            <script src="/js/nouislider.min.js"></script>
+            <script src="/js/jquery.zoom.min.js"></script>
+            <script src="/js/main.js"></script>
 
             <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
             <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
