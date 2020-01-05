@@ -1,0 +1,22 @@
+
+<% items.forEach(function(item){ %>
+    <div class="cart-list" onclick="funcSum()"> 
+        <div class="product-widget">
+            <div class="product-img">
+                <img src="<%= item.anh %>" alt="">
+            </div>
+            <div class="product-body">
+                <h3 class="product-name"><a href="#"><%= item.ten %></a></h3>
+                <h4 class="product-price"><span class="qty"><%= item.quantity %>x</span><%= item.gia %></h4>
+            </div>
+        </div>
+    </div>
+<% }); %>
+    <div class="cart-summary">
+        <small>Có <%=items.length%> sản phẩm</small>
+        <h5 id="sumsum">Tổng: 75.245.000đ</h5>
+    </div>
+    <div class="cart-btns">
+        <a href="/cart">Giỏ hàng</a>
+        <a href="/checkout">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
