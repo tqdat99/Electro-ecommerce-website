@@ -8,20 +8,22 @@
                 <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 51T Quận 6</a></li>
             </ul>
-            <%if (typeof user === 'undefined' || user == null){%>
-                <ul class="header-links pull-right">
-                    <li><a href="/user/register"><i class="fa fa-plus"></i>Đăng ký</a></li>
-                    <li><a href="/user/login"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>
-                </ul>
+                <%if (typeof user === 'undefined' || user == null){%>
+                    <ul class="header-links pull-right">
+                        <li><a href="/user/register"><i class="fa fa-plus"></i>Đăng ký</a></li>
+                        <li><a href="/user/login"><i class="fa fa-sign-in"></i>Đăng nhập</a></li>
+                    </ul>
                 <%} else {%>
                     <ul class="header-links pull-right">
                         <p style="display:inline; color:#ffffff; padding-right: 8px;"> Xin chào </p>
                         <li><a href="/user/profile"><i class="fa fa-user-o"></i><%=user.fullname%></a></li>
                         <form action="/user/logout" method="get">
                             <button type="submit">Đăng xuất</button>
+                             <button><a href="/checkout/order-list">Đơn hàng</a></button>
                         </form>
+                       
                     </ul>
-                    <%}%>
+                <%}%>
         </div>
     </div>
     <!-- /TOP HEADER -->
@@ -63,40 +65,9 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Giỏ hàng</span>
-                                <div class="qty">3</div>
+                                <div id="header-qty" class="qty"></div>
                             </a>
-                            <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product01.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">laptop asus rog strix g g531gd-al025t</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$32.000.000đ</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">Tai nghe On-ear Sony MDRZX310APBCE (Đen)</a></h3>
-                                            <h4 class="product-price"><span class="qty">2x</span>340.000đ</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-                                </div>
-                                <div class="cart-summary">
-                                    <small>Có 4 sản phẩm</small>
-                                    <h5>Tổng: 75.245.000đ</h5>
-                                </div>
-                                <div class="cart-btns">
-                                    <a href="/cart">Giỏ hàng</a>
-                                    <a href="/checkout">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+                            <div class="cart-dropdown">                             
                             </div>
                         </div>
                         <!-- /Cart -->
@@ -157,3 +128,70 @@
 <script src="vendors/jquery.ajaxchimp.min.js"></script>
 <script src="vendors/mail-script.js"></script>
 <script src="js/main.js"></script>
+<% if (user) { %>
+    <script type="text/javascript">
+        $(function() {
+            if(localStorage.cart) {
+                var cart = JSON.parse(localStorage.cart)
+                var payload = []
+                for (var productid in cart) {
+                    var obj = {}
+                    obj['productid'] = productid
+                    obj['quantity'] = cart[productid].quantity
+                    payload.push(obj)
+                }
+                $.post("/cart/import", { items: payload }, function(){
+                    localStorage.clear()
+                    document.location.reload()
+                });
+            } else {
+                $.get( "/cart/count", function(cartcount) {
+                    $("#header-qty").html(cartcount)
+                });
+                $.get( "/cart/subview", function(subview) {
+                    $(".cart-dropdown").html(subview)
+                }); 
+            }
+        });
+    </script>
+<% } else { %>
+    <script type="text/javascript">
+        $(function() {
+            if (!localStorage.cart) {
+                $("#header-qty").html(0)
+                $(".cart-dropdown").html("<div>Empty cart</div>")
+            } else {
+                var cart = JSON.parse(localStorage.cart)
+                $("#header-qty").html(Object.keys(cart).length)
+
+                var htmlString = ""
+                for (var productid in cart) {
+                    item = cart[productid]
+                    htmlString += '<div class="cart-list">'
+                    htmlString +=     '<div class="product-widget">'
+                    htmlString +=         '<div class="product-img">'
+                    htmlString +=             '<img src="' + item.picture + '">'
+                    htmlString +=         '</div>'
+                    htmlString +=         '<div class="product-body">'
+                    htmlString +=             '<h3 class="product-name"><a href="#">'+ item.name +'</a></h3>'
+                    htmlString +=             '<h4 class="product-price"><span class="qty">'+ item.price +'x</span>'
+                    htmlString +=                  item.quantity
+                    htmlString +=             '</h4>'
+                    htmlString +=         '</div>'
+                    htmlString +=     '</div>'
+                    htmlString += '</div>'
+                }
+
+                htmlString +=   '<div class="cart-summary">'
+                htmlString +=       '<small>Có ??? sản phẩm</small>'
+                htmlString +=       '<h5 id="sumsum">Tổng: 75.245.000đ</h5>'
+                htmlString +=   '</div>'
+                htmlString +=   '<div class="cart-btns">'
+                htmlString +=       '<a href="/user/login">Giỏ hàng</a>'
+                htmlString +=       '<a href="/user/login">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>'
+                htmlString +=   '</div>'
+                $(".cart-dropdown").html(htmlString)
+            }
+        });
+    </script>
+<% } %>
