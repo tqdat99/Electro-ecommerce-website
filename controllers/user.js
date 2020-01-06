@@ -51,25 +51,25 @@ module.exports.registerFormPost = async function(req, res, next) {
     var password = req.body.password,
         username = req.body.username
 
-    console.log(valid)
+    //console.log(valid)
     userModel.findUserByUsername(username, function(foundUser) {
         userModel.validatePassword(password, function(ifValid) {
             if (foundUser != null) {
-                console.log(foundUser)
+                //console.log(foundUser)
                 res.render('register', {
                     msg: 'Tên tài khoản đã tồn tại',
                     user: req.user
                 })
             } else if (!ifValid) {
-                console.log(ifValid)
-                console.log('Mật khẩu phải có ít nhất 6 ký tự')
+                //console.log(ifValid)
+                //console.log('Mật khẩu phải có ít nhất 6 ký tự')
                 return res.render('register', {
                     msg: 'Mật khẩu phải có ít nhất 6 ký tự',
                     user: req.user
                 })
             } else {
                 userModel.addUser(user)
-                console.log('added')
+                    //console.log('added')
                 res.redirect('/user/login')
             }
         })
@@ -176,7 +176,7 @@ module.exports.passwordReset = function(req, res) {
     }
 
     if (password != retype) {
-        console.log('Mật khẩu không trùng khớp.')
+        //console.log('Mật khẩu không trùng khớp.')
         return res.render('reset-password-form', {
             msg: 'Mật khẩu không trùng khớp',
         })
@@ -184,13 +184,13 @@ module.exports.passwordReset = function(req, res) {
 
     userModel.validatePassword(password, function(ifValid) {
         if (!ifValid) {
-            console.log('Mật khẩu phải có ít nhất 6 ký tự')
+            //console.log('Mật khẩu phải có ít nhất 6 ký tự')
             return res.render('reset-password-form', {
                 msg: 'Mật khẩu phải có ít nhất 6 ký tự',
             })
         } else {
             userModel.changePasswordByUsername(username, password, function(result) {
-                console.log('Đã thay đổi password')
+                //console.log('Đã thay đổi password')
                 res.redirect('/user/login')
             })
         }
@@ -204,7 +204,7 @@ module.exports.passwordForget = function(req, res) {
                 if (user) {
                     forgetPasswordUser = user;
                     done(null, user)
-                    console.log(user)
+                        //console.log(user)
                 } else {
                     res.render('forget-password-form', { msg: "Tài khoản không tồn tại" })
                 }
@@ -232,10 +232,10 @@ module.exports.passwordForget = function(req, res) {
                     };
                     smtpTransport.sendMail(mainOptions, function(err, info) {
                         if (err) {
-                            console.log(err);
+                            //console.log(err);
                         } else {
                             res.redirect('/user/forget-password-pending')
-                            console.log('Message sent');
+                                //console.log('Message sent');
                         }
                     });
                 }
@@ -243,55 +243,5 @@ module.exports.passwordForget = function(req, res) {
         }
     ], function(err) {
         return res.status(422).json({ message: err });
-    });
-};
-
-exports.reset_password = function(req, res, next) {
-    User.findOne({
-        reset_password_token: req.body.token,
-        reset_password_expires: {
-            $gt: Date.now()
-        }
-    }).exec(function(err, user) {
-        if (!err && user) {
-            if (req.body.newPassword === req.body.verifyPassword) {
-                user.hash_password = bcrypt.hashSync(req.body.newPassword, 10);
-                user.reset_password_token = undefined;
-                user.reset_password_expires = undefined;
-                user.save(function(err) {
-                    if (err) {
-                        return res.status(422).send({
-                            message: err
-                        });
-                    } else {
-                        var data = {
-                            to: user.email,
-                            from: email,
-                            template: 'reset-password-email',
-                            subject: 'Password Reset Confirmation',
-                            context: {
-                                name: user.fullName.split(' ')[0]
-                            }
-                        };
-
-                        smtpTransport.sendMail(data, function(err) {
-                            if (!err) {
-                                return res.json({ message: 'Password reset' });
-                            } else {
-                                return done(err);
-                            }
-                        });
-                    }
-                });
-            } else {
-                return res.status(422).send({
-                    message: 'Passwords do not match'
-                });
-            }
-        } else {
-            return res.status(400).send({
-                message: 'Password reset token is invalid or has expired.'
-            });
-        }
     });
 };

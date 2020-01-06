@@ -45,9 +45,9 @@ module.exports.editUserByUsername = function(username, form, callback) {
 module.exports.changePasswordByUsername = async function(username, password, callback) {
     const hasedPw = await bcrypt.hash(password, 10)
     query = "update \"Users\" set password = '" + hasedPw + "' where username = '" + username + "'"
-    console.log(query)
+        //console.log(query)
     pool.query(query, function(err, result) {
-        console.log(result)
+        //console.log(result)
         callback(result)
     })
 }

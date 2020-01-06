@@ -51,7 +51,7 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
     condition = 0
 
     if (key != undefined) {
-        console.log(key)
+        //console.log(key)
         query += "(to_tsvector(ten) @@ to_tsquery("
         keys = key.split(" ")
         for (i = 0; i < keys.length; i++) {
@@ -121,7 +121,7 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
     query += " ORDER BY gia " + order;
 
 
-    console.log(query)
+    //console.log(query)
     pool.query(query, function(err, result) {
         //console.log(result.rows)
         callback(result.rows);

@@ -40,8 +40,8 @@ module.exports.updateCart = function(req, res) {
 
         cartitems.forEach(function(item) {
             index += 1
-            console.log(index)
-            console.log('stt-' + item.cartid + ':' + req.body['stt-' + item.cartid])
+                //console.log(index)
+                //console.log('stt-' + item.cartid + ':' + req.body['stt-' + item.cartid])
 
             if (index == count) {
                 f = function() {
@@ -59,7 +59,7 @@ module.exports.updateCart = function(req, res) {
 }
 
 module.exports.addItem = function(req, res) {
-    console.log(req.body)
+    //console.log(req.body)
     cartModel.addCartItem(req.user.username, req.body['stt'], function(cartitems) {
         res.redirect('back');
     })
