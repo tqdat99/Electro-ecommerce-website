@@ -83,6 +83,17 @@ module.exports.validatePassword = function(password, callback) {
     callback(true)
 }
 
+module.exports.comparePassword = function(username, password, callback) {
+    query = "select password from \"Users\" where username = '" + username + "'"
+    pool.query(query, async function(err, userPassword) {
+        if (await bcrypt.compare(password, userPassword.rows[0].password)) {
+            callback(1);
+        } else {
+            callback(0)
+        }
+    })
+}
+
 module.exports.checkAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
         return next()

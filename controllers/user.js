@@ -132,6 +132,48 @@ module.exports.registerFormPost = async function(req, res, next) {
     })
 }
 
+module.exports.passwordChangeForm = function(req, res) {
+    res.render('change-password-form', {
+        user: req.user,
+        msg: "",
+    })
+}
+
+module.exports.passwordChange = function(req, res) {
+    userModel.validatePassword(req.body.newpassword, function(valid) {
+        if (!valid)
+            res.render('change-password-form', {
+                user: req.user,
+                msg: "Mật khẩu phải có ít nhất 6 ký tự",
+            })
+        else if (req.body.retype != req.body.newpassword)
+            res.render('change-password-form', {
+                user: req.user,
+                msg: "Mật khẩu không khớp",
+            })
+        else
+            userModel.comparePassword(req.user.username, req.body.newpassword, function(correctNew) {
+                userModel.comparePassword(req.user.username, req.body.oldpassword, function(correctOld) {
+                    if (correctNew)
+                        res.render('change-password-form', {
+                            user: req.user,
+                            msg: "Mật khẩu mới trùng với mật khẩu cũ",
+                        })
+                    else if (!correctOld)
+                        res.render('change-password-form', {
+                            user: req.user,
+                            msg: "Mật khẩu cũ không trùng khớp",
+                        })
+                    else
+                        res.render('change-password-form', {
+                            user: req.user,
+                            msg: "Đổi mật khẩu thành công",
+                        })
+                })
+            })
+    })
+}
+
 module.exports.passwordForget = function(req, res) {
     async.waterfall([
         function(done) {
