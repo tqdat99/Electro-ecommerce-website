@@ -16,7 +16,6 @@ module.exports.addOrder= function(username, name, email, address, phone, note, c
 }
 
 module.exports.addOrderStatus= function(orderid, callback) {
-    orderid = (new Date()).getTime()
     var status = 1;
     var time = new Date().toLocaleString()
 	query = 'insert into "order_status" (orderid, status, time) values (\'' + orderid  + '\', \'' + status + '\', \'' + time + '\')';
@@ -28,8 +27,8 @@ module.exports.addOrderStatus= function(orderid, callback) {
 
 module.exports.getOrderList= function(username, callback) {
 
-query = 'select * from "order" inner join "order_status" on "order".orderid = "order_status".orderid  where username  = \'' + username + '\' and "order_status".status = (SELECT MAX (status) FROM "order_status")';
-
+query = 'select * from "order", "order_status" where "order".orderid = "order_status".orderid and username  = \'' + username + '\'';
+console.log(query)
     pool.query(query, function(err, result) {
         callback(result.rows)
     })
