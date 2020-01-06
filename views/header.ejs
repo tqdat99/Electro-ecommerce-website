@@ -15,10 +15,11 @@
                 </ul>
                 <%} else {%>
                     <ul class="header-links pull-right">
-                        <p style="display:inline; color:#ffffff; padding-right: 8px;"> Xin chào </p>
-                        <li><a href="/user/profile"><i class="fa fa-user-o"></i><%=user.fullname%></a></li>
-                        <form action="/user/logout" method="get">
-                            <button type="submit">Đăng xuất</button>
+                        <p style="color:#ffffff; display: inline; margin-right: 8px;"> Chào
+                        </p>
+                        <li><a href="/user/profile?username=<%=user.username%>"><i class="fa fa-user-o"></i><%=user.username%></a></li>
+                        <form action="/user/logout" method="post" style="display:inline; padding-left: 16px; ">
+                            <button type="submit "><i class="fa fa-sign-out " aria-hidden="true" style="margin-right: 8px;"></i>Đăng xuất</button>
                         </form>
                     </ul>
                     <%}%>
@@ -26,8 +27,9 @@
     </div>
     <!-- /TOP HEADER -->
 
+
     <!-- MAIN HEADER -->
-    <div id="header">
+    <div id="header" style="padding:0px">
         <!-- container -->
         <div class="container">
             <!-- row -->
@@ -59,90 +61,32 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Giỏ hàng</span>
-                                <div class="qty">3</div>
+                                <div id="header-qty" class="qty"></div>
                             </a>
                             <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product01.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">laptop asus rog strix g g531gd-al025t</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$32.000.000đ</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">Tai nghe On-ear Sony MDRZX310APBCE (Đen)</a></h3>
-                                            <h4 class="product-price"><span class="qty">2x</span>340.000đ</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-                                </div>
-                                <div class="cart-summary">
-                                    <small>Có 4 sản phẩm</small>
-                                    <h5>Tổng: 75.245.000đ</h5>
-                                </div>
-                                <div class="cart-btns">
-                                    <a href="/cart">Giỏ hàng</a>
-                                    <a href="/checkout">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
                             </div>
+                            <!-- /Cart -->
                         </div>
-                        <!-- /Cart -->
-                    </div>
-                </div>
-                <div class="mainmenu">
-                    <div class="row">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/">Home</a></li>
-                            <li class="dropdown"><a href="#">Loại<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="/store/filter?type=Laptop&order=asc&page=1">Laptop</a></li>
-                                    <li><a href="/store/filter?type=Tivi&order=asc&page=1">Tivi</a></li>
-                                    <li><a href="/store/filter?type=Dienthoai&order=asc&page=1">Điện thoại</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown"><a href="#">Laptop<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="/store/filter?type=Laptop&brand=Apple&order=asc&page=1">Apple</a></li>
-                                    <li><a href="/store/filter?type=Laptop&brand=Asus&order=asc&page=1">Asus</a></li>
-                                    <li><a href="/store/filter?type=Laptop&brand=Dell&order=asc&page=1">Dell</a></li>
-                                    <li><a href="/store/filter?type=Laptop&brand=HP&order=asc&page=1">HP</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown"><a href="#">Tivi<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="/store/filter?type=Tivi&brand=LG&order=asc&page=1">LG</a></li>
-                                    <li><a href="/store/filter?type=Tivi&brand=Sony&order=asc&page=1">Sony</a></li>
-                                    <li><a href="/store/filter?type=Tivi&brand=Panasonic&order=asc&page=1">Panasonic</a></li>
-                                    <li><a href="/store/filter?type=Tivi&brand=Samsung&order=asc&page=1">Samsung</a></li>
-                                    <li><a href="/store/filter?type=Tivi&brand=Toshiba&order=asc&page=1">Toshiba</a></li>
-                                    <li><a href="/store/filter?type=Tivi&brand=Asanzo&order=asc&page=1">Asanzo</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown"><a href="#">Điện thoại<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="/store/filter?type=Dienthoai&brand=Apple&order=asc&page=1">Apple</a></li>
-                                    <li><a href="/store/filter?type=Dienthoai&brand=Xiaomi&order=asc&page=1">Xiaomi</a></li>
-                                    <li><a href="/store/filter?type=Dienthoai&brand=Huawei&order=asc&page=1">Huawei</a></li>
-                                    <li><a href="/store/filter?type=Dienthoai&brand=Samsung&order=asc&page=1">Samsung</a></li>
-                                    <li><a href="/store/filter?type=Dienthoai&brand=Vivo&order=asc&page=1">Vivo</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+        <nav id="navigation" style="margin-bottom: 0px;">
+            <!-- container -->
+            <div class="container">
+                <!-- responsive-nav -->
+                <div id="responsive-nav">
+                    <!-- NAV -->
+                    <ul class="main-nav nav navbar-nav">
+                        <li id="home"><a href="/">Home</a></li>
+                        <li id="store"><a href="/store/filter?Type=All">Cửa hàng</a></li>
+                    </ul>
+                    <!-- /NAV -->
+                </div>
+                <!-- /responsive-nav -->
+            </div>
+            <!-- /container -->
+        </nav>
 </header>
 
 <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
@@ -153,3 +97,80 @@
 <script src="vendors/jquery.ajaxchimp.min.js"></script>
 <script src="vendors/mail-script.js"></script>
 <script src="js/main.js"></script>
+<script>
+    var currentHref = window.location.href
+    if (currentHref.includes('store')) {
+        nav = document.getElementById("store")
+        nav.setAttribute("class", "active")
+    } else {
+        nav = document.getElementById("home")
+        nav.setAttribute("class", "active")
+    }
+</script>
+<%if (typeof user === 'undefined' || user == null){%>
+    <script type="text/javascript">
+        $(function() {
+            if (localStorage.cart) {
+                var cart = JSON.parse(localStorage.cart)
+                var payload = []
+                for (var productid in cart) {
+                    var obj = {}
+                    obj['productid'] = productid
+                    obj['quantity'] = cart[productid].quantity
+                    payload.push(obj)
+                }
+                $.post("/cart/import", {
+                    items: payload
+                }, function() {
+                    localStorage.clear()
+                    document.location.reload()
+                });
+            } else {
+                $.get("/cart/count", function(cartcount) {
+                    $("#header-qty").html(cartcount)
+                });
+                $.get("/cart/subview", function(subview) {
+                    $(".cart-dropdown").html(subview)
+                });
+            }
+        });
+    </script>
+    <% } else { %>
+        <script type="text/javascript">
+            $(function() {
+                if (!localStorage.cart) {
+                    $("#header-qty").html(0)
+                    $(".cart-dropdown").html("<div>Empty cart</div>")
+                } else {
+                    var cart = JSON.parse(localStorage.cart)
+                    $("#header-qty").html(Object.keys(cart).length)
+                    var htmlString = ""
+                    for (var productid in cart) {
+                        item = cart[productid]
+                        htmlString += '<div class="cart-list">'
+                        htmlString += '<div class="product-widget">'
+                        htmlString += '<div class="product-img">'
+                        htmlString += '<img src="' + item.picture + '">'
+                        htmlString += '</div>'
+                        htmlString += '<div class="product-body">'
+                        htmlString += '<h3 class="product-name"><a href="#">' + item.name + '</a></h3>'
+                        htmlString += '<h4 class="product-price"><span class="qty">' + item.price + 'x</span>'
+                        htmlString += item.quantity
+                        htmlString += '</h4>'
+                        htmlString += '</div>'
+                        htmlString += '</div>'
+                        htmlString += '</div>'
+                    }
+                    htmlString += '<div class="cart-summary">'
+                    htmlString += '<small>Có ??? sản phẩm</small>'
+                    htmlString += '<h5 id="sumsum">Tổng: 75.245.000đ</h5>'
+                    htmlString += '</div>'
+                    htmlString += '<div class="cart-btns">'
+                    htmlString += '<a href="/user/login">Giỏ hàng</a>'
+                    htmlString += '<a href="/user/login">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>'
+                    htmlString += '</div>'
+                    $(".cart-dropdown").html(htmlString)
+                }
+            });
+        </script>
+        <% } %>

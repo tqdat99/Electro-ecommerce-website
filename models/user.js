@@ -28,16 +28,27 @@ module.exports.addUser = async function(user) {
     })
 }
 
-module.exports.editUserByUsername = function(form) {
+module.exports.editUserByUsername = function(username, form, callback) {
     // const query = {
     //         text: 'update "Users" set password = \'$1\', fullname = \'$2\', birthday = \'$3\', address = \'$4\', phone = \'$5\' where username = \'$6\'',
     //         values: [form.password, form.fullname, form.birthday, form.address, form.phone, form.username],
     //     }
-    query = "update \"Users\" set password = '" + form.password + "', fullname = '" + form.fullname + "', birthday = '" + form.birthday +
-        "', address = '" + form.address + "', phone = '" + form.phone + "' where username = '" + form.username + "'"
+    query = "update \"Users\" set fullname = '" + form.fullname + "', birthday = '" + form.birthday + "', email = '" + form.email +
+        "', address = '" + form.address + "', phone = '" + form.phone + "' where username = '" + username + "'"
+        //console.log(query)
+    pool.query(query, function(err, result) {
+        //console.log(result)
+        callback(result)
+    })
+}
+
+module.exports.changePasswordByUsername = async function(username, password, callback) {
+    const hasedPw = await bcrypt.hash(password, 10)
+    query = "update \"Users\" set password = '" + hasedPw + "' where username = '" + username + "'"
     console.log(query)
     pool.query(query, function(err, result) {
         console.log(result)
+        callback(result)
     })
 }
 
@@ -53,7 +64,9 @@ module.exports.unlockUser = function(username) {
 
 module.exports.findUserByUsername = function(username, callback) {
     query = 'select * from "Users" where username = \'' + username + '\''
-    pool.query(query, async(err, res) => {
+        //console.log(query)
+    pool.query(query, function(err, res) {
+        //console.log(res.rows[0])
         if (res.rows.length > 0)
             callback(res.rows[0])
         else

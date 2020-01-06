@@ -5,6 +5,21 @@ const passport = require('passport');
 const initialize = require('../models/passport');
 initialize(passport);
 
+var jwt = require('jsonwebtoken'),
+    path = require('path'),
+    async = require('async'),
+    crypto = require('crypto'),
+    _ = require('lodash'),
+    hbs = require('nodemailer-express-handlebars'),
+    email = process.env.MAILER_EMAIL_ID || 'biodarkus1305@gmail.com',
+    pass = process.env.MAILER_PASSWORD || 'datdarkus1305',
+    nodemailer = require('nodemailer');
+
+var ejs = require("ejs");
+
+var forgetPasswordUser;
+
+
 var userModel = require('../models/user')
 
 module.exports.registerFormGet = function(req, res) {
@@ -54,20 +69,20 @@ module.exports.registerFormPost = async function(req, res, next) {
 }
 
 module.exports.profile = function(req, res) {
-    res.render('profile', {
-        msg: '',
-        user: req.user
-    });
+    req.user.birthday = req.user.birthday.substring(0, 10)
+    userModel.findUserByUsername(req.query.username, function(userInfo) {
+        userInfo.birthday = new Date(userInfo.birthday).toISOString().substring(0, 10);
+        res.render('profile', {
+            user: req.user,
+            userInfo: userInfo
+        });
+    })
 }
 
 module.exports.profileEdit = function(req, res) {
-    console.log("profileEdit:")
-    console.log(req.body)
-    userModel.editUserByUsername(req.body)
-    res.render('profile', {
-        msg: '',
-        user: req.user
-    });
+    userModel.editUserByUsername(req.query.username, req.body, function(result) {
+        res.redirect('/user/profile?username=' + req.query.username)
+    })
 }
 
 module.exports.logInFormGet = function(req, res) {
@@ -100,3 +115,157 @@ module.exports.checkNotAuthenticated = function(req, res, next) {
     }
     next();
 }
+
+module.exports.passwordForgetForm = function(req, res) {
+    res.render('forget-password-form');
+};
+
+module.exports.passwordForgetPending = function(req, res) {
+    res.render('forget-password-pending');
+};
+
+var smtpTransport = nodemailer.createTransport({
+    service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
+    auth: {
+        user: 'biodarkus1305@gmail.com',
+        pass: 'datdarkus1305'
+    }
+});
+
+module.exports.passwordResetForm = function(req, res) {
+    res.render('reset-password-form', { msg: '' });
+};
+
+module.exports.passwordReset = function(req, res) {
+    var valid = true
+    var username = forgetPasswordUser.username,
+        password = req.body.password,
+        retype = req.body.retype
+
+    form = {
+        username: username,
+        password: password,
+        retype: retype,
+    }
+
+    if (password != retype) {
+        console.log('Mật khẩu không trùng khớp.')
+        return res.render('reset-password-form', {
+            msg: 'Mật khẩu không trùng khớp',
+        })
+    }
+
+    userModel.validatePassword(password, function(ifValid) {
+        if (!ifValid) {
+            console.log('Mật khẩu phải có ít nhất 6 ký tự')
+            return res.render('reset-password-form', {
+                msg: 'Mật khẩu phải có ít nhất 6 ký tự',
+            })
+        } else {
+            userModel.changePasswordByUsername(username, password, function(result) {
+                console.log('Đã thay đổi password')
+                res.redirect('/user/login')
+            })
+        }
+    })
+};
+
+module.exports.passwordForget = function(req, res) {
+    async.waterfall([
+        function(done) {
+            userModel.findUserByUsername(req.body.username, function(user) {
+                if (user) {
+                    forgetPasswordUser = user;
+                    done(null, user)
+                    console.log(user)
+                } else {
+                    console.log('User not found.')
+                    done('User not found.')
+                }
+            })
+        },
+        function(user, done) {
+            crypto.randomBytes(20, function(err, buffer) {
+                var token = buffer.toString('hex');
+                done(err, user, token);
+            });
+        },
+        function(user, token, done) {
+            ejs.renderFile(__dirname.replace("\controllers", "") + "/public/templates/forgot-password-email.ejs", {
+                name: user.fullname,
+                url: 'http://localhost:3003/user/reset-password?token=' + token,
+            }, function(err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var mainOptions = {
+                        from: 'biodarkus1305@gmail.com',
+                        to: user.email,
+                        subject: '[Electro] Reset mật khẩu',
+                        html: data
+                    };
+                    smtpTransport.sendMail(mainOptions, function(err, info) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.redirect('/user/forget-password-pending')
+                            console.log('Message sent');
+                        }
+                    });
+                }
+            });
+        }
+    ], function(err) {
+        return res.status(422).json({ message: err });
+    });
+};
+
+exports.reset_password = function(req, res, next) {
+    User.findOne({
+        reset_password_token: req.body.token,
+        reset_password_expires: {
+            $gt: Date.now()
+        }
+    }).exec(function(err, user) {
+        if (!err && user) {
+            if (req.body.newPassword === req.body.verifyPassword) {
+                user.hash_password = bcrypt.hashSync(req.body.newPassword, 10);
+                user.reset_password_token = undefined;
+                user.reset_password_expires = undefined;
+                user.save(function(err) {
+                    if (err) {
+                        return res.status(422).send({
+                            message: err
+                        });
+                    } else {
+                        var data = {
+                            to: user.email,
+                            from: email,
+                            template: 'reset-password-email',
+                            subject: 'Password Reset Confirmation',
+                            context: {
+                                name: user.fullName.split(' ')[0]
+                            }
+                        };
+
+                        smtpTransport.sendMail(data, function(err) {
+                            if (!err) {
+                                return res.json({ message: 'Password reset' });
+                            } else {
+                                return done(err);
+                            }
+                        });
+                    }
+                });
+            } else {
+                return res.status(422).send({
+                    message: 'Passwords do not match'
+                });
+            }
+        } else {
+            return res.status(400).send({
+                message: 'Password reset token is invalid or has expired.'
+            });
+        }
+    });
+};

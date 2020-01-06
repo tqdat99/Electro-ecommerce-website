@@ -1,15 +1,30 @@
 var productModel = require('../models/product')
+var typeModel = require('../models/type')
+
 module.exports.productDetailById = function(req, res) {
     productModel.getProductDetailById(req.params['id'], function(item) {
-        productModel.getProductList(undefined, [item.loai], [item.brand], undefined, 'asc', function(items) {
-            onPageItems = items.slice(0, 4)
-            res.render('product-details', {
-                item: item,
-                Items: onPageItems
+        productModel.getProductImagesById(req.params['id'], function(images) {
+            productModel.getCommentsByProductId(req.params['id'], function(comments) {
+                productModel.getProductList(undefined, [item.loai], [item.brand], undefined, 'asc', function(items) {
+                    onPageItems = items.slice(0, 4)
+                    res.render('product-details', {
+                        item: item,
+                        comments: comments,
+                        Items: onPageItems,
+                        Images: images
+                    })
+                })
             })
         })
     })
 }
+
+module.exports.postComment = function(req, res) {
+    productModel.insertComment(req.body['name'], req.body['message'], req.params['id'], function() {
+        res.redirect('back');
+    })
+}
+
 
 module.exports.productList = function(req, res) {
     var perPage = 9
@@ -43,7 +58,7 @@ module.exports.productList = function(req, res) {
             type = req.query.type
     }
     if (req.query.type == 'All') {
-        type = ['Laptop', 'Tivi', 'Dienthoai']
+        type = undefined
     }
 
     if (req.params['brand'] != undefined) {
@@ -79,17 +94,24 @@ module.exports.productList = function(req, res) {
     productModel.getProductList(key, type, brand, price, order, function(items) {
         // console.log(page + "," + items.length + "," + perPage + "," + Math.ceil(items.length / perPage))
         // console.log(items)
-        onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + 9)
-            // console.log(onPageItems)
-        res.render('store', {
-            Items: onPageItems,
-            Type: type,
-            Brand: brand,
-            Order: order,
-            Page: page,
-            user: req.user,
-            current: page,
-            pages: Math.ceil(items.length / perPage)
-        });
+        typeModel.getAllTypes(function(types) {
+            productModel.getProductBrands(function(brands) {
+                onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + 9)
+                    //console.log(brands)
+                    // console.log(types)
+                res.render('store', {
+                    Items: onPageItems,
+                    Type: type,
+                    Brand: brand,
+                    Order: order,
+                    Page: page,
+                    user: req.user,
+                    current: page,
+                    Brands: brands,
+                    Types: types,
+                    pages: Math.ceil(items.length / perPage)
+                });
+            })
+        })
     })
 }

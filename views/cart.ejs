@@ -78,103 +78,102 @@
             <div class="container">
                 <div class="cart_inner">
                     <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Tên sản phẩm</th>
-                                    <th scope="col"></th>
-                                    <th scope="col">Giá</th>
-                                    <th scope="col">Số lượng</th>
-                                    <th scope="col">Tổng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="store/product-details">
-                                            <img src="./img/product01.png" alt="" class="cart-thumbnail">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="store/product-details">
-                                            <p>Laptop Asus Rog Strix G G531GD-AL025T</p>
-                                        </a>
+                        <form action="/cart" method="post">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col"></th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Tổng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% items.forEach(function(item){ %>
+                                        <tr class="cartlistlist">
+                                            <td>
+                                                <a href="/store/id=<%=item.id%>">
+                                                    <img src="<%= item.anh %>" alt="" class="cart-thumbnail">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="/store/id=<%=item.id%>">
+                                                    <p>
+                                                        <%= item.ten %>
+                                                    </p>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    <%= new Intl.NumberFormat().format(item.gia)%>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <div class="product_count">
+                                                    <input type="text" name="stt-<%= item.cartid %>" id="sst-<%= item.cartid %>" maxlength="12" value="<%= item.quantity %>" title="Quantity:" class="input-text qty">
+                                                    <button onclick="var result = document.getElementById('sst-<%= item.cartid %>'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                                    <button onclick="var result = document.getElementById('sst-<%= item.cartid %>'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h5>
+                                                    <p style="align: right;" name="sumPrice">
+                                                        <%= new Intl.NumberFormat().format(item.gia*item.quantity)%>
+                                                    </p>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+                                            <tr class="cartlistlist">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <h5>Tổng tiền</h5>
+                                                </td>
+                                                <td>
+                                                    <h5>
+                                                        <p style="align: right;" id="total">
+                                                        </p>
+                                                    </h5>
+                                                </td>
+                                            </tr>
 
-                                    </td>
-                                    <td>
-                                        <p>32.000.000đ</p>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>32.000.000đ</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="store/product-details">
-                                            <img src="./img/product02.png" alt="" class="cart-thumbnail">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="store/product-details">
-                                            <p>Tai nghe On-ear Sony MDRZX310APBCE (Đen)</p>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p>340.000đ</p>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                            <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>1.680.000đ</h5>
-                                    </td>
-                                </tr>
+                                            <tr class="shipping_area">
+                                                <td class="d-none d-md-block">
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    <div class="shipping_box">
+                                                        <button type="submit" class="gray_btn">Cập nhật</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
-                                <tr class="shipping_area">
-                                    <td class="d-none d-md-block">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <div class="shipping_box">
-                                            <a class="gray_btn" href="#">Cập nhật</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="shipping_area">
-                                    <td class="d-none d-md-block">
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <div class="shipping_box">
-                                            <a class="button" href="/checkout">Tiến hành thanh toán</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                                            <tr class="shipping_area">
+                                                <td class="d-none d-md-block">
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    <div class="shipping_box">
+                                                        <a class="button" href="/checkout">Tiến hành thanh toán</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -199,6 +198,14 @@
             <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
             <script src="vendors/jquery.ajaxchimp.min.js"></script>
             <script src="vendors/mail-script.js"></script>
+            <script>
+                var prices = document.getElementsByName("sumPrice");
+                var total = 0;
+                for (i = 0; i < prices.length; i++) {
+                    total += parseFloat(prices[i].innerHTML.replace(/,/g, ''));
+                }
+                document.getElementById("total").innerHTML = new Intl.NumberFormat().format(total);
+            </script>
 </body>
 
 </html>

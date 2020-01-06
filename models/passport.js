@@ -41,7 +41,6 @@ function initialize(passport) {
     passport.deserializeUser((user, done) => {
         return done(null, user);
     });
-
 }
 
 module.exports = initialize;

@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb-tree">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li class="active">Sản phẩm</li>
                         </ul>
                     </div>
@@ -73,51 +73,109 @@
 
                         <div class="aside">
                             <h3 class="aside-title">Danh mục</h3>
-                            <input type="radio" name="type" value="All" checked>Tất cả<br>
-                            <input type="radio" name="type" value="Laptop">Laptop<br>
-                            <input type="radio" name="type" value="Tivi">Tivi<br>
-                            <input type="radio" name="type" value="Dienthoai">Điện thoại<br>
+                            <div class="input-radio">
+                                <input type="radio" name="type" id="All" value="All" checked>
+                                <label for="All">
+                                <span></span>
+                                Tất cả       
+                            </label>
+                            </div>
+                            <%Types.forEach(function(type){%>
+                                <div class="input-radio">
+                                    <input type="radio" name="type" id="<%=type.id%>" value="<%=type.id%>">
+                                    <label for="<%=type.id%>">
+                                    <span></span>
+                                    <%=type.ten%>        
+                                </label>
+                                </div>
+                                <%})%>
                         </div>
 
                         <div class="aside">
                             <h3 class="aside-title">Hãng</h3>
-                            <input type="checkbox" name="brand" value="Samsung">Samsung<br>
-                            <input type="checkbox" name="brand" value="LG">LG<br>
-                            <input type="checkbox" name="brand" value="Sony">Sony<br>
-                            <input type="checkbox" name="brand" value="Asus">Asus<br>
-                            <input type="checkbox" name="brand" value="Acer">Acer<br>
-                            <input type="checkbox" name="brand" value="Apple">Apple<br>
-                            <input type="checkbox" name="brand" value="Nokia">Nokia<br>
-                            <input type="checkbox" name="brand" value="Xiaomi">Xiaomi<br>
-                            <input type="checkbox" name="brand" value="Apple">Apple<br>
-                            <input type="checkbox" name="brand" value="Huawei">Huawei<br>
-                            <input type="checkbox" name="brand" value="Dell">Dell<br>
-                            <input type="checkbox" name="brand" value="HP">HP<br>
-                            <input type="checkbox" name="brand" value="Panasonic">Panasonic<br>
-                            <input type="checkbox" name="brand" value="Toshiba">Toshiba<br>
-                            <input type="checkbox" name="brand" value="Asanzo">Asanzo<br>
-                            <input type="checkbox" name="brand" value="Vivo">Vivo<br>
+                            <%Brands.forEach(function(brand){%>
+                                <div class="input-checkbox">
+                                    <input type="checkbox" name="brand" id="<%=brand.brand%>" value="<%=brand.brand%>">
+                                    <label for="<%=brand.brand%>">
+                                    <span></span>
+                                    <%=brand.brand%>        
+                                </label>
+                                </div>
+                                <%})%>
                         </div>
 
                         <div class="aside">
                             <h3 class="aside-title">Giá</h3>
-                            <input type="radio" name="price" value="0-3000000">Dưới 3,000,000<br>
-                            <input type="radio" name="price" value="3000000-6000000">3,000,000 - 6,000,000<br>
-                            <input type="radio" name="price" value="6000000-10000000">6,000,000 - 10,000,000<br>
-                            <input type="radio" name="price" value="10000000-15000000">10,000,000 - 15,000,000<br>
-                            <input type="radio" name="price" value="15000000-20000000">15,000,000 - 20,000,000<br>
-                            <input type="radio" name="price" value="20000000-25000000">20,000,000 - 25,000,000<br>
-                            <input type="radio" name="price" value="25000000-30000000">25,000,000 - 30,000,000<br>
-                            <input type="radio" name="price" value="30000000">30,000,000 trở lên<br>
+                            <div class="input-radio">
+                                <input type="radio" name="price" id="0-3000000" value="0-3000000">
+                                <label for="0-3000000">
+                                <span></span>
+                                Dưới 3,000,000   
+                            </label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" name="price" id="3000000-6000000" value="3000000-6000000">
+                                <label for="3000000-6000000">
+                                <span></span>
+                                3,000,000 - 6,000,000   
+                            </label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" name="price" id="6000000-10000000" value="6000000-10000000">
+                                <label for="6000000-10000000">
+                                <span></span>
+                                6,000,000 - 10,000,000    
+                            </label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" name="price" id="10000000-15000000" value="10000000-15000000">
+                                <label for="10000000-15000000">
+                                <span></span>
+                                10,000,000 - 15,000,000  
+                            </label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" name="price" id="15000000-20000000" value="15000000-20000000">
+                                <label for="15000000-20000000">
+                                <span></span>
+                                15,000,000 - 20,000,000
+                            </label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" name="price" id="25000000-30000000" value="25000000-30000000">
+                                <label for="25000000-30000000">
+                                <span></span>
+                                25,000,000 - 30,000,000
+                            </label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" name="price" id="30000000" value="30000000">
+                                <label for="30000000">
+                                <span></span>
+                                30,000,000 trở lên
+                            </label>
+                            </div>
                         </div>
 
                         <div class="aside">
                             <h3 class="aside-title">Sắp xếp theo giá</h3>
-                            <input type="radio" name="order" value="asc">Tăng dần<br>
-                            <input type="radio" name="order" value="desc">Giảm dần<br>
+                            <div class="input-radio">
+                                <input type="radio" name="order" id="asc" value="asc">
+                                <label for="asc">
+                                <span></span>
+                                Tăng dần
+                            </label>
+                            </div>
+                            <div class="input-radio">
+                                <input type="radio" name="order" id="desc" value="desc">
+                                <label for="desc">
+                                <span></span>
+                                Giảm dần
+                            </label>
+                            </div>
                         </div>
 
-                        <input type="submit" value="Áp dụng">
+                        <input type="submit" class="button" value="Áp dụng" style="margin-top: 24px;">
 
                     </form>
 
@@ -151,15 +209,13 @@
                                                     <%= new Intl.NumberFormat().format(item.gia)%>
                                                 </h4>
                                                 <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
                                                 </div>
-                                                <div class="add-to-cart">
-                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-                                                </div>
+                                                <form action="/cart/additem" method="post">
+                                                    <div class="add-to-cart">
+                                                        <input type="hidden" name="stt" value="<%=item.id%>">
+                                                        <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </a>
@@ -266,15 +322,6 @@
                         }
                     }
                 }
-                // for (var i = <%=pages%> - 4; i <= <%=pages%>; i++) {
-                //     // if (i == <%=current%>)
-                //     //     continue
-                //     id = "page" + i;
-                //     page = document.getElementById(id);
-                //     page.innerHTML = id;
-                //     n = currentHref.indexOf("&page=");
-                //     page.href = currentHref.substr(0, n) + "&page=" + i;
-                // }
             </script>
             <script src="js/jquery.min.js"></script>
             <script src="js/bootstrap.min.js"></script>

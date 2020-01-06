@@ -40,75 +40,65 @@
 <body>
     <%include header.ejs%>
 
+        <div class="slideshowContainer" style="margin-bottom: 0px; margin-top: 0px;">
+
+            <!-- Replace the image 'src' with the images in your project.
+        Javascript is set up so that you can add as many images as you like, but make sure that you match the number of 'circle' span elements (below) to the number of images -->
+            <%Advertisements.forEach(function(ads){%>
+                <a href="<%=ads.link%>" target="_blank"><img class="imageSlides" src="<%=ads.anh%>"></a>
+                <%})%>
+                    <!-- I would recommend to replace these 'span' elements with 'img' files
+        for each the left and right arrow that fits your project, and size accordingly.
+        I've shown 'span' elements because I didn't want to upload files. -->
+                    <span id="leftArrow" class="slideshowArrow">&#8249;</span>
+                    <span id="rightArrow" class="slideshowArrow">&#8250;</span>
+
+                    <div class="slideshowCircles">
+                        <!-- Filled 'dot' class is set to first image in slideshow, and then via Javascript the filled 'dot' class follows the current image.
+        Make sure you match the number of these 'circle' span elements to the number of images in your slideshow. -->
+                        <%Advertisements.forEach(function(ads){%>
+                            <span class="circle"></span>
+                            <%})%>
+                                <!-- <span class="circle dot"></span>
+                                <span class="circle"></span>
+                                <span class="circle"></span> -->
+                    </div>
+
+        </div>
+
         <!-- SECTION -->
-        <div class="section">
+        <div class="section" style="margin:8px">
             <!-- container -->
             <div class="container">
                 <!-- row -->
-                <!-- shop -->
-                <div class="col-md-4 col-xs-6">
-                    <a href="/store/filter?type=Laptop&order=asc&page=1">
-                        <div class="shop">
-                            <div class="shop-img">
-                                <img src="./img/shop01.png" alt="">
-                            </div>
-                            <div class="shop-body">
-                                <h3>Laptop</h3>
-                                <a href="" class="cta-btn">Xem<i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- /shop -->
+                <div class="row">
 
-                <!-- shop -->
-                <!-- <div class="col-md-3 col-xs-6">
-                    <a href="/store">
-                        <div class="shop">
-                            <div class="shop-img">
-                                <img src="./img/shop03.png" alt="">
-                            </div>
-                            <div class="shop-body">
-                                <h3>Tai nghe</h3>
-                                <a href="#" class="cta-btn">Xem<i class="fa fa-arrow-circle-right"></i></a>
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <h3 class="title">Gian hàng</h3>
+                            <div class="section-nav">
                             </div>
                         </div>
-                    </a>
-                </div> -->
-                <!-- /shop -->
-
-                <!-- shop -->
-                <div class="col-md-4 col-xs-6">
-                    <a href="/store/filter?type=Dienthoai&order=asc&page=1">
-                        <div class="shop">
-                            <div class="shop-img">
-                                <img src="./img/shop02.png" alt="">
-                            </div>
-                            <div class="shop-body">
-                                <h3>Điện thoại</h3>
-                                <a href="#" class="cta-btn">Xem<i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
+                    </div>
+                    <!-- shop -->
+                    <%Types.forEach(function(type){%>
+                        <div class="col-md-4 col-xs-6">
+                            <a href="/store/filter?type=<%=type.id%>&order=asc&page=1">
+                                <div class="shop">
+                                    <div class="shop-img">
+                                        <img src="<%=type.anh%>" alt="">
+                                    </div>
+                                    <div class="shop-body">
+                                        <h3>
+                                            <%=type.ten%>
+                                        </h3>
+                                        <a href="" class="cta-btn" style="display: block;">Xem<i class="fa fa-arrow-circle-right" style="margin-left: 8px;"></i></a>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                    <!-- /shop -->
+                        <%})%>
                 </div>
-
-                <!-- shop -->
-                <div class="col-md-4 col-xs-6">
-                    <a href="/store/filter?type=Tivi&order=asc&page=1">
-                        <div class="shop">
-                            <div class="shop-img">
-                                <img src="./img/shop04.png" alt="">
-                            </div>
-                            <div class="shop-body">
-                                <h3>Tivi</h3>
-                                <a href="#" class="cta-btn">Xem<i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- /shop -->
-                </div>
-                <!-- /row -->
             </div>
             <!-- /container -->
         </div>
@@ -157,15 +147,21 @@
                                                 <%= new Intl.NumberFormat().format(item.gia)%>
                                             </h4>
                                             <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
                                             </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-                                            </div>
+                                            <% if (user) { %>
+                                                <form action="/cart/additem" method="post">
+                                                    <div class="add-to-cart">
+                                                        <input type="hidden" name="stt" value="<%=item.id%>">
+                                                        <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                                    </div>
+                                                </form>
+                                                <% } else { %>
+                                                    <div class="add-to-cart">
+                                                        <a class="add-to-cart-btn add-to-local-cart-btn" data-productid="<%= item.id %>" data-name="<%= item.ten %>" data-price="<%= item.gia %>" data-picture="<%= item.anh %>">
+                                                            <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                        </a>
+                                                    </div>
+                                                    <% } %>
                                         </div>
                                     </div>
                                 </a>
@@ -182,51 +178,7 @@
         </div>
         <!-- /SECTION -->
 
-        <!-- HOT DEAL SECTION -->
-        <div id="hot-deal" class="section">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="hot-deal">
-                            <ul class="hot-deal-countdown">
-                                <li>
-                                    <div>
-                                        <h3>02</h3>
-                                        <span>Ngày</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <h3>10</h3>
-                                        <span>Giờ</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <h3>34</h3>
-                                        <span>Phút</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <h3>60</h3>
-                                        <span>Giây</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <h2 class="text-uppercase">hot deal tuần này</h2>
-                            <p>Giảm đến 50%</p>
-                            <a class="primary-btn cta-btn" href="/store/type=Laptop">Khám phá ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /HOT DEAL SECTION -->
+
 
         <%include footer.ejs%>
 
@@ -237,6 +189,114 @@
             <script src="js/nouislider.min.js"></script>
             <script src="js/jquery.zoom.min.js"></script>
             <script src="js/main.js"></script>
+            <script>
+                // IMAGE SLIDES & CIRCLES ARRAYS, & COUNTER
+                var imageSlides = document.getElementsByClassName('imageSlides');
+                var circles = document.getElementsByClassName('circle');
+                var leftArrow = document.getElementById('leftArrow');
+                var rightArrow = document.getElementById('rightArrow');
+                var counter = 0;
+
+                // HIDE ALL IMAGES FUNCTION
+                function hideImages() {
+                    for (var i = 0; i < imageSlides.length; i++) {
+                        imageSlides[i].classList.remove('visible');
+                    }
+                }
+
+                // REMOVE ALL DOTS FUNCTION
+                function removeDots() {
+                    for (var i = 0; i < imageSlides.length; i++) {
+                        circles[i].classList.remove('dot');
+                    }
+                }
+
+                // SINGLE IMAGE LOOP/CIRCLES FUNCTION
+                function imageLoop() {
+                    var currentImage = imageSlides[counter];
+                    var currentDot = circles[counter];
+                    currentImage.classList.add('visible');
+                    removeDots();
+                    currentDot.classList.add('dot');
+                    counter++;
+                }
+
+                // LEFT & RIGHT ARROW FUNCTION & CLICK EVENT LISTENERS
+                function arrowClick(e) {
+                    var target = e.target;
+                    if (target == leftArrow) {
+                        clearInterval(imageSlideshowInterval);
+                        hideImages();
+                        removeDots();
+                        if (counter == 1) {
+                            counter = (imageSlides.length - 1);
+                            imageLoop();
+                            imageSlideshowInterval = setInterval(slideshow, 3000);
+                        } else {
+                            counter--;
+                            counter--;
+                            imageLoop();
+                            imageSlideshowInterval = setInterval(slideshow, 3000);
+                        }
+                    } else if (target == rightArrow) {
+                        clearInterval(imageSlideshowInterval);
+                        hideImages();
+                        removeDots();
+                        if (counter == imageSlides.length) {
+                            counter = 0;
+                            imageLoop();
+                            imageSlideshowInterval = setInterval(slideshow, 3000);
+                        } else {
+                            imageLoop();
+                            imageSlideshowInterval = setInterval(slideshow, 3000);
+                        }
+                    }
+                }
+
+                leftArrow.addEventListener('click', arrowClick);
+                rightArrow.addEventListener('click', arrowClick);
+
+
+                // IMAGE SLIDE FUNCTION
+                function slideshow() {
+                    if (counter < imageSlides.length) {
+                        imageLoop();
+                    } else {
+                        counter = 0;
+                        hideImages();
+                        imageLoop();
+                    }
+                }
+
+                // SHOW FIRST IMAGE, & THEN SET & CALL SLIDE INTERVAL
+                setTimeout(slideshow, 500);
+                var imageSlideshowInterval = setInterval(slideshow, 3000);
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $(".add-to-local-cart-btn").click(function(e) {
+                        var cart = {}
+                        if (localStorage.cart) {
+                            cart = JSON.parse(localStorage.cart)
+                        }
+
+                        var productid = $(e.target).attr("data-productid")
+                        var name = $(e.target).attr("data-name")
+                        var price = $(e.target).attr("data-price")
+                        var picture = $(e.target).attr("data-picture")
+                        if (!cart[productid]) {
+                            cart[productid] = {}
+                            cart[productid]["name"] = name
+                            cart[productid]["price"] = price
+                            cart[productid]["picture"] = picture
+                            cart[productid]["quantity"] = 1
+                        } else {
+                            cart[productid]["quantity"] = cart[productid]["quantity"] + 1
+                        }
+                        localStorage.cart = JSON.stringify(cart)
+                    })
+                });
+            </script>
 
 </body>
 

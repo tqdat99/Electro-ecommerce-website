@@ -1,0 +1,40 @@
+<% items.forEach(function(item){ %>
+    <div class="cart-list" onclick="funcSum()">
+        <div class="product-widget">
+            <div class="product-img">
+                <img src="<%= item.anh %>" alt="">
+            </div>
+            <div class="product-body">
+                <h3 class="product-name">
+                    <a href="/store/id=<%=item.id%>">
+                        <%= item.ten %>
+                    </a>
+                </h3>
+                <h5 class="product-price" name="qty" style="display: inline; font-size: 16px;">
+                    <%=item.quantity%>
+                </h5>x
+                <h4 class="product-price" name="price" style="display: inline;">
+                    <%= new Intl.NumberFormat().format(item.gia) %>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+        <div class="cart-summary">
+            <small>Có <%=items.length%> sản phẩm</small>
+            <h5 id="total"></h5>
+        </div>
+        <div class="cart-btns">
+            <a href="/cart">Giỏ hàng</a>
+            <a href="/checkout">Thanh toán<i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+
+        <script>
+            var prices = document.getElementsByName("price");
+            var qty = document.getElementsByName("qty");
+            var total = 0;
+            for (i = 0; i < prices.length; i++) {
+                total += parseFloat(qty[i].innerHTML) * parseFloat(prices[i].innerHTML.replace(/,/g, ''));
+            }
+            document.getElementById("total").innerHTML = "Tổng: " + new Intl.NumberFormat().format(total);
+        </script>

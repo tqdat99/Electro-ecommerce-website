@@ -16,7 +16,8 @@ module.exports.getProductDetailById = function(id, callback) {
 }
 
 module.exports.getProductList = function(key, type, brand, price, order, callback) {
-    var query
+    var query,
+        condition = 0
         // console.log("models:")
         // console.log(key)
         // console.log(type)
@@ -26,28 +27,47 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
 
     query = "select * from \"products\""
 
-    if (key != undefined) {
-        if (type.length > 0)
-            query += " where ";
-    } else if (type != undefined) {
-        if (type.length > 0)
-            query += " where ";
-    } else if (brand != undefined) {
-        if (brand.length > 0)
-            query += " where ";
-    } else if (price != null)
+    if (key != undefined && condition == 0) {
         query += " where ";
+        condition = 1;
+    }
+    if (type != undefined && condition == 0) {
+        if (type.length > 0) {
+            query += " where ";
+            condition = 1;
+        }
+    }
+    if (brand != undefined && condition == 0) {
+        if (brand.length > 0) {
+            query += " where ";
+            condition = 1;
+        }
+    }
+    if (price != null && condition == 0) {
+        condition = 1;
+        query += " where ";
+    }
+
+    condition = 0
 
     if (key != undefined) {
         query += "(to_tsvector(ten) @@ to_tsquery('" + key + "'))"
-        if (type != undefined) {
-            if (type.length > 0)
+        if (type != undefined && condition == 0) {
+            if (type.length > 0 && type[0] != "All") {
+                condition = 1;
                 query += " and ";
-        } else if (brand != undefined) {
-            if (brand.length > 0)
+            }
+        }
+        if (brand != undefined && condition == 0) {
+            if (brand.length > 0) {
                 query += " and ";
-        } else if (price != null)
+                condition = 1;
+            }
+        }
+        if (price != null && condition == 0) {
             query += " and ";
+            condition = 1;
+        }
     }
 
     if (type != undefined) {
@@ -59,12 +79,13 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
                     query += " or ";
             }
             query += ")";
-        }
-        if (brand != undefined) {
-            if (brand.length > 0)
+            if (brand != undefined) {
+                if (brand.length > 0)
+                    query += " and ";
+            }
+            if (price != null)
                 query += " and ";
-        } else if (price != null)
-            query += " and ";
+        }
     }
 
 
@@ -77,9 +98,9 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
                     query += " or ";
             }
             query += ")";
-        }
-        if (price != null) {
-            query += " and ";
+            if (price != null) {
+                query += " and ";
+            }
         }
     }
 
@@ -93,8 +114,10 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
 
     query += " ORDER BY gia " + order;
 
-    // console.log(query)
+
+    console.log(query)
     pool.query(query, function(err, result) {
+        //console.log(result.rows)
         callback(result.rows);
     });
 }
@@ -122,7 +145,37 @@ module.exports.addProduct = function(form, callback) {
     }
 
     pool.query(query, function(err, result) {
-        console.log(result)
+        // console.log(result)
         callback(result)
     })
+}
+
+module.exports.getProductImagesById = function(id, callback) {
+    query = "select * from \"Product Images\" where id = '" + id + "'"
+    pool.query(query, function(err, result) {
+        // console.log("getProductImagesById:" + result.rows)
+        callback(result.rows)
+    })
+}
+
+module.exports.getProductBrands = function(callback) {
+    query = "select distinct brand from \"products\""
+    pool.query(query, function(err, result) {
+        callback(result.rows)
+    })
+}
+
+module.exports.insertComment = function(name, message, productid, callback) {
+    query = 'insert into "comments" (productid, content, name) values (\'' + productid + '\', \'' + message + '\' , \'' + name + '\')';
+    pool.query(query, function(err, result) {
+        console.log(result);
+        callback(result);
+    });
+}
+
+module.exports.getCommentsByProductId = function(id, callback) {
+    query = "select * from \"comments\" where productid = '" + id + "'";
+    pool.query(query, function(err, result) {
+        callback(result.rows)
+    });
 }
