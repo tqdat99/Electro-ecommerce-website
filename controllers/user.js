@@ -140,37 +140,39 @@ module.exports.passwordChangeForm = function(req, res) {
 }
 
 module.exports.passwordChange = function(req, res) {
-    userModel.validatePassword(req.body.newpassword, function(valid) {
-        if (!valid)
-            res.render('change-password-form', {
-                user: req.user,
-                msg: "Mật khẩu phải có ít nhất 6 ký tự",
-            })
-        else if (req.body.retype != req.body.newpassword)
-            res.render('change-password-form', {
-                user: req.user,
-                msg: "Mật khẩu không khớp",
-            })
-        else
-            userModel.comparePassword(req.user.username, req.body.newpassword, function(correctNew) {
-                userModel.comparePassword(req.user.username, req.body.oldpassword, function(correctOld) {
-                    if (correctNew)
-                        res.render('change-password-form', {
-                            user: req.user,
-                            msg: "Mật khẩu mới trùng với mật khẩu cũ",
-                        })
-                    else if (!correctOld)
-                        res.render('change-password-form', {
-                            user: req.user,
-                            msg: "Mật khẩu cũ không trùng khớp",
-                        })
-                    else
+    userModel.comparePassword(req.user.username, req.body.newpassword, function(correctNew) {
+        userModel.comparePassword(req.user.username, req.body.oldpassword, function(correctOld) {
+            if (!correctOld)
+                res.render('change-password-form', {
+                    user: req.user,
+                    msg: "Mật khẩu cũ không trùng khớp",
+                })
+            userModel.validatePassword(req.body.newpassword, function(valid) {
+                if (req.body.retype != req.body.newpassword)
+                    res.render('change-password-form', {
+                        user: req.user,
+                        msg: "Mật khẩu mới không khớp",
+                    })
+                else if (!valid)
+                    res.render('change-password-form', {
+                        user: req.user,
+                        msg: "Mật khẩu mới phải có ít nhất 6 ký tự",
+                    })
+                else if (correctNew)
+                    res.render('change-password-form', {
+                        user: req.user,
+                        msg: "Mật khẩu mới trùng với mật khẩu cũ",
+                    })
+                else {
+                    userModel.changePasswordByUsername(req.user.username, req.body.newpassword, function(changePwResult) {
                         res.render('change-password-form', {
                             user: req.user,
                             msg: "Đổi mật khẩu thành công",
                         })
-                })
+                    })
+                }
             })
+        })
     })
 }
 
