@@ -67,8 +67,8 @@ module.exports.getProductList = function(type, brand, price, order, callback) {
     });
 }
 
-module.exports.insertComment = function(name, message, productid, callback){
-    query = 'insert into "comments" (productid, content, name) values (\'' + productid + '\', \'' + message + '\' , \'' + name + '\')';
+module.exports.insertComment = function(name, message, productid, time, callback){
+    query = 'insert into "comments" (productid, content, name, date) values (\'' + productid + '\', \'' + message + '\' , \'' + name + '\', \'' + time + '\')';
     pool.query(query, function(err, result) {
         console.log(result);
         callback(result);
@@ -76,8 +76,9 @@ module.exports.insertComment = function(name, message, productid, callback){
 }
 
 module.exports.getCommentsByProductId = function(id, callback) {
-    query = "select * from \"comments\" where productid = '" + id + "'";
+    query = "select * from \"comments\" where productid = '" + id + "' order by commentid desc";
     pool.query(query, function(err, result) {
+        console.log(result)
         callback(result.rows)
     });
 }

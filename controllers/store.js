@@ -7,7 +7,8 @@ module.exports.productDetailById = function(req, res) {
                 res.render('product-details', {
                     item: item,
                     comments: comments,
-                    Items: onPageItems
+                    Items: onPageItems,
+                    user: req.user
                 })
             })
         })
@@ -90,7 +91,8 @@ module.exports.productList = function(req, res) {
 }
 
 module.exports.postComment = function(req,res){
-    productModel.insertComment(req.body['name'], req.body['message'], req.params['id'], function(){ 
+    var time = new Date().toLocaleString()   
+    productModel.insertComment(req.body['name'], req.body['message'], req.params['id'], time, function(){ 
         res.redirect('back');
     })
 }
