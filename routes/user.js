@@ -7,6 +7,8 @@ var orderController = require('../controllers/order')
 
 router.get('/register', userController.checkNotAuthenticated, userController.registerFormGet)
 router.post('/register', userController.checkNotAuthenticated, userController.registerFormPost)
+router.get('/verifying', userController.checkNotAuthenticated, userController.registerVerifying)
+router.get('/verify', userController.checkNotAuthenticated, userController.addUser)
 
 router.get('/login', userController.checkNotAuthenticated, userController.logInFormGet)
 router.post('/login', userController.checkNotAuthenticated, userController.logInFormPost);

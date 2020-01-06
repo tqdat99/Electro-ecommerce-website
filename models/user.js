@@ -16,6 +16,7 @@ module.exports.getAllUser = function(callback) {
 module.exports.addUser = async function(user) {
     const hasedPw = await bcrypt.hash(user.password, 10)
     user.password = hasedPw
+    console.log(user)
 
     const query = {
         text: 'insert into "Users" values($1, $2, $3, $4, $5, $6, $7, $8)',
@@ -25,6 +26,8 @@ module.exports.addUser = async function(user) {
     pool.query(query, (err, res) => {
         if (err)
             console.log(err.stack)
+        else
+            console.log(res)
     })
 }
 

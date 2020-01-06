@@ -19,6 +19,16 @@ var ejs = require("ejs");
 
 var forgetPasswordUser;
 
+verifyingUser = {
+    username: "",
+    password: "",
+    email: "",
+    fullname: "",
+    birthday: "",
+    phone: "",
+    address: ""
+}
+
 var smtpTransport = nodemailer.createTransport({
     service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
     auth: {
@@ -37,17 +47,27 @@ module.exports.registerFormGet = function(req, res) {
     });
 }
 
+module.exports.registerVerifying = function(req, res) {
+    res.render('verify-pending', {
+        user: req.user,
+    })
+}
+
+module.exports.addUser = function(req, res) {
+    userModel.addUser(verifyingUser)
+    res.redirect('/user/login')
+}
+
 module.exports.registerFormPost = async function(req, res, next) {
     var valid = true;
-    user = {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        fullname: req.body.fullname,
-        birthday: req.body.birthday,
-        phone: req.body.phone,
-        address: req.body.address
-    }
+    verifyingUser.username = req.body.username
+    verifyingUser.password = req.body.password
+    verifyingUser.email = req.body.email
+    verifyingUser.fullname = req.body.fullname
+    verifyingUser.birthday = req.body.birthday
+    verifyingUser.phone = req.body.phone
+    verifyingUser.address = req.body.address
+
     var password = req.body.password,
         username = req.body.username
 
@@ -68,13 +88,98 @@ module.exports.registerFormPost = async function(req, res, next) {
                     user: req.user
                 })
             } else {
-                userModel.addUser(user)
-                    //console.log('added')
-                res.redirect('/user/login')
+                async.waterfall([
+                    function(done) {
+                        crypto.randomBytes(20, function(err, buffer) {
+                            var token = buffer.toString('hex');
+                            done(err, token);
+                        });
+                    },
+                    function(token, done) {
+                        console.log(req.body.fullname, req.body.email)
+                        console.log(req.headers.host + '/user/verify?token=' + token)
+                        ejs.renderFile(__dirname.replace("\controllers", "") + "/public/templates/verify-email.ejs", {
+                            name: req.body.fullname,
+                            url: req.headers.host + '/user/verify?token=' + token,
+                        }, function(err, data) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                var mainOptions = {
+                                    from: email,
+                                    to: req.body.email,
+                                    subject: '[Electro] Kích hoạt tài khoản',
+                                    html: data
+                                };
+                                //console.log(mainOptions)
+                                smtpTransport.sendMail(mainOptions, function(err, info) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        res.redirect('/user/verifying')
+                                        console.log('Message sent');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                ], function(err) {
+                    return res.status(422).json({ message: err });
+                });
+                res.redirect('/user/verifying')
             }
         })
     })
 }
+
+module.exports.passwordForget = function(req, res) {
+    async.waterfall([
+        function(done) {
+            userModel.findUserByUsername(req.body.username, function(user) {
+                if (user) {
+                    forgetPasswordUser = user;
+                    done(null, user)
+                        //console.log(user)
+                } else {
+                    res.render('forget-password-form', { msg: "Tài khoản không tồn tại" })
+                }
+            })
+        },
+        function(user, done) {
+            crypto.randomBytes(20, function(err, buffer) {
+                var token = buffer.toString('hex');
+                done(err, user, token);
+            });
+        },
+        function(user, token, done) {
+            ejs.renderFile(__dirname.replace("\controllers", "") + "/public/templates/forgot-password-email.ejs", {
+                name: user.fullname,
+                url: req.headers.host + '/user/verify?token=' + token,
+            }, function(err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var mainOptions = {
+                        from: email,
+                        to: user.email,
+                        subject: '[Electro] Reset mật khẩu',
+                        html: data
+                    };
+                    smtpTransport.sendMail(mainOptions, function(err, info) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.redirect('/user/forget-password-pending')
+                            console.log('Message sent');
+                        }
+                    });
+                }
+            });
+        }
+    ], function(err) {
+        return res.status(422).json({ message: err });
+    });
+};
 
 module.exports.profile = function(req, res) {
     req.user.birthday = req.user.birthday.substring(0, 10)
@@ -225,17 +330,18 @@ module.exports.passwordForget = function(req, res) {
                     console.log(err);
                 } else {
                     var mainOptions = {
-                        from: 'biodarkus1305@gmail.com',
+                        from: email,
                         to: user.email,
                         subject: '[Electro] Reset mật khẩu',
                         html: data
                     };
+                    console.log(mainOptions);
                     smtpTransport.sendMail(mainOptions, function(err, info) {
                         if (err) {
-                            //console.log(err);
+                            console.log(err);
                         } else {
                             res.redirect('/user/forget-password-pending')
-                                //console.log('Message sent');
+                            console.log('Message sent');
                         }
                     });
                 }
