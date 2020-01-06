@@ -1,5 +1,6 @@
 <!-- HEADER -->
 <header>
+
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
@@ -19,7 +20,7 @@
                         <li><a href="/user/profile"><i class="fa fa-user-o"></i><%=user.fullname%></a></li>
                         <form action="/user/logout" method="get">
                             <button type="submit">Đăng xuất</button>
-                             <button><a href="/checkout/order-list">Đơn hàng</a></button>
+                            <button><a href="/checkout/order-list">Đơn hàng</a></button>
                         </form>
                        
                     </ul>
@@ -62,13 +63,13 @@
                     <div class="header-ctn">
                         <!-- Cart -->
                         <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <a data-target="#exampleModal" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Giỏ hàng</span>
                                 <div id="header-qty" class="qty"></div>
                             </a>
-                            <div class="cart-dropdown">                             
-                            </div>
+                                <div class="cart-dropdown">                             
+                                </div>
                         </div>
                         <!-- /Cart -->
                     </div>
@@ -118,6 +119,10 @@
         </div>
     </div>
     </div>
+
+    <!-- Modal -->
+
+
 </header>
 
 <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
@@ -128,7 +133,7 @@
 <script src="vendors/jquery.ajaxchimp.min.js"></script>
 <script src="vendors/mail-script.js"></script>
 <script src="js/main.js"></script>
-<% if (user) { %>
+<% if (typeof user !== 'undefined' && user != null) { %>
     <script type="text/javascript">
         $(function() {
             if(localStorage.cart) {
@@ -154,7 +159,7 @@
             }
         });
     </script>
-<% } else { %>
+<% } if (typeof user === 'undefined' || user == null) { %>
     <script type="text/javascript">
         $(function() {
             if (!localStorage.cart) {
@@ -164,9 +169,18 @@
                 var cart = JSON.parse(localStorage.cart)
                 $("#header-qty").html(Object.keys(cart).length)
 
+                var total = 0;
+                var i = 0;
+
                 var htmlString = ""
                 for (var productid in cart) {
+
                     item = cart[productid]
+
+                    i++;
+
+                    total += item.price*item.quantity;
+
                     htmlString += '<div class="cart-list">'
                     htmlString +=     '<div class="product-widget">'
                     htmlString +=         '<div class="product-img">'
@@ -183,15 +197,19 @@
                 }
 
                 htmlString +=   '<div class="cart-summary">'
-                htmlString +=       '<small>Có ??? sản phẩm</small>'
-                htmlString +=       '<h5 id="sumsum">Tổng: 75.245.000đ</h5>'
+                htmlString +=       '<small>Có ' + i + ' sản phẩm</small>'
+                htmlString +=       '<h5 id="sumsum">Tổng: ' + total + '  </h5>'
                 htmlString +=   '</div>'
                 htmlString +=   '<div class="cart-btns">'
-                htmlString +=       '<a href="/user/login">Giỏ hàng</a>'
-                htmlString +=       '<a href="/user/login">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>'
+                htmlString +=       '<a href="/cart">Giỏ hàng</a>'
+                htmlString +=       ' <a type="button" data-toggle="modal" data-target="#exampleModalCenter">Thanh toán</a>'
                 htmlString +=   '</div>'
+
                 $(".cart-dropdown").html(htmlString)
             }
         });
     </script>
+
 <% } %>
+
+<!-- The Modal -->

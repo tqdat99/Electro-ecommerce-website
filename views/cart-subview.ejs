@@ -1,4 +1,6 @@
 
+<% total = 0 %>
+
 <% items.forEach(function(item){ %>
     <div class="cart-list" onclick="funcSum()"> 
         <div class="product-widget">
@@ -11,12 +13,16 @@
             </div>
         </div>
     </div>
+    <% total +=  item.gia*item.quantity %>
+
 <% }); %>
+
+
     <div class="cart-summary">
         <small>Có <%=items.length%> sản phẩm</small>
-        <h5 id="sumsum">Tổng: 75.245.000đ</h5>
+        <h5 id="sumsum">Tổng: <%=total%></h5>
     </div>
     <div class="cart-btns">
         <a href="/cart">Giỏ hàng</a>
-        <a href="/checkout">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="/checkout">Thanh toán<i class="fa fa-arrow-circle-right"></i></a>
     </div>
