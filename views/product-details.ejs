@@ -116,31 +116,48 @@
                                 <%= item.mota%>
                             </p>
 
-                            <div class="add-to-cart">
+                            <!--<div class="add-to-cart">
 
-                                <!--<div class="qty-label">
+                                <div class="qty-label">
                                     Qty
                                     <div class="input-number">
                                         <input type="number" value=1>
                                         <span class="qty-up">+</span>
                                         <span class="qty-down">-</span>
                                     </div>
-                                </div>-->
+                                </div>
                                 <form action="/cart/additem" method="post">
                                     <div class="add-to-cart">
                                         <input type="hidden" name="stt" value="<%=item.id%>">
                                         <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
                                     </div>
                                 </form>
-                                <!-- <button href="/cart" class="add-to-cart-btn"><i href="/cart" class="fa fa-shopping-cart"></i> add to cart</button> -->
+                                 <button href="/cart" class="add-to-cart-btn"><i href="/cart" class="fa fa-shopping-cart"></i> add to cart</button> -->
                                 <!--<a href="/cart"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>add to cart</button></a> -->
-                            </div>
+                            <!--</div> 
 
-                            <!-- <ul class="product-links">
+                             <ul class="product-links">
                                 <li>Danh mục:</li>
                                 <li><a href="#">Laptop</a></li>
                                 <li><a href="#">Apple</a></li>
                             </ul> -->
+
+                                            <% if (user) { %>
+                                                <form action="/cart/additem" method="post">
+                                                    <div class="add-to-cart">
+                                                        <input type="hidden" name="stt" value="<%=item.id%>">
+                                                        <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                                    </div>
+                                                </form>
+                                            <% } else { %>
+                                                <div class="add-to-cart">
+                                                    <a data-toggle="popover" title="Added" class="add-to-cart-btn add-to-local-cart-btn" data-productid="<%= item.id %>" data-name="<%= item.ten %>" data-price="<%= item.gia %>" data-picture="<%= item.anh %>">
+                                                        <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                    </a>
+                                                </div>
+                                            <% } %>
+
+
                         </div>
                     </div>
                     <!-- /Product details -->
@@ -239,9 +256,26 @@
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                             </div>
-                                            <div class="add-to-cart">
+                                            <!--<div class="add-to-cart">
                                                 <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-                                            </div>
+                                            </div>-->
+
+                                            <% if (user) { %>
+                                                <form action="/cart/additem" method="post">
+                                                    <div class="add-to-cart">
+                                                        <input type="hidden" name="stt" value="<%=item.id%>">
+                                                        <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                                    </div>
+                                                </form>
+                                            <% } else { %>
+                                                <div class="add-to-cart">
+                                                    <a class="add-to-cart-btn add-to-local-cart-btn" data-toggle="popover" title="Added" data-productid="<%= item.id %>" data-name="<%= item.ten %>" data-price="<%= item.gia %>" data-picture="<%= item.anh %>">
+                                                        <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
+                                                    </a>
+                                                </div>
+                                            <% } %>
+
+
                                         </div>
                                     </div>
                                 </a>
@@ -265,6 +299,7 @@
                         <div class="col-lg-6">
                             <div class="comment_list">
                                 <div id="data-container"></div>
+
                                 <div id="pagination-container"></div>
                             </div>
                         </div>
@@ -274,7 +309,11 @@
                                 <form class="row contact_form" action="/store/id=<%=item.id%>" method="post" id="contactForm" novalidate="novalidate">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Họ tên">
+                                            <% if (user) { %>
+                                                <input type="text" class="form-control" id="name" name="name" value="<%=user.username%>" >
+                                            <% } else { %>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Họ tên">
+                                            <% } %>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -313,21 +352,27 @@
                                 html += '<div class="review_item">'
                                 html += '  <div class="media">'
                                 html += '    <div class="media-body">'
-                                html += '      <h4>' + comment.name + '</h4>'
+                                html += '<tr>'
+                                html += '      <th><h4>' + comment.name + '</h4></th>'
+                                html += '</tr>'
+                                html += '<tr>'
+                                html += '      <th>' + comment.date + '</th>'
+                                html += '</tr>'
                                 html += '    </div>'
                                 html += '  </div>'
                                 html += '  <p>' + comment.content + '</p>'
                                 html += '</div>'
+                                html += '<br>'
                             });
                             html += '</div>';
                             return html;
                         }
-
                         var source = [
                         <% comments.forEach(function(comment){ %>
                             {
                                 name: '<%= comment.name %>',
-                                content: '<%= comment.content %>'
+                                content: '<%= comment.content %>',
+                                date: '<%= comment.date %>'
                             },
                         <% }) %>
                         ]
@@ -341,8 +386,51 @@
                             }
                         })
                     });
+                </script>
 
+                <script type="text/javascript">
+                $(document).ready(function() {
+                    $(".add-to-local-cart-btn").click(function(e){
+                        var cart = {}
+                        if (localStorage.cart) {
+                            cart = JSON.parse(localStorage.cart)
+                        }
+                        
+                        var productid = $(e.target).attr("data-productid")
+                        var name = $(e.target).attr("data-name")
+                        var price = $(e.target).attr("data-price")
+                        var picture = $(e.target).attr("data-picture")
 
+                        if(!cart[productid]) {
+                            cart[productid] = {}
+                            cart[productid]["name"] = name
+                            cart[productid]["price"] = price
+                            cart[productid]["picture"] = picture
+                            cart[productid]["quantity"] = 1
+                        } else {
+                            cart[productid]["quantity"] = cart[productid]["quantity"] + 1
+                        }
+
+                        localStorage.cart = JSON.stringify(cart)
+                    })
+                });
+                </script>
+
+                <script>
+                $(document).ready(function () {
+
+                   $('[data-toggle="popover"]').popover({
+                        placement: 'bottom',
+                        delay : {
+                            hide : 5000 // doesn't do anything
+                        }
+                    }).on('shown.bs.popover', function () {
+                        setTimeout(function (a) {
+                            a.popover('hide');
+                        }, 500, $(this));
+                    });
+
+                });
                 </script>
 
 </body>
