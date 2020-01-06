@@ -91,7 +91,15 @@
                             <% statuses.forEach(function(status){ %>
                                 <tr>
                                     <td>
-                                        <p><%=status.status%></p>
+                                        <% if(status.status == 1){ %>
+                                           <p>Đơn hàng đã tiếp nhận</p>
+                                        <% } else if (status.status == 2){ %>  
+                                           <p>Đơn hàng đang xử lí</p>
+                                        <% }else if (status.status == 3){ %>  
+                                           <p>Đơn hàng đang giao</p>
+                                        <% }else if(status.status == 4) { %>  
+                                           <p>Đơn hàng giao thành công</p>
+                                        <% } %>
                                     </td>
                                     <td>
                                         <p><%=status.time%></p>
@@ -122,7 +130,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+<% total = 0 %>
                                 <% items.forEach(function(item){ %>
 
                                     <tr>
@@ -147,7 +155,7 @@
                                             <h5><%= item.quantity *item.gia %></h5>
                                         </td>
                                     </tr>
-
+<% total +=  item.gia*item.quantity %>
                                 <% }); %>
 
                                 <tr>
@@ -161,7 +169,7 @@
                                         <p>Tổng</p>
                                     </td>
                                     <td>
-                                        <h5>33.680.000đ</h5>
+                                        <h5><%=total%></h5>
                                     </td>
                                 </tr>
                                 <tr class="shipping_area">

@@ -89,7 +89,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                     <% items.forEach(function(item){ %>
                                         <tr>
                                             <td>
@@ -102,9 +101,17 @@
                                                 <p><%= item.sum %></p>
                                             </td>
                                             <td>
-                                                <p>
-                                                    <%= item.status %>
-                                                </p>
+
+                                                <% if(item.status == 1){ %>
+                                                   <p>Đơn hàng đã tiếp nhận</p>
+                                                 <% } else if (item.status == 2){ %>  
+                                                   <p>Đơn hàng đang xử lí</p>
+                                                <% }else if (item.status == 3){ %>  
+                                                   <p>Đơn hàng đang giao</p>
+                                                <% }else if(item.status == 4) { %>  
+                                                   <p>Đơn hàng giao thành công</p>
+                                                <% } %>
+
                                             </td>
                                             <td>
                                                 <form method="post" action="/checkout/order-details">
@@ -136,13 +143,13 @@
             <script src="/js/nouislider.min.js"></script>
             <script src="/js/jquery.zoom.min.js"></script>
             <script src="/js/main.js"></script>
-            <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-            <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-            <script src="vendors/skrollr.min.js"></script>
-            <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-            <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-            <script src="vendors/jquery.ajaxchimp.min.js"></script>
-            <script src="vendors/mail-script.js"></script>
+            <script src="/vendors/jquery/jquery-3.2.1.min.js"></script>
+            <script src="/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+            <script src="/vendors/skrollr.min.js"></script>
+            <script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
+            <script src="/vendors/nice-select/jquery.nice-select.min.js"></script>
+            <script src="/vendors/jquery.ajaxchimp.min.js"></script>
+            <script src="/vendors/mail-script.js"></script>
 </body>
 
 </html>
