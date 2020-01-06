@@ -1,5 +1,22 @@
 var database = require('./database')
 var pool = database.pool;
+var cartModel = require('./cart')
+
+module.exports.addOrder = function(username, name, email, address, phone, note, callback) {
+    orderid = (new Date()).getTime();
+    cartModel.getSumPrice(username, function(sum) {
+        var s = JSON.stringify(sum[0].sum);
+        var tong = JSON.parse(s);
+        query = 'insert into "order" (orderid, username, name, email, address, phone, note, sum) values (\'' + orderid + '\', \'' + username + '\',\'' + name + '\' , \'' + email + '\', \'' + address + '\', \'' + phone + '\' , \'' + note + '\', \'' + tong + '\')';
+        query2 = 'insert into "order_status" values (\'' + orderid + '\', 1, \'' + new Date().toLocaleString() + '\')';
+        console.log(query)
+        pool.query(query, function(err, result1) {
+            pool.query(query2, function(err, result2) {
+                callback(orderid)
+            })
+        })
+    });
+}
 
 module.exports.getOrderListByUsername = function(username, callback) {
     query = "select * from \"order\" where username ='" + username + "'"

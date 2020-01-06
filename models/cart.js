@@ -1,6 +1,5 @@
 var database = require('./database')
 var pool = database.pool;
-var cartModel = require('./cart')
 
 module.exports.getCartByUser = function(username, callback) {
     query = 'select * from "cartItem" inner join "products" on "cartItem".productid = "products".id  where username = \'' + username + '\'';
@@ -15,7 +14,6 @@ module.exports.getSumPrice = function(username, callback) {
         callback(result.rows);
     });
 }
-
 
 module.exports.updateCartItem = function(cartid, quantity, callback) {
     query = 'update "cartItem" set quantity = \'' + quantity + '\' where cartid = \'' + cartid + '\'';
@@ -56,7 +54,7 @@ module.exports.addOrderProduct = function(username, orderid, callback) {
         result.rows.forEach(function(item) {
             queryInsert = 'insert into "order_product" (productid, quantity, orderid) values (\'' + item.productid + '\', \'' + item.quantity + '\', \'' + orderid + '\')';
             pool.query(queryInsert, function(err, result) {
-                cartModel.deleteCartItem(item.cartid, function() {})
+                module.exports.deleteCartItem(item.cartid, function() {})
             });
         });
         callback()
