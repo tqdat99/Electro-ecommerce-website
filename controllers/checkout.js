@@ -1,19 +1,20 @@
 var checkoutModel = require('../models/checkout')
 var cartModel = require('../models/cart')
-    /*module.exports.getCheckout = function(req, res) {
-        res.render('checkout');
-    };*/
+var userModel = require('../models/user')
 
-exports.getCheckout = function(req, res) {
+module.exports.getCheckout = function(req, res) {
     cartModel.getCartByUser(req.user.username, function(cartitems) {
-        res.render('checkout', {
-            user: req.user,
-            items: cartitems,
-        });
+        userModel.findUserByUsername(req.user.username, function(userInfo) {
+            res.render('checkout', {
+                user: req.user,
+                userInfo: userInfo,
+                items: cartitems,
+            });
+        })
     })
 }
 
-exports.addOrder = function(req, res) {
+module.exports.addOrder = function(req, res) {
     checkoutModel.addOrder(req.user.username, req.body['full-name'], req.body['email'], req.body['address'], req.body['tel'], req.body['note'], function(orderid) {
         cartModel.addOrderProduct(req.user.username, orderid, function() {
             checkoutModel.addOrderStatus(orderid, function() {
@@ -24,7 +25,7 @@ exports.addOrder = function(req, res) {
 }
 
 
-exports.viewOrderList = function(req, res) {
+module.exports.viewOrderList = function(req, res) {
     checkoutModel.getOrderList(req.user.username, function(orderitems) {
         res.render('order-list', {
             user: req.user,

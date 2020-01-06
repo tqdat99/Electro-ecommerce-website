@@ -58,7 +58,7 @@
                     <div class="header-ctn">
                         <!-- Cart -->
                         <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <a data-target="#exampleModal" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Giỏ hàng</span>
                                 <div id="header-qty" class="qty"></div>
@@ -107,7 +107,7 @@
         nav.setAttribute("class", "active")
     }
 </script>
-<%if (typeof user === 'undefined' || user == null){%>
+<% if (typeof user !== 'undefined' && user != null) { %>
     <script type="text/javascript">
         $(function() {
             if (localStorage.cart) {
@@ -135,7 +135,7 @@
             }
         });
     </script>
-    <% } else { %>
+    <% } if (typeof user === 'undefined' || user == null) { %>
         <script type="text/javascript">
             $(function() {
                 if (!localStorage.cart) {
@@ -144,9 +144,13 @@
                 } else {
                     var cart = JSON.parse(localStorage.cart)
                     $("#header-qty").html(Object.keys(cart).length)
+                    var total = 0;
+                    var i = 0;
                     var htmlString = ""
                     for (var productid in cart) {
                         item = cart[productid]
+                        i++;
+                        total += item.price * item.quantity;
                         htmlString += '<div class="cart-list">'
                         htmlString += '<div class="product-widget">'
                         htmlString += '<div class="product-img">'
@@ -154,7 +158,7 @@
                         htmlString += '</div>'
                         htmlString += '<div class="product-body">'
                         htmlString += '<h3 class="product-name"><a href="#">' + item.name + '</a></h3>'
-                        htmlString += '<h4 class="product-price"><span class="qty">' + item.price + 'x</span>'
+                        htmlString += '<h4 class="product-price"><span class="qty">' + new Intl.NumberFormat().format(item.price) + ' x</span>'
                         htmlString += item.quantity
                         htmlString += '</h4>'
                         htmlString += '</div>'
@@ -162,12 +166,12 @@
                         htmlString += '</div>'
                     }
                     htmlString += '<div class="cart-summary">'
-                    htmlString += '<small>Có ??? sản phẩm</small>'
-                    htmlString += '<h5 id="sumsum">Tổng: 75.245.000đ</h5>'
+                    htmlString += '<small>Có ' + i + ' sản phẩm</small>'
+                    htmlString += '<h5 id="sumsum">Tổng: ' + new Intl.NumberFormat().format(total) + '  </h5>'
                     htmlString += '</div>'
                     htmlString += '<div class="cart-btns">'
-                    htmlString += '<a href="/user/login">Giỏ hàng</a>'
-                    htmlString += '<a href="/user/login">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>'
+                    htmlString += '<a href="/cart">Giỏ hàng</a>'
+                    htmlString += '<a href="/user/login" type="button" data-toggle="modal" data-target="#exampleModalCenter">Thanh toán </a>'
                     htmlString += '</div>'
                     $(".cart-dropdown").html(htmlString)
                 }

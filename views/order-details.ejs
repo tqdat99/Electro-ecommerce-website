@@ -52,58 +52,114 @@
 <body>
     <%include header.ejs%>
 
-        <!-- BREADCRUMB -->
-        <div id="breadcrumb" class="section">
-            <!-- container -->
+        <section class="cart_area">
             <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="breadcrumb-tree">
-                            <li><a href="#">Trang chủ</a></li>
-                            <li><a href="#">Tài khoản</a></li>
-                            <li class="active">Chi tiết đơn hàng</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /BREADCRUMB -->
+                <div class="cart_inner">
 
-        <div class="container">
-            <h4>Mã đơn hàng:
-                <%=statuses[0].orderid%>
-            </h4>
-        </div>
+                    <h3>Thông tin đơn hàng</h3>
+                    <h4>Mã đơn hàng</h4>
+                    <p>
+                        <%=Order.orderid%>
+                    </p>
+                    <h4>Tên kháchh hàng</h4>
+                    <p>
+                        <%=Order.name%>
+                    </p>
+                    <h4>Email</h4>
+                    <p>
+                        <%=Order.email%>
+                    </p>
+                    <h4>Địa chỉ</h4>
+                    <p>
+                        <%=Order.address%>
+                    </p>
+                    <h4>Số điện thoại</h4>
+                    <p>
+                        <%=Order.phone%>
+                    </p>
+                    <h4>Ghi chú</h4>
+                    <p>
+                        <%=Order.note%>
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <section class="cart_area">
             <div class="container">
                 <div class="cart_inner">
                     <div class="table-responsive">
+                        <h3>Trạng thái đơn hàng</h3>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Trạng thái</th>
-                                    <th scope="col">Thời gian</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% statuses.forEach(function(status){ %>
+                                <tr>
+                                    <td>
+                                        <p>Tạo đơn hàng</p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <%=new Date(CreatedAt).toLocaleString()%>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Đã giao cho shipper</p>
+                                    </td>
+                                    <td>
+                                        <%if (Shipping === undefined && CanceledAt === undefined){%>
+                                            Chưa
+                                            <%} else if (CanceledAt === undefined) { %>
+                                                <p>
+                                                    <%=new Date(Shipping).toLocaleString()%>
+                                                </p>
+                                                <%} else if (CanceledAt !== undefined){ %>
+                                                    <p>
+                                                        Đã hủy
+                                                    </p>
+                                                    <%}%>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Shipper báo đã giao</p>
+                                    </td>
+                                    <td>
+                                        <%if (Shipping !== undefined && ShippedAt === undefined && CanceledAt === undefined){%>
+                                            x
+                                            <%} else if (Shipping === undefined && ShippedAt === undefined && CanceledAt === undefined){ %>
+                                                <p>
+                                                    Chưa
+                                                </p>
+                                                <%} else if (CanceledAt === undefined){ %>
+                                                    <p>
+                                                        <%=new Date(ShippedAt).toLocaleString()%>
+                                                    </p>
+                                                    <%} else if (CanceledAt !== undefined){ %>
+                                                        <p>
+                                                            Đã hủy
+                                                        </p>
+                                                        <%}%>
+                                    </td>
+                                </tr>
+                                <%if (CanceledAt !== undefined){%>
                                     <tr>
                                         <td>
-                                            <p>
-                                                <%=status.status%>
-                                            </p>
+                                            <p>Đã hủy</p>
                                         </td>
                                         <td>
                                             <p>
-                                                <%=status.time%>
+                                                <%=new Date(CanceledAt).toLocaleString()%>
                                             </p>
                                         </td>
                                     </tr>
-                                    <% }); %>
+                                    <%}%>
                             </tbody>
                         </table>
                     </div>
@@ -115,52 +171,91 @@
         <section class="cart_area">
             <div class="container">
                 <div class="cart_inner">
+                    <h3>Sản phẩm đơn hàng</h3>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th scope="col">ID sản phẩm</th>
+                                    <th scope="col">Ảnh sản phẩm</th>
                                     <th scope="col">Tên sản phẩm</th>
-                                    <th scope="col"></th>
                                     <th scope="col">Giá</th>
                                     <th scope="col">Số lượng</th>
                                     <th scope="col">Tổng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% items.forEach(function(item){ %>
+                                <%Products.forEach(function(product){%>
                                     <tr>
                                         <td>
-                                            <a href="/store/product-details">
-                                                <img src="/<%= item.anh %>" alt="" class="cart-thumbnail">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/store/product-details">
+                                            <a href="/store/id=<%=product.productid%>" target="_blank">
                                                 <p>
-                                                    <%= item.ten %>
+                                                    <%=product.productid%>
                                                 </p>
                                             </a>
                                         </td>
+                                        <td>
+                                            <img src="<%=product.anh%>" alt="" class="cart-thumbnail">
                                         </td>
                                         <td>
                                             <p>
-                                                <%= item.gia %>
+                                                <%=product.ten%>
                                             </p>
                                         </td>
                                         <td>
                                             <p>
-                                                <%= item.quantity %>
+                                                <%= new Intl.NumberFormat().format(product.gia)%>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <%=product.quantity%>
                                             </p>
                                         </td>
                                         <td>
                                             <h5>
-                                                <%= item.quantity *item.gia %>
+                                                <%= new Intl.NumberFormat().format(product.quantity * product.gia)%>
                                             </h5>
                                         </td>
                                     </tr>
-                                    <% }); %>
+                                    <%})%>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                                <p>Tổng</p>
+                                            </td>
+                                            <td>
+                                                <h5>
+                                                    <%= new Intl.NumberFormat().format(Order.sum)%>
+                                                </h5>
+                                            </td>
+                                        </tr>
+                                        <tr class="shipping_area">
+                                            <td class="d-none d-md-block">
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
                             </tbody>
                         </table>
+                        <!-- <%if (CanceledAt === undefined && ShippedAt === undefined){%>
+                            <div class="shipping_box">
+                                <form action="/orders/set-status?orderid=<%=Order.orderid%>&status=-1" method="post">
+                                    <button type="submit" value="submit" class="button" style="background-color: #F01D4F; border-color: #F01D4F;">Hủy đơn hàng</button>
+                                </form>
+                            </div>
+                            <%}%> -->
                     </div>
                 </div>
             </div>
@@ -168,23 +263,22 @@
         <!--================End Cart Area =================-->
 
 
-        <%include footer.ejs%>
 
-            <!-- jQuery Plugins -->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/slick.min.js"></script>
-            <script src="js/nouislider.min.js"></script>
-            <script src="js/jquery.zoom.min.js"></script>
-            <script src="js/main.js"></script>
+        <!-- jQuery Plugins -->
+        <script src="js/jquery.min.js "></script>
+        <script src="js/bootstrap.min.js "></script>
+        <script src="js/slick.min.js "></script>
+        <script src="js/nouislider.min.js "></script>
+        <script src="js/jquery.zoom.min.js "></script>
+        <script src="js/main.js "></script>
 
-            <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-            <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-            <script src="vendors/skrollr.min.js"></script>
-            <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-            <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-            <script src="vendors/jquery.ajaxchimp.min.js"></script>
-            <script src="vendors/mail-script.js"></script>
+        <script src="vendors/jquery/jquery-3.2.1.min.js "></script>
+        <script src="vendors/bootstrap/bootstrap.bundle.min.js "></script>
+        <script src="vendors/skrollr.min.js "></script>
+        <script src="vendors/owl-carousel/owl.carousel.min.js "></script>
+        <script src="vendors/nice-select/jquery.nice-select.min.js "></script>
+        <script src="vendors/jquery.ajaxchimp.min.js "></script>
+        <script src="vendors/mail-script.js "></script>
 </body>
 
 </html>

@@ -1,13 +1,15 @@
 var productModel = require('../models/product')
 var typeModel = require('../models/type')
+var commentModel = require('../models/comment')
 
 module.exports.productDetailById = function(req, res) {
     productModel.getProductDetailById(req.params['id'], function(item) {
         productModel.getProductImagesById(req.params['id'], function(images) {
-            productModel.getCommentsByProductId(req.params['id'], function(comments) {
+            commentModel.getCommentsByProductId(req.params['id'], function(comments) {
                 productModel.getProductList(undefined, [item.loai], [item.brand], undefined, 'asc', function(items) {
                     onPageItems = items.slice(0, 4)
                     res.render('product-details', {
+                        user: req.user,
                         item: item,
                         comments: comments,
                         Items: onPageItems,
@@ -20,11 +22,11 @@ module.exports.productDetailById = function(req, res) {
 }
 
 module.exports.postComment = function(req, res) {
-    productModel.insertComment(req.body['name'], req.body['message'], req.params['id'], function() {
+    var time = new Date().toLocaleString()
+    commentModel.insertComment(req.body['name'], req.body['message'], req.params['id'], time, function() {
         res.redirect('back');
     })
 }
-
 
 module.exports.productList = function(req, res) {
     var perPage = 9

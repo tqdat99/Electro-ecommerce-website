@@ -28,7 +28,7 @@ module.exports.addOrderStatus = function(orderid, callback) {
 
 module.exports.getOrderList = function(username, callback) {
 
-    query = 'select * from "order" inner join "order_status" on "order".orderid = "order_status".orderid  where username  = \'' + username + '\' and "order_status".status = (SELECT MAX (status) FROM "order_status")';
+    query = 'select * from "order", "order_status" where "order".orderid = "order_status".orderid and username  = \'' + username + '\'';
 
     pool.query(query, function(err, result) {
         callback(result.rows)

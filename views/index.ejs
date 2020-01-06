@@ -125,13 +125,15 @@
                     <div class="row">
                         <!-- product -->
                         <% Items.forEach(function(item){ %>
-                            <div class="col-md-3 col-xs-6">
-                                <a href="/store/id=<%=item.id%>">
-                                    <div class="product">
+                            <div class="col-md-3 col-xs-2">
+                                <div class="product">
+                                    <a href="/store/id=<%=item.id%>">
                                         <div class="product-img">
                                             <img src="<%=item.anh%>" alt="">
                                         </div>
-                                        <div class="product-body">
+                                    </a>
+                                    <div class="product-body">
+                                        <a href="/store/id=<%=item.id%>">
                                             <p class="product-category">
                                                 <%= item.loai%>
                                             </p>
@@ -148,26 +150,30 @@
                                             </h4>
                                             <div class="product-rating">
                                             </div>
-                                            <% if (user) { %>
-                                                <form action="/cart/additem" method="post">
-                                                    <div class="add-to-cart">
-                                                        <input type="hidden" name="stt" value="<%=item.id%>">
-                                                        <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
-                                                    </div>
-                                                </form>
-                                                <% } else { %>
-                                                    <div class="add-to-cart">
-                                                        <a class="add-to-cart-btn add-to-local-cart-btn" data-productid="<%= item.id %>" data-name="<%= item.ten %>" data-price="<%= item.gia %>" data-picture="<%= item.anh %>">
-                                                            <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
-                                                        </a>
-                                                    </div>
-                                                    <% } %>
-                                        </div>
+                                        </a>
+
+                                        <!-- <form action="/cart/additem" method="post">
+                                                <div class="add-to-cart">
+                                                    <input type="hidden" name="stt" value="<%=item.id%>">
+                                                    <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                                </div>
+                                            </form> -->
+                                        <% if (user) { %>
+                                            <form action="/cart/additem" method="post">
+                                                <div class="add-to-cart">
+                                                    <input type="hidden" name="stt" value="<%=item.id%>">
+                                                    <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                                </div>
+                                            </form>
+                                            <% } else { %>
+                                                <div class="add-to-cart">
+                                                    <button class="add-to-cart-btn add-to-local-cart-btn" data-toggle="popover" title="Đã thêm vào giỏ hàng" data-productid="<%= item.id %>" data-name="<%= item.ten %>" data-price="<%= item.gia %>" data-picture="<%= item.anh %>"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                                </div>
+                                                <% } %>
                                     </div>
-                                </a>
+                                </div>
 
                             </div>
-
                             <% }); %>
                     </div>
                     <!-- Products tab & slick -->
@@ -295,6 +301,20 @@
                         }
                         localStorage.cart = JSON.stringify(cart)
                     })
+                });
+            </script>
+            <script>
+                $(document).ready(function() {
+                    $('[data-toggle="popover"]').popover({
+                        placement: 'bottom',
+                        delay: {
+                            hide: 5000 // doesn't do anything
+                        }
+                    }).on('shown.bs.popover', function() {
+                        setTimeout(function(a) {
+                            a.popover('hide');
+                        }, 500, $(this));
+                    });
                 });
             </script>
 

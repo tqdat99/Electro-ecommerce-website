@@ -1,19 +1,15 @@
 var orderModel = require('../models/order')
 
-module.exports.orderList = function(req, res) {
-
+module.exports.orderListByUsername = function(req, res) {
     var perPage = 5
     var page = 1
-
-    // console.log(req.params)
-    // console.log(req.query.page)
 
     if (req.params['page'] != undefined)
         page = req.params['page']
     if (req.query.page != undefined)
         page = req.query.page
 
-    orderModel.getOrderList(function(items) {
+    orderModel.getOrderListByUsername(function(items) {
         onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + perPage)
         res.render('profile', {
             user: req.user,
@@ -41,7 +37,8 @@ module.exports.orderDetails = function(req, res) {
                     else if (status[i].status == '-1')
                         CanceledAt = status[i].time
                 }
-                res.render('manage-order-details', {
+                console.log(CreatedAt, Shipping, ShippedAt, CanceledAt)
+                res.render('order-details', {
                     user: req.user,
                     Order: order,
                     Products: products,

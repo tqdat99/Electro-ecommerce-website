@@ -51,7 +51,13 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
     condition = 0
 
     if (key != undefined) {
-        query += "(to_tsvector(ten) @@ to_tsquery('" + key + "'))"
+        console.log(key)
+        query += "(to_tsvector(ten) @@ to_tsquery("
+        keys = key.split(" ")
+        for (i = 0; i < keys.length; i++) {
+            query += "'" + keys[i] + "'";
+        }
+        query += "))"
         if (type != undefined && condition == 0) {
             if (type.length > 0 && type[0] != "All") {
                 condition = 1;
@@ -163,19 +169,4 @@ module.exports.getProductBrands = function(callback) {
     pool.query(query, function(err, result) {
         callback(result.rows)
     })
-}
-
-module.exports.insertComment = function(name, message, productid, callback) {
-    query = 'insert into "comments" (productid, content, name) values (\'' + productid + '\', \'' + message + '\' , \'' + name + '\')';
-    pool.query(query, function(err, result) {
-        console.log(result);
-        callback(result);
-    });
-}
-
-module.exports.getCommentsByProductId = function(id, callback) {
-    query = "select * from \"comments\" where productid = '" + id + "'";
-    pool.query(query, function(err, result) {
-        callback(result.rows)
-    });
 }

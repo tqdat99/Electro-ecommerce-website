@@ -1,15 +1,19 @@
 var cartModel = require('../models/cart')
 
-exports.getCart = function(req, res) {
-    cartModel.getCartByUser(req.user.username, function(cartitems) {
-        res.render('cart', {
-            user: req.user,
-            items: cartitems,
-        });
-    })
+module.exports.getCart = function(req, res) {
+    if (req.user) {
+        cartModel.getCartByUser(req.user.username, function(cartitems) {
+            res.render('cart', {
+                user: req.user,
+                items: cartitems,
+            });
+        })
+    } else {
+        res.render('cart')
+    }
 }
 
-exports.getCartCount = function(req, res) {
+module.exports.getCartCount = function(req, res) {
     cartModel.getCartByUser(req.user.username, function(cartitems) {
         res.setHeader('Content-Type', 'application/json');
         if (cartitems) {
@@ -20,7 +24,7 @@ exports.getCartCount = function(req, res) {
     })
 }
 
-exports.getCartSubview = function(req, res) {
+module.exports.getCartSubview = function(req, res) {
     cartModel.getCartByUser(req.user.username, function(cartitems) {
         res.render('cart-subview', {
             items: cartitems,
@@ -28,7 +32,7 @@ exports.getCartSubview = function(req, res) {
     })
 }
 
-exports.updateCart = function(req, res) {
+module.exports.updateCart = function(req, res) {
     cartModel.getCartByUser(req.user.username, function(cartitems) {
         var index = 0
         var count = cartitems.length
@@ -54,14 +58,14 @@ exports.updateCart = function(req, res) {
     })
 }
 
-exports.addItem = function(req, res) {
+module.exports.addItem = function(req, res) {
     console.log(req.body)
     cartModel.addCartItem(req.user.username, req.body['stt'], function(cartitems) {
-        res.redirect('/cart')
+        res.redirect('back');
     })
 }
 
-exports.import = function(req, res) {
+module.exports.import = function(req, res) {
     req.body['items'].forEach(function(item) {
         for (var i = 0; i < item.quantity; i++) {
             cartModel.addCartItem(req.user.username, item.productid, function() {})

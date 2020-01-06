@@ -3,6 +3,7 @@ var router = express.Router()
 router.use(express.static('public'))
 
 var userController = require('../controllers/user')
+var orderController = require('../controllers/order')
 
 router.get('/register', userController.checkNotAuthenticated, userController.registerFormGet)
 router.post('/register', userController.checkNotAuthenticated, userController.registerFormPost)
@@ -12,6 +13,8 @@ router.post('/login', userController.checkNotAuthenticated, userController.logIn
 
 router.get('/profile', userController.checkAuthenticated, userController.profile)
 router.post('/profile', userController.checkAuthenticated, userController.profileEdit)
+
+router.get('/order', userController.checkAuthenticated, orderController.orderDetails)
 
 router.post('/logout', userController.logOut)
 

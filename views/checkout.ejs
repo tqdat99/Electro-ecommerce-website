@@ -75,22 +75,16 @@
                             </div>
                             <form method="post" action="/checkout">
                                 <div class="form-group">
-                                    <input class="input" type="text" name="full-name" placeholder="Họ tên">
+                                    <input class="input" type="text" name="full-name" placeholder="Họ tên" value="<%=userInfo.fullname%>">
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="email" name="email" placeholder="Email">
-                                </div>
-                                <!--<div class="form-group">
-                                    <input class="input" type="text" name="city" placeholder="Tỉnh/Thành phố">
+                                    <input class="input" type="email" name="email" placeholder="Email" value="<%=userInfo.email%>">
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="text" name="district" placeholder="Quận">
-                                </div>-->
-                                <div class="form-group">
-                                    <input class="input" type="text" name="address" placeholder="Địa chỉ chi tiết">
+                                    <input class="input" type="text" name="address" placeholder="Địa chỉ chi tiết" value="<%=userInfo.address%>">
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="tel" name="tel" placeholder="Điện thoại">
+                                    <input class="input" type="tel" name="tel" placeholder="Điện thoại" value="<%=userInfo.phone%>">
                                 </div>
                                 <div class="form-group order-notes">
                                     <textarea class="input" name="note" placeholder="Ghi chú"></textarea>
@@ -118,8 +112,8 @@
                                             <%=item.quantity%>x
                                                 <%=item.ten%>
                                         </div>
-                                        <div>
-                                            <%=item.quantity * item.gia%>
+                                        <div name="sumPrice">
+                                            <%= new Intl.NumberFormat().format(item.quantity * item.gia)%>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +124,7 @@
                                     </div>
                                     <div class="order-col">
                                         <div><strong>Tổng cộng</strong></div>
-                                        <div><strong class="order-total">33.680.000đ</strong></div>
+                                        <div><strong class="order-total" id="total">33.680.000đ</strong></div>
                                     </div>
                         </div>
                         <!-- <div class="payment-method">
@@ -177,6 +171,14 @@
             <script src="js/nouislider.min.js"></script>
             <script src="js/jquery.zoom.min.js"></script>
             <script src="js/main.js"></script>
+            <script>
+                var prices = document.getElementsByName("sumPrice");
+                var total = 0;
+                for (i = 0; i < prices.length; i++) {
+                    total += parseFloat(prices[i].innerHTML.replace(/,/g, ''));
+                }
+                document.getElementById("total").innerHTML = new Intl.NumberFormat().format(total);
+            </script>
 
 </body>
 

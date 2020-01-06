@@ -11,16 +11,24 @@ var jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
     _ = require('lodash'),
     hbs = require('nodemailer-express-handlebars'),
-    email = process.env.MAILER_EMAIL_ID || 'biodarkus1305@gmail.com',
-    pass = process.env.MAILER_PASSWORD || 'datdarkus1305',
+    email = process.env.MAILER_EMAIL_ID || 'electroecom@gmail.com',
+    pass = process.env.MAILER_PASSWORD || 'electro123456',
     nodemailer = require('nodemailer');
 
 var ejs = require("ejs");
 
 var forgetPasswordUser;
 
+var smtpTransport = nodemailer.createTransport({
+    service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
+    auth: {
+        user: email,
+        pass: pass
+    }
+});
 
-var userModel = require('../models/user')
+var userModel = require('../models/user');
+var orderModel = require('../models/order');
 
 module.exports.registerFormGet = function(req, res) {
     res.render('register', {
@@ -70,12 +78,31 @@ module.exports.registerFormPost = async function(req, res, next) {
 
 module.exports.profile = function(req, res) {
     req.user.birthday = req.user.birthday.substring(0, 10)
-    userModel.findUserByUsername(req.query.username, function(userInfo) {
+    userModel.findUserByUsername(req.user.username, function(userInfo) {
         userInfo.birthday = new Date(userInfo.birthday).toISOString().substring(0, 10);
-        res.render('profile', {
-            user: req.user,
-            userInfo: userInfo
-        });
+
+        var perPage = 5
+        var page = 1
+
+        // console.log(req.params)
+        // console.log(req.query.page)
+
+        if (req.params['page'] != undefined)
+            page = req.params['page']
+        if (req.query.page != undefined)
+            page = req.query.page
+
+        orderModel.getOrderListByUsername(req.query.username, function(items) {
+            onPageItems = items.slice(perPage * (page - 1), perPage * (page - 1) + perPage)
+            res.render('profile', {
+                user: req.user,
+                userInfo: userInfo,
+                Orders: onPageItems,
+                Page: page,
+                current: page,
+                pages: Math.ceil(items.length / perPage)
+            });
+        })
     })
 }
 
@@ -117,23 +144,23 @@ module.exports.checkNotAuthenticated = function(req, res, next) {
 }
 
 module.exports.passwordForgetForm = function(req, res) {
-    res.render('forget-password-form');
+    res.render('forget-password-form', {
+        user: req.user,
+        msg: ""
+    });
 };
 
 module.exports.passwordForgetPending = function(req, res) {
-    res.render('forget-password-pending');
+    res.render('forget-password-pending', {
+        user: req.user,
+    });
 };
 
-var smtpTransport = nodemailer.createTransport({
-    service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
-    auth: {
-        user: 'biodarkus1305@gmail.com',
-        pass: 'datdarkus1305'
-    }
-});
-
 module.exports.passwordResetForm = function(req, res) {
-    res.render('reset-password-form', { msg: '' });
+    res.render('reset-password-form', {
+        user: req.user,
+        msg: ''
+    });
 };
 
 module.exports.passwordReset = function(req, res) {
@@ -179,8 +206,7 @@ module.exports.passwordForget = function(req, res) {
                     done(null, user)
                     console.log(user)
                 } else {
-                    console.log('User not found.')
-                    done('User not found.')
+                    res.render('forget-password-form', { msg: "Tài khoản không tồn tại" })
                 }
             })
         },
@@ -193,7 +219,7 @@ module.exports.passwordForget = function(req, res) {
         function(user, token, done) {
             ejs.renderFile(__dirname.replace("\controllers", "") + "/public/templates/forgot-password-email.ejs", {
                 name: user.fullname,
-                url: 'http://localhost:3003/user/reset-password?token=' + token,
+                url: req.headers.host + '/user/reset-password?token=' + token,
             }, function(err, data) {
                 if (err) {
                     console.log(err);

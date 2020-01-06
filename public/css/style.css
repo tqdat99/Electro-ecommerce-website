@@ -501,7 +501,7 @@ Cart
     
     .header-ctn {
         float: right;
-        padding: 15px 0px;
+        margin: 24px;
     }
     
     .header-ctn>div {
@@ -1536,6 +1536,7 @@ Product details
         border-radius: 40px;
         -webkit-transition: 0.2s all;
         transition: 0.2s all;
+        cursor: pointer;
     }
     
     .product-details .add-to-cart .add-to-cart-btn>i {

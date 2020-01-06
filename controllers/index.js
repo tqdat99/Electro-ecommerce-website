@@ -2,7 +2,7 @@ var productModel = require('../models/product');
 var advertisementModel = require('../models/advertisement')
 var typeModel = require('../models/type')
 
-exports.home = function(req, res) {
+module.exports.home = function(req, res) {
     productModel.getItems(function(items) {
         typeModel.getAllTypes(function(types) {
             advertisementModel.getAllActiveAdvertisements(function(ads) {
