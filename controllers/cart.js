@@ -1,12 +1,16 @@
 var cartModel = require('../models/cart')
 
 exports.getCart = function(req, res) {
-	cartModel.getCartByUser(req.user.username, function(cartitems){ 
-        res.render('cart', {
-        	user: req.user,
-        	items: cartitems,
-    	});
-    })
+	if (req.user) {
+		cartModel.getCartByUser(req.user.username, function(cartitems){ 
+	        res.render('cart', {
+	        	user: req.user,
+	        	items: cartitems,
+	    	});
+	    })
+	} else {
+		res.render('cart')
+	}
 }
 
 exports.getCartCount = function(req, res) {
