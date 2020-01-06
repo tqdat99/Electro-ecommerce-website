@@ -38,6 +38,9 @@
 </head>
 
 <body>
+  
+</div>
+
     <%include header.ejs%>
         <!-- SECTION -->
         <div class="section">
@@ -171,7 +174,7 @@
                                                 </form>
                                             <% } else { %>
                                                 <div class="add-to-cart">
-                                                    <a class="add-to-cart-btn add-to-local-cart-btn" data-productid="<%= item.id %>" data-name="<%= item.ten %>" data-price="<%= item.gia %>" data-picture="<%= item.anh %>">
+                                                    <a data-toggle="popover" title="Added" class="add-to-cart-btn add-to-local-cart-btn" data-productid="<%= item.id %>" data-name="<%= item.ten %>" data-price="<%= item.gia %>" data-picture="<%= item.anh %>">
                                                         <i class="fa fa-shopping-cart"></i>Thêm vào giỏ
                                                     </a>
                                                 </div>
@@ -272,6 +275,23 @@
 
                         localStorage.cart = JSON.stringify(cart)
                     })
+                });
+            </script>
+
+            <script>
+                $(document).ready(function () {
+
+                    $('[data-toggle="popover"]').popover({
+                        placement: 'bottom',
+                        delay : {
+                            hide : 5000 // doesn't do anything
+                        }
+                    }).on('shown.bs.popover', function () {
+                        setTimeout(function (a) {
+                            a.popover('hide');
+                        }, 500, $(this));
+                    });
+
                 });
             </script>
 
