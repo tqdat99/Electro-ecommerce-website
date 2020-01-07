@@ -76,6 +76,8 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
         }
     }
 
+    condition = 0
+
     if (type != undefined) {
         if (type.length > 0) {
             query += "(";
@@ -85,15 +87,20 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
                     query += " or ";
             }
             query += ")";
-            if (brand != undefined) {
-                if (brand.length > 0)
+            if (brand != undefined && condition == 0) {
+                if (brand.length > 0) {
                     query += " and ";
+                    condition = 1;
+                }
             }
-            if (price != null)
-                query += " and ";
+            if (price != null && condition == 0)
+                query += " and "; {
+                condition = 1;
+            }
         }
     }
 
+    condition = 0
 
     if (brand != undefined) {
         if (brand.length > 0) {
@@ -121,7 +128,7 @@ module.exports.getProductList = function(key, type, brand, price, order, callbac
     query += " ORDER BY gia " + order;
 
 
-    //console.log(query)
+    console.log(query)
     pool.query(query, function(err, result) {
         //console.log(result.rows)
         callback(result.rows);
