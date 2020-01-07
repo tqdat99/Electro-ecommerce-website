@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
+    <title>Electro</title>
+    <link rel="shortcut icon" href="/images/Electro.ico">
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -73,23 +74,23 @@
                             <div class="section-title">
                                 <h3 class="title">Thông tin</h3>
                             </div>
-                            <form method="post" action="/checkout">
+                            <form name="myForm" onsubmit="return validateForm()" method="post" action="/checkout">
                                 <div class="form-group">
-                                    <input class="input" type="text" name="full-name" placeholder="Họ tên" value="<%=userInfo.fullname%>">
+                                    <input class="input" type="text" name="full-name" placeholder="Họ tên" value="<%=userInfo.fullname%>" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="email" name="email" placeholder="Email" value="<%=userInfo.email%>">
+                                    <input class="input" type="email" name="email" placeholder="Email" value="<%=userInfo.email%>"required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="text" name="address" placeholder="Địa chỉ chi tiết" value="<%=userInfo.address%>">
+                                    <input class="input" type="text" name="address" placeholder="Địa chỉ chi tiết" value="<%=userInfo.address%>" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="tel" name="tel" placeholder="Điện thoại" value="<%=userInfo.phone%>">
+                                    <input class="input" type="tel" name="tel" placeholder="Điện thoại" value="<%=userInfo.phone%>" required>
                                 </div>
                                 <div class="form-group order-notes">
                                     <textarea class="input" name="note" placeholder="Ghi chú"></textarea>
                                 </div>
-                                <button type="submit" class="primary-btn order-submit">Xác nhận đơn hàng</button>
+                                    <button type="submit" class="primary-btn order-submit">Xác nhận đơn hàng</button>
                             </form>
                         </div>
                         <!-- /Billing Details -->
@@ -179,7 +180,23 @@
                 }
                 document.getElementById("total").innerHTML = new Intl.NumberFormat().format(total);
             </script>
+            <script type="text/javascript">
+                function validateForm() {
+                    var name = document.forms["myForm"]["full-name"].value;
+                    var phone = document.forms["myForm"]["tel"].value;
 
+                    if (name.length < 6) {
+                        alert("Họ tên không hợp lệ");
+                        return false;
+                    }
+                    var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                    if (vnf_regex.test(phone) == false)
+                    {
+                        alert("Số điện thoại không hợp lệ");
+                        return false;
+                    }
+                }
+            </script>
 </body>
 
 </html>
