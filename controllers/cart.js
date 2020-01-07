@@ -9,7 +9,9 @@ module.exports.getCart = function(req, res) {
             });
         })
     } else {
-        res.render('cart')
+        res.render('cart', {
+            user: req.user,
+        });
     }
 }
 
