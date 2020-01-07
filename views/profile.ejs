@@ -107,7 +107,7 @@
                         <div class="form-group">
                             <button type="submit" value="submit" class="button">Lưu</button>
                         </div>
-                        <a href="/user/reset-password" class="button">
+                        <a href="/user/change-password" class="button">
                             Đổi mật khẩu
                         </a>
                     </form>
@@ -223,8 +223,7 @@
                         return false;
                     }
                     var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-                    if (vnf_regex.test(phone) == false)
-                    {
+                    if (vnf_regex.test(phone) == false) {
                         alert("Số điện thoại không hợp lệ");
                         return false;
                     }
